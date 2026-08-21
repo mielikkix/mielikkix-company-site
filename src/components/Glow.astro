@@ -1,0 +1,14 @@
+---
+interface Props {
+  class?: string;
+  tone?: 'accent' | 'gold';
+}
+
+const { class: className = '', tone = 'accent' } = Astro.props;
+const colorClass = tone === 'gold' ? 'bg-antler-gold' : 'bg-aurora-neon';
+---
+
+<span
+  aria-hidden="true"
+  class={`pointer-events-none absolute rounded-full opacity-20 blur-3xl ${colorClass} ${className}`}
+></span>

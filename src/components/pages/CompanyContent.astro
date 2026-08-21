@@ -1,4 +1,7 @@
 ---
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
 import { t } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -10,28 +13,27 @@ const { lang } = Astro.props;
 const c = t(lang).company;
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-  <p class="text-sm font-semibold uppercase tracking-widest text-aurora-neon">{c.eyebrow}</p>
-  <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{c.heading}</h1>
-</section>
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="gold" class="relative overflow-hidden">
+    <Glow class="-right-16 -top-24 h-72 w-72" tone="gold" />
+    <div class="relative max-w-2xl">
+      <Eyebrow text={c.eyebrow} tone="gold" />
+      <h1 class="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{c.heading}</h1>
+    </div>
+  </Panel>
 
-<section id="about" class="scroll-mt-24 border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+  <Panel id="about" class="scroll-mt-24">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.aboutHeading}</h2>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.aboutBody}</p>
-  </div>
-</section>
+  </Panel>
 
-<section id="careers" class="scroll-mt-24 border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+  <Panel id="careers" class="scroll-mt-24">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.careersHeading}</h2>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.careersBody}</p>
-  </div>
-</section>
+  </Panel>
 
-<section id="contact" class="scroll-mt-24 border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+  <Panel id="contact" class="scroll-mt-24">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.contactHeading}</h2>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.contactBody}</p>
-  </div>
-</section>
+  </Panel>
+</div>

@@ -1,6 +1,9 @@
 ---
 import ButtonPrimary from '../ButtonPrimary.astro';
 import ButtonSecondary from '../ButtonSecondary.astro';
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
 import { t, localizedPath } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -10,35 +13,25 @@ interface Props {
 
 const { lang } = Astro.props;
 const c = t(lang).home;
+const nav = t(lang).nav;
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-  <div class="max-w-3xl">
-    <p class="text-sm font-semibold uppercase tracking-widest text-aurora-neon">{c.heroEyebrow}</p>
-    <h1 class="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">{c.heroTitle}</h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
-    <div class="mt-8 flex flex-wrap gap-4">
-      <ButtonPrimary href="https://app.mielikkix.ai">{c.ctaPrimary}</ButtonPrimary>
-      <ButtonSecondary href={localizedPath('/force-agents', lang)}>{c.ctaSecondary}</ButtonSecondary>
-    </div>
-  </div>
-</section>
-
-<section class="border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="gold" class="relative overflow-hidden">
+    <Glow class="-right-16 -top-24 h-72 w-72" tone="accent" />
+    <Glow class="-bottom-24 -left-16 h-72 w-72" tone="gold" />
+    <div class="relative grid gap-10 md:grid-cols-2 md:items-center">
       <div>
-        <h2 class="text-2xl font-bold sm:text-3xl">{c.chatWidgetHeading}</h2>
-        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.chatWidgetBody}</p>
-        <a
-          href={localizedPath('/chat-widget', lang)}
-          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
-        >
-          {c.chatWidgetLink}
-          <span aria-hidden="true">→</span>
-        </a>
+        <Eyebrow text={c.heroEyebrow} />
+        <h1 class="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{c.heroTitle}</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <ButtonPrimary href="https://app.mielikkix.ai">{c.ctaPrimary}</ButtonPrimary>
+          <ButtonSecondary href={localizedPath('/force-agents', lang)}>{c.ctaSecondary}</ButtonSecondary>
+        </div>
       </div>
-      <div class="rounded-2xl border border-antler-gold/30 bg-deep-forest p-8" aria-hidden="true">
+
+      <div class="rounded-2xl border border-mist-white/15 bg-deep-forest p-6" aria-hidden="true">
         <div class="flex items-center gap-2 border-b border-mist-white/10 pb-4">
           <span class="h-2.5 w-2.5 rounded-full bg-aurora-neon"></span>
           <span class="text-sm font-semibold text-mist-white/90">Mielikkix Chat</span>
@@ -53,31 +46,41 @@ const c = t(lang).home;
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </Panel>
 
-<section class="border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-    <div class="max-w-2xl">
-      <h2 class="text-2xl font-bold sm:text-3xl">{c.forceAgentsHeading}</h2>
+  <div class="grid gap-6 sm:gap-8 md:grid-cols-2">
+    <Panel>
+      <Eyebrow text={nav.chatWidget} tone="accent" />
+      <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.chatWidgetHeading}</h2>
+      <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.chatWidgetBody}</p>
+      <a
+        href={localizedPath('/chat-widget', lang)}
+        class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+      >
+        {c.chatWidgetLink}
+        <span aria-hidden="true">→</span>
+      </a>
+    </Panel>
+
+    <Panel>
+      <Eyebrow text={nav.forceAgents} tone="gold" />
+      <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.forceAgentsHeading}</h2>
       <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.forceAgentsBody}</p>
       <a
         href={localizedPath('/force-agents', lang)}
-        class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
       >
         {c.forceAgentsLink}
         <span aria-hidden="true">→</span>
       </a>
-    </div>
+    </Panel>
   </div>
-</section>
 
-<section class="border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+  <Panel tone="accent" class="text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
     <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.closingBody}</p>
     <div class="mt-8 flex justify-center">
       <ButtonPrimary href={localizedPath('/pricing', lang)}>{c.closingCta}</ButtonPrimary>
     </div>
-  </div>
-</section>
+  </Panel>
+</div>

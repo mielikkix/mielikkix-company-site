@@ -1,6 +1,9 @@
 ---
 import ButtonPrimary from '../ButtonPrimary.astro';
 import Card from '../Card.astro';
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
 import { t } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -12,34 +15,33 @@ const { lang } = Astro.props;
 const c = t(lang).chatWidget;
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-  <p class="text-sm font-semibold uppercase tracking-widest text-aurora-neon">{c.eyebrow}</p>
-  <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{c.heading}</h1>
-  <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
-</section>
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="accent" class="relative overflow-hidden">
+    <Glow class="-right-16 -top-24 h-72 w-72" tone="accent" />
+    <div class="relative max-w-2xl">
+      <Eyebrow text={c.eyebrow} tone="accent" />
+      <h1 class="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{c.heading}</h1>
+      <p class="mt-6 text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
+    </div>
+  </Panel>
 
-<section class="border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+  <Panel>
     <h2 class="text-2xl font-bold sm:text-3xl">{c.whatHeading}</h2>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.whatBody}</p>
-  </div>
-</section>
+  </Panel>
 
-<section class="border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+  <Panel>
     <h2 class="text-2xl font-bold sm:text-3xl">{c.capabilitiesHeading}</h2>
     <div class="mt-8 grid gap-6 sm:grid-cols-2">
       {c.capabilities.map((cap) => <Card title={cap.title}><p class="text-sm leading-relaxed text-mist-white/80">{cap.body}</p></Card>)}
     </div>
-  </div>
-</section>
+  </Panel>
 
-<section class="border-t border-mist-white/10">
-  <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+  <Panel tone="gold" class="text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.ctaHeading}</h2>
     <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.ctaBody}</p>
     <div class="mt-8 flex justify-center">
       <ButtonPrimary href="https://app.mielikkix.ai">{c.cta}</ButtonPrimary>
     </div>
-  </div>
-</section>
+  </Panel>
+</div>

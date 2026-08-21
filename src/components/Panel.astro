@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+  id?: string;
+  tone?: 'default' | 'accent' | 'gold';
+}
+
+const { class: className = '', id, tone = 'default' } = Astro.props;
+
+const toneClasses: Record<NonNullable<Props['tone']>, string> = {
+  default: 'border-mist-white/10 bg-mist-white/[0.03]',
+  accent: 'border-aurora-neon/25 bg-aurora-neon/5',
+  gold: 'border-antler-gold/25 bg-antler-gold/5',
+};
+---
+
+<div id={id} class={`rounded-3xl border ${toneClasses[tone]} p-8 shadow-lg shadow-black/20 sm:p-10 ${className}`}>
+  <slot />
+</div>
