@@ -4,6 +4,7 @@ import Panel from '../Panel.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
 import HubDiagram from '../HubDiagram.astro';
+import IconBadge from '../IconBadge.astro';
 import { t } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -13,6 +14,32 @@ interface Props {
 
 const { lang } = Astro.props;
 const c = t(lang).products;
+
+const crewIcons = ['headset', 'megaphone', 'trendingUp'] as const;
+
+const cardStyles = [
+  {
+    bg: 'bg-aurora-neon',
+    border: 'border-aurora-neon',
+    text: 'text-[#06231A]',
+    body: 'text-[#06231A]/75',
+    iconTone: 'accent' as const,
+  },
+  {
+    bg: 'bg-antler-gold',
+    border: 'border-antler-gold',
+    text: 'text-[#2A2005]',
+    body: 'text-[#2A2005]/75',
+    iconTone: 'gold' as const,
+  },
+  {
+    bg: 'bg-mist-white',
+    border: 'border-mist-white',
+    text: 'text-deep-forest',
+    body: 'text-deep-forest/75',
+    iconTone: 'mixed' as const,
+  },
+];
 ---
 
 <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
@@ -44,16 +71,20 @@ const c = t(lang).products;
     </div>
   </Panel>
 
-  <Panel tone="accent">
+  <Panel>
     <h2 class="text-2xl font-bold sm:text-3xl">{c.crewsHeading}</h2>
     <div class="mt-8 grid gap-6 sm:grid-cols-3">
       {
-        c.crews.map((crew) => (
-          <div class="rounded-2xl border border-antler-gold/30 bg-deep-forest p-6">
-            <h3 class="text-lg font-semibold text-mist-white">{crew.heading}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-mist-white/80">{crew.body}</p>
-          </div>
-        ))
+        c.crews.map((crew, i) => {
+          const style = cardStyles[i % cardStyles.length];
+          return (
+            <div class={`rounded-2xl border ${style.border} ${style.bg} p-6 shadow-lg shadow-black/20`}>
+              <IconBadge icon={crewIcons[i]} tone={style.iconTone} />
+              <h3 class={`mt-4 text-lg font-semibold ${style.text}`}>{crew.heading}</h3>
+              <p class={`mt-2 text-sm leading-relaxed ${style.body}`}>{crew.body}</p>
+            </div>
+          );
+        })
       }
     </div>
   </Panel>
