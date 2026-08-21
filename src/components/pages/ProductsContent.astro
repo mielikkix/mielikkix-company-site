@@ -1,0 +1,66 @@
+---
+import ButtonPrimary from '../ButtonPrimary.astro';
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
+import HubDiagram from '../HubDiagram.astro';
+import { t } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).products;
+---
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="gold" class="relative overflow-hidden">
+    <Glow class="-right-16 -top-24 h-72 w-72" tone="gold" />
+    <div class="relative max-w-2xl">
+      <Eyebrow text={c.eyebrow} tone="gold" />
+      <h1 class="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{c.heading}</h1>
+      <p class="mt-6 text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
+    </div>
+  </Panel>
+
+  <Panel>
+    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+      <div class="order-2 md:order-1">
+        <HubDiagram
+          centerLabel={c.hubCenterLabel}
+          nodes={[
+            { icon: 'headset', label: c.crews[0].heading, tone: 'accent' },
+            { icon: 'megaphone', label: c.crews[1].heading, tone: 'gold' },
+            { icon: 'trendingUp', label: c.crews[2].heading, tone: 'accent' },
+          ]}
+        />
+      </div>
+      <div class="order-1 md:order-2">
+        <p class="text-base leading-relaxed text-mist-white/80">{c.body}</p>
+      </div>
+    </div>
+  </Panel>
+
+  <Panel tone="accent">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.crewsHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-3">
+      {
+        c.crews.map((crew) => (
+          <div class="rounded-2xl border border-antler-gold/30 bg-deep-forest p-6">
+            <h3 class="text-lg font-semibold text-mist-white">{crew.heading}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mist-white/80">{crew.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Panel>
+
+  <Panel tone="gold" class="text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.ctaBody}</h2>
+    <div class="mt-8 flex justify-center">
+      <ButtonPrimary href="https://app.mielikkix.ai">{c.cta}</ButtonPrimary>
+    </div>
+  </Panel>
+</div>

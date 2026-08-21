@@ -2,9 +2,10 @@
 import ButtonPrimary from '../ButtonPrimary.astro';
 import ButtonSecondary from '../ButtonSecondary.astro';
 import Panel from '../Panel.astro';
+import Card from '../Card.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
-import HubDiagram from '../HubDiagram.astro';
+import PillarStack from '../PillarStack.astro';
 import { t, localizedPath } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -15,98 +16,96 @@ interface Props {
 const { lang } = Astro.props;
 const c = t(lang).home;
 const nav = t(lang).nav;
-const groups = t(lang).forceAgents.groups;
-const crews = [groups.frontDesk.heading, groups.salesMarketing.heading, groups.growthRetention.heading];
+const activities = t(lang).solutions.activities;
+const p = t(lang).products;
 ---
 
-<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
-  <Panel surface="dark" tone="gold" class="relative overflow-hidden text-center">
-    <Glow class="-right-16 -top-24 h-72 w-72" tone="accent" />
-    <Glow class="-bottom-24 -left-16 h-72 w-72" tone="gold" />
-    <div class="relative mx-auto max-w-3xl">
-      <Eyebrow text={c.heroEyebrow} class="mx-auto" />
-      <h1 class="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">{c.heroTitle}</h1>
-      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
+<section class="relative overflow-hidden border-b border-mist-white/10 bg-deep-forest">
+  <Glow class="-right-40 -top-32 h-[28rem] w-[28rem]" tone="accent" />
+  <Glow class="-bottom-40 left-0 h-96 w-96" tone="gold" />
+  <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <div class="max-w-3xl">
+      <Eyebrow text={c.heroEyebrow} />
+      <h1 class="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+        {c.heroTitleLead}
+        <span class="bg-gradient-to-r from-aurora-neon to-antler-gold bg-clip-text text-transparent">{c.heroTitleAccent}</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
+      <div class="mt-8 flex flex-wrap gap-4">
         <ButtonPrimary href="https://app.mielikkix.ai">{c.ctaPrimary}</ButtonPrimary>
-        <ButtonSecondary href={localizedPath('/force-agents', lang)}>{c.ctaSecondary}</ButtonSecondary>
+        <ButtonSecondary href={`${localizedPath('/company', lang)}#contact`}>{c.ctaSecondary}</ButtonSecondary>
       </div>
-      <ul class="relative mt-10 flex flex-wrap justify-center gap-3">
-        {
-          crews.map((crew) => (
-            <li class="rounded-full border border-mist-white/15 bg-mist-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-mist-white/70">
-              {crew}
-            </li>
-          ))
-        }
-      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel>
+    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+      <div>
+        <Eyebrow text={nav.solutions} tone="gold" />
+        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.stackHeading}</h2>
+        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.stackSubhead}</p>
+        <a
+          href={localizedPath('/solutions', lang)}
+          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        >
+          {c.stackLink}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <PillarStack items={activities.map((a) => ({ title: a.title, short: a.short }))} />
+    </div>
+  </Panel>
+
+  <Panel tone="gold">
+    <Eyebrow text={c.valueEyebrow} tone="gold" />
+    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.valueHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        c.valueGrid.map((item) => (
+          <Card title={item.title}>
+            <p class="text-sm leading-relaxed text-mist-white/80">{item.body}</p>
+          </Card>
+        ))
+      }
     </div>
   </Panel>
 
   <Panel>
     <div class="grid gap-10 md:grid-cols-2 md:items-center">
       <div>
-        <Eyebrow text={nav.chatWidget} tone="accent" surface="light" />
-        <h2 class="mt-4 text-2xl font-bold text-deep-forest sm:text-3xl">{c.chatWidgetHeading}</h2>
-        <p class="mt-4 text-base leading-relaxed text-deep-forest/70">{c.chatWidgetBody}</p>
+        <Eyebrow text={c.productsEyebrow} />
+        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.productsHeading}</h2>
+        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.productsBody}</p>
         <a
-          href={localizedPath('/chat-widget', lang)}
-          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-deep-forest transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest"
+          href={localizedPath('/products', lang)}
+          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
         >
-          {c.chatWidgetLink}
-          <span aria-hidden="true" class="text-aurora-neon">→</span>
+          {c.productsLink}
+          <span aria-hidden="true">→</span>
         </a>
       </div>
-
       <div class="rounded-2xl border border-mist-white/15 bg-deep-forest p-6" aria-hidden="true">
         <div class="flex items-center gap-2 border-b border-mist-white/10 pb-4">
           <span class="h-2.5 w-2.5 rounded-full bg-aurora-neon"></span>
           <span class="text-sm font-semibold text-mist-white/90">Mielikkix Chat</span>
         </div>
         <div class="mt-4 space-y-3">
-          <div class="max-w-[80%] rounded-xl rounded-tl-sm bg-mist-white/10 px-4 py-2 text-sm text-mist-white/90">
-            {c.chatBubbleGreeting}
-          </div>
-          <div class="ml-auto max-w-[80%] rounded-xl rounded-tr-sm bg-aurora-neon px-4 py-2 text-sm text-[#06231A]">
-            {c.chatBubbleReply}
-          </div>
+          <div class="max-w-[80%] rounded-xl rounded-tl-sm bg-mist-white/10 px-4 py-2 text-sm text-mist-white/90">{p.chatBubbleGreeting}</div>
+          <div class="ml-auto max-w-[80%] rounded-xl rounded-tr-sm bg-aurora-neon px-4 py-2 text-sm text-[#06231A]">{p.chatBubbleReply}</div>
         </div>
       </div>
     </div>
   </Panel>
-
-  <Panel tone="gold">
-    <div class="grid gap-10 md:grid-cols-2 md:items-center">
-      <div class="order-2 md:order-1">
-        <HubDiagram
-          centerLabel={nav.chatWidget}
-          nodes={[
-            { icon: 'headset', label: groups.frontDesk.heading, tone: 'accent' },
-            { icon: 'megaphone', label: groups.salesMarketing.heading, tone: 'gold' },
-            { icon: 'trendingUp', label: groups.growthRetention.heading, tone: 'accent' },
-          ]}
-        />
-      </div>
-      <div class="order-1 md:order-2">
-        <Eyebrow text={nav.forceAgents} tone="gold" surface="light" />
-        <h2 class="mt-4 text-2xl font-bold text-deep-forest sm:text-3xl">{c.forceAgentsHeading}</h2>
-        <p class="mt-4 text-base leading-relaxed text-deep-forest/70">{c.forceAgentsBody}</p>
-        <a
-          href={localizedPath('/force-agents', lang)}
-          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-deep-forest transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest"
-        >
-          {c.forceAgentsLink}
-          <span aria-hidden="true" class="text-antler-gold">→</span>
-        </a>
-      </div>
-    </div>
-  </Panel>
-
-  <Panel surface="dark" tone="accent" class="text-center">
-    <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
-    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.closingBody}</p>
-    <div class="mt-8 flex justify-center">
-      <ButtonPrimary href={localizedPath('/pricing', lang)}>{c.closingCta}</ButtonPrimary>
-    </div>
-  </Panel>
 </div>
+
+<section class="relative overflow-hidden bg-gradient-to-br from-aurora-neon via-deep-forest to-antler-gold">
+  <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+    <h2 class="text-2xl font-bold text-mist-white sm:text-3xl">{c.closingHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/85">{c.closingBody}</p>
+    <div class="mt-8 flex justify-center">
+      <ButtonPrimary href={`${localizedPath('/company', lang)}#contact`}>{c.closingCta}</ButtonPrimary>
+    </div>
+  </div>
+</section>

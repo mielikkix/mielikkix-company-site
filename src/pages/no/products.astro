@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ForceAgentsContent from '../../components/pages/ForceAgentsContent.astro';
+import ProductsContent from '../../components/pages/ProductsContent.astro';
 import { t } from '../../i18n/utils';
 
 const lang = 'no';
-const c = t(lang).forceAgents;
+const c = t(lang).products;
 ---
 
 <BaseLayout lang={lang} title={c.seoTitle} description={c.seoDescription}>
-  <ForceAgentsContent lang={lang} />
+  <ProductsContent lang={lang} />
 </BaseLayout>

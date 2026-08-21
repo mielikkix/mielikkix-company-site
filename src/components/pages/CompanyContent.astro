@@ -15,7 +15,7 @@ const c = t(lang).company;
 ---
 
 <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
-  <Panel surface="dark" tone="gold" class="relative overflow-hidden">
+  <Panel tone="gold" class="relative overflow-hidden">
     <Glow class="-right-16 -top-24 h-72 w-72" tone="gold" />
     <div class="relative max-w-2xl">
       <Eyebrow text={c.eyebrow} tone="gold" />
@@ -26,24 +26,25 @@ const c = t(lang).company;
   <Panel id="about" class="scroll-mt-24">
     <div class="flex items-center gap-4">
       <IconBadge icon="target" tone="accent" />
-      <h2 class="text-2xl font-bold text-deep-forest sm:text-3xl">{c.aboutHeading}</h2>
+      <h2 class="text-2xl font-bold sm:text-3xl">{c.aboutHeading}</h2>
     </div>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed text-deep-forest/70">{c.aboutBody}</p>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.aboutBody}</p>
+    <p class="mt-3 max-w-2xl text-sm italic text-mist-white/50">{c.aboutPlaceholder}</p>
   </Panel>
 
   <Panel id="careers" class="scroll-mt-24">
     <div class="flex items-center gap-4">
       <IconBadge icon="trendingUp" tone="gold" />
-      <h2 class="text-2xl font-bold text-deep-forest sm:text-3xl">{c.careersHeading}</h2>
+      <h2 class="text-2xl font-bold sm:text-3xl">{c.careersHeading}</h2>
     </div>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed text-deep-forest/70">{c.careersBody}</p>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.careersBody}</p>
   </Panel>
 
   <Panel id="contact" class="scroll-mt-24">
     <div class="flex items-center gap-4">
       <IconBadge icon="headset" tone="accent" />
-      <h2 class="text-2xl font-bold text-deep-forest sm:text-3xl">{c.contactHeading}</h2>
+      <h2 class="text-2xl font-bold sm:text-3xl">{c.contactHeading}</h2>
     </div>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed text-deep-forest/70">{c.contactBody}</p>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.contactBody}</p>
   </Panel>
 </div>

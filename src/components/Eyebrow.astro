@@ -3,25 +3,19 @@ interface Props {
   text: string;
   class?: string;
   tone?: 'accent' | 'gold';
-  surface?: 'light' | 'dark';
 }
 
-const { text, class: className = '', tone = 'accent', surface = 'dark' } = Astro.props;
+const { text, class: className = '', tone = 'accent' } = Astro.props;
 
-const darkClasses =
+const toneClasses =
   tone === 'gold'
     ? 'border-antler-gold/30 bg-antler-gold/10 text-antler-gold'
     : 'border-aurora-neon/30 bg-aurora-neon/10 text-aurora-neon';
 
-const lightClasses =
-  tone === 'gold' ? 'border-antler-gold/30 bg-antler-gold/10 text-deep-forest' : 'border-aurora-neon/30 bg-aurora-neon/10 text-deep-forest';
-
 const dotClass = tone === 'gold' ? 'bg-antler-gold' : 'bg-aurora-neon';
 ---
 
-<span
-  class={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-widest ${surface === 'light' ? lightClasses : darkClasses} ${className}`}
->
+<span class={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-widest ${toneClasses} ${className}`}>
   <span class={`h-1.5 w-1.5 rounded-full ${dotClass}`}></span>
   {text}
 </span>

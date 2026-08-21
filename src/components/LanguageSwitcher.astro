@@ -18,13 +18,13 @@ const label = t(lang).a11y.languageLabel;
   {
     langCodes.map((code, i) => (
       <>
-        {i > 0 && <span class="text-deep-forest/25" aria-hidden="true">/</span>}
+        {i > 0 && <span class="text-mist-white/30" aria-hidden="true">/</span>}
         <a
           href={localizedPath(path, code)}
           hreflang={code === 'no' ? 'nb' : code}
           aria-current={code === lang ? 'true' : undefined}
-          class={`rounded px-1.5 py-1 uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest ${
-            code === lang ? 'font-semibold text-deep-forest' : 'text-deep-forest/50 hover:text-deep-forest'
+          class={`rounded px-1.5 py-1 uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white ${
+            code === lang ? 'font-semibold text-aurora-neon' : 'text-mist-white/70 hover:text-mist-white'
           }`}
         >
           {code}
