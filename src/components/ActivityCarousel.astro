@@ -1,0 +1,108 @@
+---
+import Icon from './Icon.astro';
+import IconBadge from './IconBadge.astro';
+
+interface Activity {
+  icon: Parameters<typeof IconBadge>[0]['icon'];
+  title: string;
+  description: string;
+  bullets: string[];
+}
+
+interface Props {
+  activities: Activity[];
+  idPrefix?: string;
+}
+
+const { activities, idPrefix = 'solution-slide' } = Astro.props;
+
+const slideStyles = [
+  {
+    bg: 'bg-aurora-neon',
+    border: 'border-aurora-neon',
+    text: 'text-[#06231A]',
+    body: 'text-[#06231A]/75',
+    pill: 'border-[#06231A]/25 bg-[#06231A]/10 text-[#06231A]/90',
+    iconTone: 'accent' as const,
+  },
+  {
+    bg: 'bg-antler-gold',
+    border: 'border-antler-gold',
+    text: 'text-[#2A2005]',
+    body: 'text-[#2A2005]/75',
+    pill: 'border-[#2A2005]/25 bg-[#2A2005]/10 text-[#2A2005]/90',
+    iconTone: 'gold' as const,
+  },
+  {
+    bg: 'bg-mist-white',
+    border: 'border-mist-white',
+    text: 'text-deep-forest',
+    body: 'text-deep-forest/75',
+    pill: 'border-deep-forest/20 bg-deep-forest/10 text-deep-forest/90',
+    iconTone: 'mixed' as const,
+  },
+];
+
+const count = activities.length;
+---
+
+<div class="relative">
+  <div
+    class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+  >
+    {
+      activities.map((activity, i) => {
+        const style = slideStyles[i % slideStyles.length];
+        const prevIdx = (i - 1 + count) % count;
+        const nextIdx = (i + 1) % count;
+        return (
+          <div id={`${idPrefix}-${i}`} class="relative w-full shrink-0 snap-center px-1">
+            <div class={`rounded-3xl border ${style.border} ${style.bg} p-8 shadow-lg shadow-black/20 sm:p-10`}>
+              <div class="flex items-start gap-4">
+                <IconBadge icon={activity.icon} tone={style.iconTone} class="h-14 w-14 shrink-0" />
+                <h2 class={`text-2xl font-bold sm:text-3xl ${style.text}`}>{activity.title}</h2>
+              </div>
+              <p class={`mt-4 max-w-2xl text-base leading-relaxed ${style.body}`}>{activity.description}</p>
+              <ul class="mt-5 flex flex-wrap gap-3">
+                {activity.bullets.map((bullet) => (
+                  <li class={`rounded-full border px-4 py-1.5 text-xs font-medium ${style.pill}`}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+
+            {count > 1 && (
+              <>
+                <a
+                  href={`#${idPrefix}-${prevIdx}`}
+                  aria-label="Previous"
+                  class="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-deep-forest text-mist-white shadow-lg transition hover:bg-deep-forest/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white sm:-left-4"
+                >
+                  <Icon name="chevronLeft" class="h-5 w-5" />
+                </a>
+                <a
+                  href={`#${idPrefix}-${nextIdx}`}
+                  aria-label="Next"
+                  class="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-deep-forest text-mist-white shadow-lg transition hover:bg-deep-forest/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white sm:-right-4"
+                >
+                  <Icon name="chevronRight" class="h-5 w-5" />
+                </a>
+              </>
+            )}
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <div class="mt-6 flex justify-center gap-2">
+    {
+      activities.map((_, i) => (
+        <a
+          href={`#${idPrefix}-${i}`}
+          aria-label={`Go to slide ${i + 1}`}
+          class="h-2.5 w-2.5 rounded-full bg-mist-white/25 transition hover:bg-mist-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        />
+      ))
+    }
+  </div>
+</div>

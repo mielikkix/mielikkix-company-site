@@ -3,7 +3,7 @@ import ButtonPrimary from '../ButtonPrimary.astro';
 import Panel from '../Panel.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
-import IconBadge from '../IconBadge.astro';
+import ActivityCarousel from '../ActivityCarousel.astro';
 import { t, localizedPath } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -13,7 +13,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const c = t(lang).solutions;
-const tones = ['accent', 'gold', 'accent', 'gold', 'accent'] as const;
 ---
 
 <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
@@ -27,24 +26,7 @@ const tones = ['accent', 'gold', 'accent', 'gold', 'accent'] as const;
     </div>
   </Panel>
 
-  {
-    c.activities.map((activity, i) => (
-      <Panel tone={tones[i]}>
-        <div class="grid gap-6 md:grid-cols-[auto_1fr] md:items-start">
-          <IconBadge icon={activity.icon} tone={tones[i]} class="h-14 w-14" />
-          <div>
-            <h2 class="text-2xl font-bold sm:text-3xl">{activity.title}</h2>
-            <p class="mt-3 max-w-2xl text-base leading-relaxed text-mist-white/80">{activity.description}</p>
-            <ul class="mt-5 flex flex-wrap gap-3">
-              {activity.bullets.map((bullet) => (
-                <li class="rounded-full border border-mist-white/15 bg-mist-white/5 px-4 py-1.5 text-xs font-medium text-mist-white/80">{bullet}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Panel>
-    ))
-  }
+  <ActivityCarousel activities={c.activities} />
 
   <Panel tone="gold" class="text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
