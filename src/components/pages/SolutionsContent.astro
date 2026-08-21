@@ -3,7 +3,7 @@ import ButtonPrimary from '../ButtonPrimary.astro';
 import Panel from '../Panel.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
-import ActivityCarousel from '../ActivityCarousel.astro';
+import IconBadge from '../IconBadge.astro';
 import { t, localizedPath } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -13,9 +13,36 @@ interface Props {
 
 const { lang } = Astro.props;
 const c = t(lang).solutions;
+
+const cardStyles = [
+  {
+    bg: 'bg-aurora-neon',
+    border: 'border-aurora-neon',
+    text: 'text-[#06231A]',
+    body: 'text-[#06231A]/75',
+    pill: 'border-[#06231A]/25 bg-[#06231A]/10 text-[#06231A]/90',
+    iconTone: 'accent' as const,
+  },
+  {
+    bg: 'bg-antler-gold',
+    border: 'border-antler-gold',
+    text: 'text-[#2A2005]',
+    body: 'text-[#2A2005]/75',
+    pill: 'border-[#2A2005]/25 bg-[#2A2005]/10 text-[#2A2005]/90',
+    iconTone: 'gold' as const,
+  },
+  {
+    bg: 'bg-mist-white',
+    border: 'border-mist-white',
+    text: 'text-deep-forest',
+    body: 'text-deep-forest/75',
+    pill: 'border-deep-forest/20 bg-deep-forest/10 text-deep-forest/90',
+    iconTone: 'mixed' as const,
+  },
+];
 ---
 
-<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+<div class="mx-auto max-w-6xl space-y-8 px-4 py-12 sm:space-y-10 sm:px-6 sm:py-16 lg:px-8">
   <Panel tone="accent" class="relative overflow-hidden text-center">
     <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
     <Glow class="-right-24 -top-24 h-72 w-72" tone="gold" />
@@ -26,7 +53,25 @@ const c = t(lang).solutions;
     </div>
   </Panel>
 
-  <ActivityCarousel activities={c.activities} />
+  {
+    c.activities.map((activity, i) => {
+      const style = cardStyles[i % cardStyles.length];
+      return (
+        <div class={`rounded-3xl border ${style.border} ${style.bg} p-10 shadow-lg shadow-black/20 sm:p-12`}>
+          <div class="flex items-start gap-6">
+            <IconBadge icon={activity.icon} tone={style.iconTone} class="h-16 w-16 shrink-0" />
+            <h2 class={`text-3xl font-bold sm:text-4xl ${style.text}`}>{activity.title}</h2>
+          </div>
+          <p class={`mt-5 max-w-3xl text-lg leading-relaxed ${style.body}`}>{activity.description}</p>
+          <ul class="mt-6 flex flex-wrap gap-3">
+            {activity.bullets.map((bullet) => (
+              <li class={`rounded-full border px-5 py-2 text-sm font-medium ${style.pill}`}>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    })
+  }
 
   <Panel tone="gold" class="text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
