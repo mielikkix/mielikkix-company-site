@@ -26,9 +26,9 @@ const toneText = { accent: 'text-aurora-neon border-aurora-neon/40 bg-deep-fores
 
 <div class="relative mx-auto aspect-square w-full max-w-sm">
   <svg viewBox="0 0 200 200" class="absolute inset-0 h-full w-full" aria-hidden="true">
-    <line x1="100" y1="100" x2="100" y2="24" stroke="currentColor" class="text-mist-white/25" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="100" y1="100" x2="42" y2="158" stroke="currentColor" class="text-mist-white/25" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="100" y1="100" x2="158" y2="158" stroke="currentColor" class="text-mist-white/25" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="100" y1="100" x2="100" y2="24" stroke="currentColor" class="text-deep-forest/20" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="100" y1="100" x2="42" y2="158" stroke="currentColor" class="text-deep-forest/20" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="100" y1="100" x2="158" y2="158" stroke="currentColor" class="text-deep-forest/20" stroke-width="1.5" stroke-dasharray="4 4" />
   </svg>
 
   <div class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-1 rounded-full border border-aurora-neon/40 bg-deep-forest text-center shadow-lg shadow-black/30">
@@ -45,7 +45,7 @@ const toneText = { accent: 'text-aurora-neon border-aurora-neon/40 bg-deep-fores
         <span class={`flex h-12 w-12 items-center justify-center rounded-full border ${toneText[node.tone]}`}>
           <Icon name={node.icon} class="h-5 w-5" />
         </span>
-        <span class="max-w-[6.5rem] text-[11px] font-medium leading-tight text-mist-white/80">{node.label}</span>
+        <span class="max-w-[6.5rem] text-[11px] font-medium leading-tight text-deep-forest/70">{node.label}</span>
       </div>
     ))
   }

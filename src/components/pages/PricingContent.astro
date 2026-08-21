@@ -16,7 +16,7 @@ const c = t(lang).pricing;
 ---
 
 <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
-  <Panel tone="accent" class="relative overflow-hidden">
+  <Panel surface="dark" tone="accent" class="relative overflow-hidden">
     <Glow class="-right-16 -top-24 h-72 w-72" tone="accent" />
     <div class="relative max-w-2xl">
       <Eyebrow text={c.eyebrow} tone="accent" />
@@ -30,9 +30,9 @@ const c = t(lang).pricing;
       {
         c.tiers.map((tier) => (
           <Card class="flex flex-col">
-            <h2 class="text-lg font-semibold text-mist-white">{tier.name}</h2>
-            <p class="mt-2 text-sm leading-relaxed text-mist-white/80">{tier.body}</p>
-            <p class="mt-6 text-sm font-medium italic text-antler-gold">{tier.price}</p>
+            <h2 class="text-lg font-semibold text-deep-forest">{tier.name}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-deep-forest/70">{tier.body}</p>
+            <p class="mt-6 border-l-2 border-antler-gold pl-3 text-sm font-medium italic text-deep-forest/70">{tier.price}</p>
             <div class="mt-auto pt-6">
               <ButtonPrimary href="https://app.mielikkix.ai" class="w-full">
                 {tier.cta}
@@ -42,6 +42,6 @@ const c = t(lang).pricing;
         ))
       }
     </div>
-    <p class="mx-auto mt-10 max-w-2xl text-center text-sm text-mist-white/60">{c.note}</p>
+    <p class="mx-auto mt-10 max-w-2xl text-center text-sm text-deep-forest/50">{c.note}</p>
   </Panel>
 </div>

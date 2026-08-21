@@ -23,21 +23,21 @@ const links = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-mist-white/10 bg-deep-forest/95 backdrop-blur">
+<header class="sticky top-0 z-50 border-b border-antler-gold/15 bg-white/95 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
     <a
       href={localizedPath('/', lang)}
-      class="flex items-center gap-2 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+      class="flex items-center gap-2 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest"
     >
       <Logo class="h-8 w-8" />
-      <span class="text-lg font-bold tracking-tight text-mist-white">Mielikkix</span>
+      <span class="text-lg font-bold tracking-tight text-deep-forest">Mielikkix</span>
     </a>
 
     <input type="checkbox" id="nav-toggle" class="peer hidden" />
 
     <label
       for="nav-toggle"
-      class="cursor-pointer rounded p-2 text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white md:hidden"
+      class="cursor-pointer rounded p-2 text-deep-forest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest md:hidden"
       aria-label={nav.menuLabel}
       tabindex="0"
     >
@@ -47,9 +47,9 @@ const links = [
     </label>
 
     <div
-      class="absolute inset-x-0 top-full hidden flex-col gap-4 border-b border-mist-white/10 bg-deep-forest px-4 py-4 peer-checked:flex sm:px-6 md:static md:flex md:flex-1 md:flex-row md:items-center md:justify-between md:border-none md:p-0"
+      class="absolute inset-x-0 top-full hidden flex-col gap-4 border-b border-antler-gold/15 bg-white px-4 py-4 peer-checked:flex sm:px-6 md:static md:flex md:flex-1 md:flex-row md:items-center md:justify-between md:border-none md:p-0"
     >
-      <ul class="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+      <ul class="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
         {
           links.map((link) => {
             const href = localizedPath(link.slug, lang);
@@ -59,8 +59,10 @@ const links = [
                 <a
                   href={href}
                   aria-current={isActive ? 'page' : undefined}
-                  class={`rounded text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white ${
-                    isActive ? 'text-aurora-neon' : 'text-mist-white/85 hover:text-mist-white'
+                  class={`relative rounded pb-1 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest ${
+                    isActive
+                      ? "font-semibold text-deep-forest after:absolute after:-bottom-[1px] after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-aurora-neon after:content-['']"
+                      : 'text-deep-forest/65 hover:text-deep-forest'
                   }`}
                 >
                   {link.label}

@@ -3,17 +3,26 @@ interface Props {
   class?: string;
   id?: string;
   tone?: 'default' | 'accent' | 'gold';
+  surface?: 'light' | 'dark';
 }
 
-const { class: className = '', id, tone = 'default' } = Astro.props;
+const { class: className = '', id, tone = 'default', surface = 'light' } = Astro.props;
 
-const toneClasses: Record<NonNullable<Props['tone']>, string> = {
-  default: 'border-mist-white/10 bg-mist-white/[0.03]',
-  accent: 'border-aurora-neon/25 bg-aurora-neon/5',
-  gold: 'border-antler-gold/25 bg-antler-gold/5',
+const lightTone: Record<NonNullable<Props['tone']>, string> = {
+  default: 'border-antler-gold/20 bg-white shadow-md shadow-deep-forest/5',
+  accent: 'border-aurora-neon/30 bg-aurora-neon/5 shadow-md shadow-deep-forest/5',
+  gold: 'border-antler-gold/30 bg-antler-gold/5 shadow-md shadow-deep-forest/5',
 };
+
+const darkTone: Record<NonNullable<Props['tone']>, string> = {
+  default: 'border-mist-white/10 bg-deep-forest text-mist-white shadow-lg shadow-black/20',
+  accent: 'border-aurora-neon/25 bg-deep-forest text-mist-white shadow-lg shadow-black/20',
+  gold: 'border-antler-gold/25 bg-deep-forest text-mist-white shadow-lg shadow-black/20',
+};
+
+const toneClasses = surface === 'dark' ? darkTone[tone] : lightTone[tone];
 ---
 
-<div id={id} class={`rounded-3xl border ${toneClasses[tone]} p-8 shadow-lg shadow-black/20 sm:p-10 ${className}`}>
+<div id={id} class={`rounded-3xl border ${toneClasses} p-8 sm:p-10 ${className}`}>
   <slot />
 </div>

@@ -21,7 +21,7 @@ const groupIcons = ['headset', 'megaphone', 'trendingUp'] as const;
 ---
 
 <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
-  <Panel tone="gold" class="relative overflow-hidden">
+  <Panel surface="dark" tone="gold" class="relative overflow-hidden">
     <Glow class="-right-16 -top-24 h-72 w-72" tone="gold" />
     <div class="relative max-w-2xl">
       <Eyebrow text={c.eyebrow} tone="gold" />
@@ -35,12 +35,12 @@ const groupIcons = ['headset', 'megaphone', 'trendingUp'] as const;
       <Panel tone={panelTones[i]}>
         <div class="flex items-center gap-4">
           <IconBadge icon={groupIcons[i]} tone={iconTones[i]} />
-          <h2 class="text-2xl font-bold sm:text-3xl">{group.heading}</h2>
+          <h2 class="text-2xl font-bold text-deep-forest sm:text-3xl">{group.heading}</h2>
         </div>
         <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {group.agents.map((agent) => (
             <Card title={agent.name}>
-              <p class="text-sm leading-relaxed text-mist-white/80">{agent.body}</p>
+              <p class="text-sm leading-relaxed text-deep-forest/70">{agent.body}</p>
             </Card>
           ))}
         </div>
@@ -48,7 +48,7 @@ const groupIcons = ['headset', 'megaphone', 'trendingUp'] as const;
     ))
   }
 
-  <Panel class="text-center">
+  <Panel surface="dark" class="text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
     <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.closingBody}</p>
     <div class="mt-8 flex justify-center">

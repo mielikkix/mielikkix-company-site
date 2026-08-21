@@ -20,7 +20,7 @@ const crews = [groups.frontDesk.heading, groups.salesMarketing.heading, groups.g
 ---
 
 <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
-  <Panel tone="gold" class="relative overflow-hidden text-center">
+  <Panel surface="dark" tone="gold" class="relative overflow-hidden text-center">
     <Glow class="-right-16 -top-24 h-72 w-72" tone="accent" />
     <Glow class="-bottom-24 -left-16 h-72 w-72" tone="gold" />
     <div class="relative mx-auto max-w-3xl">
@@ -46,15 +46,15 @@ const crews = [groups.frontDesk.heading, groups.salesMarketing.heading, groups.g
   <Panel>
     <div class="grid gap-10 md:grid-cols-2 md:items-center">
       <div>
-        <Eyebrow text={nav.chatWidget} tone="accent" />
-        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.chatWidgetHeading}</h2>
-        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.chatWidgetBody}</p>
+        <Eyebrow text={nav.chatWidget} tone="accent" surface="light" />
+        <h2 class="mt-4 text-2xl font-bold text-deep-forest sm:text-3xl">{c.chatWidgetHeading}</h2>
+        <p class="mt-4 text-base leading-relaxed text-deep-forest/70">{c.chatWidgetBody}</p>
         <a
           href={localizedPath('/chat-widget', lang)}
-          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-deep-forest transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest"
         >
           {c.chatWidgetLink}
-          <span aria-hidden="true">→</span>
+          <span aria-hidden="true" class="text-aurora-neon">→</span>
         </a>
       </div>
 
@@ -88,21 +88,21 @@ const crews = [groups.frontDesk.heading, groups.salesMarketing.heading, groups.g
         />
       </div>
       <div class="order-1 md:order-2">
-        <Eyebrow text={nav.forceAgents} tone="gold" />
-        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.forceAgentsHeading}</h2>
-        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.forceAgentsBody}</p>
+        <Eyebrow text={nav.forceAgents} tone="gold" surface="light" />
+        <h2 class="mt-4 text-2xl font-bold text-deep-forest sm:text-3xl">{c.forceAgentsHeading}</h2>
+        <p class="mt-4 text-base leading-relaxed text-deep-forest/70">{c.forceAgentsBody}</p>
         <a
           href={localizedPath('/force-agents', lang)}
-          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-deep-forest transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep-forest"
         >
           {c.forceAgentsLink}
-          <span aria-hidden="true">→</span>
+          <span aria-hidden="true" class="text-antler-gold">→</span>
         </a>
       </div>
     </div>
   </Panel>
 
-  <Panel tone="accent" class="text-center">
+  <Panel surface="dark" tone="accent" class="text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
     <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.closingBody}</p>
     <div class="mt-8 flex justify-center">
