@@ -4,6 +4,7 @@ import Card from '../Card.astro';
 import Panel from '../Panel.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
+import IconBadge from '../IconBadge.astro';
 import { t } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -14,7 +15,9 @@ interface Props {
 const { lang } = Astro.props;
 const c = t(lang).forceAgents;
 const groups = [c.groups.frontDesk, c.groups.salesMarketing, c.groups.growthRetention];
-const tones = ['accent', 'gold', 'accent'] as const;
+const panelTones = ['accent', 'gold', 'default'] as const;
+const iconTones = ['accent', 'gold', 'mixed'] as const;
+const groupIcons = ['headset', 'megaphone', 'trendingUp'] as const;
 ---
 
 <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
@@ -29,8 +32,11 @@ const tones = ['accent', 'gold', 'accent'] as const;
 
   {
     groups.map((group, i) => (
-      <Panel tone={tones[i]}>
-        <h2 class="text-2xl font-bold sm:text-3xl">{group.heading}</h2>
+      <Panel tone={panelTones[i]}>
+        <div class="flex items-center gap-4">
+          <IconBadge icon={groupIcons[i]} tone={iconTones[i]} />
+          <h2 class="text-2xl font-bold sm:text-3xl">{group.heading}</h2>
+        </div>
         <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {group.agents.map((agent) => (
             <Card title={agent.name}>

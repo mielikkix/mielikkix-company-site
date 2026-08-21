@@ -2,6 +2,7 @@
 import Panel from '../Panel.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
+import IconBadge from '../IconBadge.astro';
 import { t } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -23,17 +24,26 @@ const c = t(lang).company;
   </Panel>
 
   <Panel id="about" class="scroll-mt-24">
-    <h2 class="text-2xl font-bold sm:text-3xl">{c.aboutHeading}</h2>
+    <div class="flex items-center gap-4">
+      <IconBadge icon="target" tone="accent" />
+      <h2 class="text-2xl font-bold sm:text-3xl">{c.aboutHeading}</h2>
+    </div>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.aboutBody}</p>
   </Panel>
 
   <Panel id="careers" class="scroll-mt-24">
-    <h2 class="text-2xl font-bold sm:text-3xl">{c.careersHeading}</h2>
+    <div class="flex items-center gap-4">
+      <IconBadge icon="trendingUp" tone="gold" />
+      <h2 class="text-2xl font-bold sm:text-3xl">{c.careersHeading}</h2>
+    </div>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.careersBody}</p>
   </Panel>
 
   <Panel id="contact" class="scroll-mt-24">
-    <h2 class="text-2xl font-bold sm:text-3xl">{c.contactHeading}</h2>
+    <div class="flex items-center gap-4">
+      <IconBadge icon="headset" tone="accent" />
+      <h2 class="text-2xl font-bold sm:text-3xl">{c.contactHeading}</h2>
+    </div>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.contactBody}</p>
   </Panel>
 </div>
