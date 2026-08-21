@@ -14,6 +14,14 @@ interface Props {
 const { lang } = Astro.props;
 const c = t(lang).solutions;
 
+const images = [
+  '/images/solutions/chatbots-saas.jpg',
+  '/images/solutions/customer-service.jpg',
+  '/images/solutions/automation.jpg',
+  '/images/solutions/custom-dev.jpg',
+  '/images/solutions/integrations.jpg',
+];
+
 const cardStyles = [
   {
     bg: 'bg-aurora-neon',
@@ -56,18 +64,26 @@ const cardStyles = [
   {
     c.activities.map((activity, i) => {
       const style = cardStyles[i % cardStyles.length];
+      const imageFirst = i % 2 === 1;
       return (
         <div class={`rounded-3xl border ${style.border} ${style.bg} p-10 shadow-lg shadow-black/20 sm:p-12`}>
-          <div class="flex items-start gap-6">
-            <IconBadge icon={activity.icon} tone={style.iconTone} class="h-16 w-16 shrink-0" />
-            <h2 class={`text-3xl font-bold sm:text-4xl ${style.text}`}>{activity.title}</h2>
+          <div class="grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center">
+            <div class={imageFirst ? 'md:order-2' : ''}>
+              <div class="flex items-start gap-6">
+                <IconBadge icon={activity.icon} tone={style.iconTone} class="h-16 w-16 shrink-0" />
+                <h2 class={`text-3xl font-bold sm:text-4xl ${style.text}`}>{activity.title}</h2>
+              </div>
+              <p class={`mt-5 max-w-3xl text-lg leading-relaxed ${style.body}`}>{activity.description}</p>
+              <ul class="mt-6 flex flex-wrap gap-3">
+                {activity.bullets.map((bullet) => (
+                  <li class={`rounded-full border px-5 py-2 text-sm font-medium ${style.pill}`}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+            <div class={`overflow-hidden rounded-2xl border ${style.border} shadow-lg shadow-black/25 ${imageFirst ? 'md:order-1' : ''}`}>
+              <img src={images[i]} alt={activity.title} width="1200" height="800" loading="lazy" class="h-64 w-full object-cover md:h-full" />
+            </div>
           </div>
-          <p class={`mt-5 max-w-3xl text-lg leading-relaxed ${style.body}`}>{activity.description}</p>
-          <ul class="mt-6 flex flex-wrap gap-3">
-            {activity.bullets.map((bullet) => (
-              <li class={`rounded-full border px-5 py-2 text-sm font-medium ${style.pill}`}>{bullet}</li>
-            ))}
-          </ul>
         </div>
       );
     })
