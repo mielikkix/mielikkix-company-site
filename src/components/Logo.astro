@@ -1,0 +1,25 @@
+---
+// PLACEHOLDER mark: a geometric fox face for the Mielikkix wordmark — left ear in
+// Aurora Neon, right ear in Antler Gold, per the CLAUDE.md logo concept. Ship as-is
+// until a designer pass replaces it with polished vector art.
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'h-8 w-8' } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 48 48"
+  role="img"
+  aria-label="Mielikkix"
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <polygon points="4,20 15,3 18,22" class="fill-aurora-neon" />
+  <polygon points="44,20 33,3 30,22" class="fill-antler-gold" />
+  <polygon points="24,44 6,25 12,11 36,11 42,25" class="fill-mist-white" />
+  <circle cx="18" cy="25" r="2.2" class="fill-deep-forest" />
+  <circle cx="30" cy="25" r="2.2" class="fill-deep-forest" />
+  <polygon points="24,37 20.5,31 27.5,31" class="fill-deep-forest" />
+</svg>

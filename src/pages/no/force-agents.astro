@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ForceAgentsContent from '../../components/pages/ForceAgentsContent.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'no';
+const c = t(lang).forceAgents;
+---
+
+<BaseLayout lang={lang} title={c.seoTitle} description={c.seoDescription}>
+  <ForceAgentsContent lang={lang} />
+</BaseLayout>

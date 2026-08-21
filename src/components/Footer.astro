@@ -1,0 +1,86 @@
+---
+import Logo from './Logo.astro';
+import { t, localizedPath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const dict = t(lang);
+const year = new Date().getFullYear();
+
+const siteLinks = [
+  { slug: '/', label: dict.nav.home },
+  { slug: '/chat-widget', label: dict.nav.chatWidget },
+  { slug: '/force-agents', label: dict.nav.forceAgents },
+  { slug: '/pricing', label: dict.nav.pricing },
+];
+
+const companyLinks = [
+  { slug: '/company#about', label: dict.company.aboutHeading },
+  { slug: '/company#careers', label: dict.company.careersHeading },
+  { slug: '/company#contact', label: dict.company.contactHeading },
+];
+---
+
+<footer class="border-t border-mist-white/10">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr] lg:px-8">
+    <div class="max-w-xs">
+      <div class="flex items-center gap-2">
+        <Logo class="h-7 w-7" />
+        <span class="text-base font-bold text-mist-white">Mielikkix</span>
+      </div>
+      <p class="mt-3 text-sm leading-relaxed text-mist-white/70">{dict.footer.tagline}</p>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-antler-gold">{dict.footer.siteHeading}</h2>
+      <ul class="mt-4 flex flex-col gap-2">
+        {
+          siteLinks.map((link) => (
+            <li>
+              <a
+                href={localizedPath(link.slug, lang)}
+                class="rounded text-sm text-mist-white/80 transition hover:text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-antler-gold">{dict.footer.companyHeading}</h2>
+      <ul class="mt-4 flex flex-col gap-2">
+        {
+          companyLinks.map((link) => (
+            <li>
+              <a
+                href={localizedPath(link.slug, lang)}
+                class="rounded text-sm text-mist-white/80 transition hover:text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href="https://app.mielikkix.ai"
+            class="rounded text-sm text-mist-white/80 transition hover:text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+          >
+            {dict.footer.login}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-mist-white/10 px-4 py-6 sm:px-6 lg:px-8">
+    <p class="mx-auto max-w-6xl text-xs text-mist-white/50">{dict.footer.copyright.replace('{year}', String(year))}</p>
+  </div>
+</footer>

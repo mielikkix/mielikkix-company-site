@@ -1,0 +1,82 @@
+---
+import Logo from './Logo.astro';
+import ButtonPrimary from './ButtonPrimary.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { t, localizedPath, getRouteSlug } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const nav = t(lang).nav;
+const currentSlug = getRouteSlug(path);
+
+const links = [
+  { slug: '/', label: nav.home },
+  { slug: '/chat-widget', label: nav.chatWidget },
+  { slug: '/force-agents', label: nav.forceAgents },
+  { slug: '/pricing', label: nav.pricing },
+  { slug: '/company', label: nav.company },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-mist-white/10 bg-deep-forest/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+    <a
+      href={localizedPath('/', lang)}
+      class="flex items-center gap-2 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+    >
+      <Logo class="h-8 w-8" />
+      <span class="text-lg font-bold tracking-tight text-mist-white">Mielikkix</span>
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="peer hidden" />
+
+    <label
+      for="nav-toggle"
+      class="cursor-pointer rounded p-2 text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white md:hidden"
+      aria-label={nav.menuLabel}
+      tabindex="0"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </label>
+
+    <div
+      class="absolute inset-x-0 top-full hidden flex-col gap-4 border-b border-mist-white/10 bg-deep-forest px-4 py-4 peer-checked:flex sm:px-6 md:static md:flex md:flex-1 md:flex-row md:items-center md:justify-between md:border-none md:p-0"
+    >
+      <ul class="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+        {
+          links.map((link) => {
+            const href = localizedPath(link.slug, lang);
+            const isActive = currentSlug === link.slug;
+            return (
+              <li>
+                <a
+                  href={href}
+                  aria-current={isActive ? 'page' : undefined}
+                  class={`rounded text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white ${
+                    isActive ? 'text-aurora-neon' : 'text-mist-white/85 hover:text-mist-white'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <div class="flex items-center gap-4">
+        <LanguageSwitcher lang={lang} path={path} />
+        <ButtonPrimary href="https://app.mielikkix.ai" class="!px-5 !py-2.5">
+          {nav.getStarted}
+        </ButtonPrimary>
+      </div>
+    </div>
+  </div>
+</header>

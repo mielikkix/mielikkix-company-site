@@ -1,0 +1,37 @@
+---
+import { t } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).company;
+---
+
+<section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+  <p class="text-sm font-semibold uppercase tracking-widest text-aurora-neon">{c.eyebrow}</p>
+  <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{c.heading}</h1>
+</section>
+
+<section id="about" class="scroll-mt-24 border-t border-mist-white/10">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.aboutHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.aboutBody}</p>
+  </div>
+</section>
+
+<section id="careers" class="scroll-mt-24 border-t border-mist-white/10">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.careersHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.careersBody}</p>
+  </div>
+</section>
+
+<section id="contact" class="scroll-mt-24 border-t border-mist-white/10">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.contactHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.contactBody}</p>
+  </div>
+</section>

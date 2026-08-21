@@ -1,0 +1,35 @@
+---
+import { languages, type Lang } from '../i18n/ui';
+import { localizedPath } from '../i18n/utils';
+import { t } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  path: string;
+  class?: string;
+}
+
+const { lang, path, class: className = '' } = Astro.props;
+const langCodes = Object.keys(languages) as Lang[];
+const label = t(lang).a11y.languageLabel;
+---
+
+<nav aria-label={label} class={`flex items-center gap-1 text-sm ${className}`}>
+  {
+    langCodes.map((code, i) => (
+      <>
+        {i > 0 && <span class="text-mist-white/30" aria-hidden="true">/</span>}
+        <a
+          href={localizedPath(path, code)}
+          hreflang={code === 'no' ? 'nb' : code}
+          aria-current={code === lang ? 'true' : undefined}
+          class={`rounded px-1.5 py-1 uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white ${
+            code === lang ? 'font-semibold text-aurora-neon' : 'text-mist-white/70 hover:text-mist-white'
+          }`}
+        >
+          {code}
+        </a>
+      </>
+    ))
+  }
+</nav>

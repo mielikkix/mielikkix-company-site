@@ -1,0 +1,41 @@
+---
+import ButtonPrimary from '../ButtonPrimary.astro';
+import Card from '../Card.astro';
+import { t } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).pricing;
+---
+
+<section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+  <p class="text-sm font-semibold uppercase tracking-widest text-aurora-neon">{c.eyebrow}</p>
+  <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{c.heading}</h1>
+  <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
+</section>
+
+<section class="border-t border-mist-white/10">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        c.tiers.map((tier) => (
+          <Card class="flex flex-col">
+            <h2 class="text-lg font-semibold text-mist-white">{tier.name}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-mist-white/80">{tier.body}</p>
+            <p class="mt-6 text-sm font-medium italic text-antler-gold">{tier.price}</p>
+            <div class="mt-auto pt-6">
+              <ButtonPrimary href="https://app.mielikkix.ai" class="w-full">
+                {tier.cta}
+              </ButtonPrimary>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+    <p class="mx-auto mt-10 max-w-2xl text-center text-sm text-mist-white/60">{c.note}</p>
+  </div>
+</section>

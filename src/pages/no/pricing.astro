@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PricingContent from '../../components/pages/PricingContent.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'no';
+const c = t(lang).pricing;
+---
+
+<BaseLayout lang={lang} title={c.seoTitle} description={c.seoDescription}>
+  <PricingContent lang={lang} />
+</BaseLayout>

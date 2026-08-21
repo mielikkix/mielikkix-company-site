@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CompanyContent from '../../components/pages/CompanyContent.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'no';
+const c = t(lang).company;
+---
+
+<BaseLayout lang={lang} title={c.seoTitle} description={c.seoDescription}>
+  <CompanyContent lang={lang} />
+</BaseLayout>
