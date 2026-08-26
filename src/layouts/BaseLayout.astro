@@ -18,6 +18,8 @@ const htmlLang = lang === 'no' ? 'nb' : 'en';
 const pageDescription = description ?? dict.meta.defaultDescription;
 const fullTitle = `${title} · ${dict.meta.siteName}`;
 const langCodes = Object.keys(languages) as Lang[];
+const canonicalUrl = new URL(path, Astro.site);
+const ogImageUrl = new URL('/og-image.svg', Astro.site);
 ---
 
 <!doctype html>
@@ -26,20 +28,27 @@ const langCodes = Object.keys(languages) as Lang[];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
     <title>{fullTitle}</title>
     <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
 
     {langCodes.map((code) => (
-      <link rel="alternate" hreflang={code === 'no' ? 'nb' : code} href={localizedPath(path, code)} />
+      <link rel="alternate" hreflang={code === 'no' ? 'nb' : code} href={new URL(localizedPath(path, code), Astro.site)} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={localizedPath(path, 'en')} />
+    <link rel="alternate" hreflang="x-default" href={new URL(localizedPath(path, 'en'), Astro.site)} />
 
     <meta property="og:site_name" content={dict.meta.siteName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang === 'no' ? 'nb_NO' : 'en_US'} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body class="flex min-h-screen flex-col bg-deep-forest text-mist-white antialiased">
     <a
@@ -53,5 +62,6 @@ const langCodes = Object.keys(languages) as Lang[];
       <slot />
     </main>
     <Footer lang={lang} />
+    <script is:inline src="https://app.mielikkix.ai/widget.js" data-business="c7650cb2-6ea1-4cc2-846b-2f7cc4025267"></script>
   </body>
 </html>

@@ -31,7 +31,7 @@ const p = t(lang).products;
     </h1>
     <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
     <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <ButtonPrimary href="https://app.mielikkix.ai">{c.ctaPrimary}</ButtonPrimary>
+      <ButtonPrimary href="https://mielikkix.ai">{c.ctaPrimary}</ButtonPrimary>
       <ButtonSecondary href={`${localizedPath('/company', lang)}#contact`}>{c.ctaSecondary}</ButtonSecondary>
     </div>
   </div>
@@ -63,7 +63,7 @@ const p = t(lang).products;
       {
         c.valueGrid.map((item) => (
           <Card title={item.title}>
-            <p class="text-sm leading-relaxed text-mist-white/80">{item.body}</p>
+            <p class="text-base leading-relaxed text-mist-white/80">{item.body}</p>
           </Card>
         ))
       }

@@ -15,7 +15,6 @@ const nav = t(lang).nav;
 const currentSlug = getRouteSlug(path);
 
 const links = [
-  { slug: '/', label: nav.home },
   { slug: '/solutions', label: nav.solutions },
   { slug: '/products', label: nav.products },
   { slug: '/company', label: nav.company },
@@ -29,7 +28,7 @@ const links = [
       class="flex items-center gap-2 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
     >
       <Logo class="h-8 w-8" />
-      <span class="text-lg font-bold tracking-tight text-mist-white">Mielikkix</span>
+      <span class="text-lg font-bold tracking-tight text-mist-white">Mielikki<span class="text-aurora-neon">X</span></span>
     </a>
 
     <input type="checkbox" id="nav-toggle" class="peer hidden" />
@@ -78,7 +77,7 @@ const links = [
         >
           {nav.contact}
         </a>
-        <ButtonPrimary href="https://app.mielikkix.ai" class="!px-5 !py-2.5">
+        <ButtonPrimary href="https://mielikkix.ai" class="!px-5 !py-2.5">
           {nav.getStarted}
         </ButtonPrimary>
       </div>

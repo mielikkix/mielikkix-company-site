@@ -19,6 +19,7 @@ const siteLinks = [
 
 const companyLinks = [
   { slug: '/company#about', label: dict.company.aboutHeading },
+  { slug: '/company#security', label: dict.company.securityHeading },
   { slug: '/company#careers', label: dict.company.careersHeading },
   { slug: '/company#contact', label: dict.company.contactHeading },
 ];
@@ -29,9 +30,15 @@ const companyLinks = [
     <div class="max-w-xs">
       <div class="flex items-center gap-2">
         <Logo class="h-7 w-7" />
-        <span class="text-base font-bold text-mist-white">Mielikkix</span>
+        <span class="text-base font-bold text-mist-white">Mielikki<span class="text-aurora-neon">X</span></span>
       </div>
       <p class="mt-3 text-sm leading-relaxed text-mist-white/70">{dict.footer.tagline}</p>
+      <a
+        href={`mailto:${dict.company.contactEmail}`}
+        class="mt-3 inline-block rounded text-sm text-mist-white/80 transition hover:text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+      >
+        {dict.company.contactEmail}
+      </a>
     </div>
 
     <div>

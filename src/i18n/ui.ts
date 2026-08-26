@@ -7,7 +7,7 @@ export type Lang = keyof typeof languages;
 
 export const defaultLang: Lang = 'en';
 
-export type IconName = 'clock' | 'route' | 'target' | 'code' | 'headset' | 'megaphone' | 'trendingUp' | 'chat';
+export type IconName = 'clock' | 'route' | 'target' | 'code' | 'headset' | 'megaphone' | 'trendingUp' | 'chat' | 'shield' | 'help' | 'check' | 'close';
 
 interface ActivityCopy {
   icon: IconName;
@@ -81,7 +81,13 @@ interface Dictionary {
     eyebrow: string;
     heading: string;
     subhead: string;
+    withoutHeading: string;
+    withoutList: string[];
+    withHeading: string;
+    withList: string[];
     activities: ActivityCopy[];
+    faqHeading: string;
+    faq: { q: string; a: string }[];
     closingHeading: string;
     closingBody: string;
     closingCta: string;
@@ -96,6 +102,10 @@ interface Dictionary {
     hubCenterLabel: string;
     chatBubbleGreeting: string;
     chatBubbleReply: string;
+    withoutHeading: string;
+    withoutList: string[];
+    withHeading: string;
+    withList: string[];
     crewsHeading: string;
     crews: [CrewCopy, CrewCopy, CrewCopy];
     cta: string;
@@ -106,13 +116,56 @@ interface Dictionary {
     seoDescription: string;
     eyebrow: string;
     heading: string;
+    heroKicker: string;
+    heroIntro: string;
+    heroIntro2: string;
+    heroCta: string;
+    mythHeading: string;
+    mythBody: string;
+    mythBody2: string;
+    worksHeading: string;
+    worksIntro: string;
+    worksList: string[];
+    worksClosing: string;
+    agentsHeading: string;
+    agentsBody: string;
+    agentsBody2: string;
+    agentsBody3: string;
+    solutionsHeading: string;
+    solutionsGrid: { icon: IconName; title: string; body: string }[];
+    approachHeading: string;
+    approachSteps: { title: string; body: string }[];
+    visionHeading: string;
+    visionBody: string;
+    visionBody2: string;
+    missionHeading: string;
+    missionBody: string;
+    missionTagline: string;
+    whyStoryHeading: string;
+    whyStoryGrid: { title: string; body: string }[];
+    closingHeading2: string;
+    closingBody2: string;
+    finalCtaHeading: string;
+    finalCtaBody: string;
+    finalCtaPricing: string;
     aboutHeading: string;
     aboutBody: string;
-    aboutPlaceholder: string;
     careersHeading: string;
     careersBody: string;
     contactHeading: string;
     contactBody: string;
+    contactEmail: string;
+    contactEmailLabel: string;
+    securityHeading: string;
+    securityBody: string;
+  };
+  notFound: {
+    seoTitle: string;
+    heading: string;
+    body: string;
+    homeLink: string;
+    solutionsLink: string;
+    contactLink: string;
   };
 }
 
@@ -185,6 +238,22 @@ export const ui: Record<Lang, Dictionary> = {
       heading: 'AI Solutions for Every Part of Your Business',
       subhead:
         'From customer-facing chatbots to backend automation, Mielikkix builds the AI layer that connects your tools, your team, and your customers.',
+      withoutHeading: 'Without Mielikkix',
+      withoutList: [
+        'Answer the same customer questions over and over, manually, every day.',
+        'Miss leads outside business hours because no one is watching the chat.',
+        'Juggle customer data across disconnected tools and spreadsheets.',
+        'Spend hours on repetitive admin instead of higher-value work.',
+        'Scale support and sales by hiring, not by automating.',
+      ],
+      withHeading: 'With Mielikkix',
+      withList: [
+        'Let an AI chatbot handle repeat questions instantly, day or night.',
+        'Capture and qualify every lead the moment they show up — 24/7.',
+        'Connect AI to your existing systems so data flows automatically.',
+        'Automate the repetitive workflows so your team focuses on real work.',
+        'Scale support and sales with AI agents, not just headcount.',
+      ],
       activities: [
         {
           icon: 'chat',
@@ -224,6 +293,25 @@ export const ui: Record<Lang, Dictionary> = {
           bullets: ['Website and CMS integration', 'API development and integration', 'CRM, ERP, and business system connections'],
         },
       ],
+      faqHeading: 'Frequently Asked Questions',
+      faq: [
+        {
+          q: 'How long does it take to get an AI solution up and running?',
+          a: "It depends on scope — a chatbot integration can move fast, while a custom multi-agent build takes longer. We'll give you a realistic timeline after a short scoping call.",
+        },
+        {
+          q: 'Who owns the data our AI systems process?',
+          a: 'You do. We build and integrate the systems — your business data stays yours. Ask us about the specifics for your setup.',
+        },
+        {
+          q: 'What happens if something breaks after launch?',
+          a: "We stay involved after launch to monitor, fix, and adjust — this isn't a build-and-disappear engagement.",
+        },
+        {
+          q: 'Do we need our own AI/ML team to work with you?',
+          a: 'No — we handle the AI and technical implementation. You bring the business context; we bring the AI layer.',
+        },
+      ],
       closingHeading: 'Not sure where to start?',
       closingBody: "Tell us what you're working on and we'll help you find the right AI solution.",
       closingCta: 'Contact Us',
@@ -239,6 +327,22 @@ export const ui: Record<Lang, Dictionary> = {
       hubCenterLabel: 'Chat Widget',
       chatBubbleGreeting: 'Hi! How can I help today?',
       chatBubbleReply: 'Can I book an appointment?',
+      withoutHeading: 'Without Force Agents',
+      withoutList: [
+        'Miss calls and messages outside business hours.',
+        'Handle bookings, FAQs, and follow-ups manually, one at a time.',
+        'Chase reviews, social posts, and email campaigns separately, by hand.',
+        'Let leads go quiet after the first conversation.',
+        'Rely on one team to cover support, sales, and growth all at once.',
+      ],
+      withHeading: 'With Force Agents',
+      withList: [
+        'A Voice Receptionist and Booking Assistant pick up every call and booking, day or night.',
+        'Front Desk & Support triages and answers routine questions instantly.',
+        'Sales & Marketing agents keep reviews, social, and email running on autopilot.',
+        'Growth & Retention agents follow up automatically so no lead goes cold.',
+        '10 specialized agents split the work, so nothing waits on one team.',
+      ],
       crewsHeading: 'Meet the Crew',
       crews: [
         {
@@ -262,14 +366,147 @@ export const ui: Record<Lang, Dictionary> = {
       seoDescription: 'About Mielikkix AS — an AI-powered software and SaaS company providing AI solutions and automation services for businesses.',
       eyebrow: 'Company',
       heading: 'About Mielikkix',
+      heroKicker: 'Building Smarter Businesses with AI',
+      heroIntro:
+        'Mielikkix AS is an AI-powered software and SaaS company helping businesses use artificial intelligence to work smarter, automate faster, and create better customer experiences.',
+      heroIntro2:
+        "We build practical AI solutions that go beyond simple chatbots — AI-powered customer service, sales automation, intelligent business workflows, multi-agent AI systems, custom software, and AI integrations. Our goal is simple: make AI useful, accessible, and measurable for real businesses.",
+      heroCta: 'Book a Free Demo',
+      mythHeading: 'Why "Mielikki"?',
+      mythBody:
+        "In Finnish mythology, Mielikki is the goddess of the forest — a guardian who watches over what's hers and makes sure nothing gets lost under her care. That's the job we wanted our product to do for the businesses that use it: stand watch, catch every visitor who shows up, and make sure no one wanders off unanswered.",
+      mythBody2:
+        "A chat widget that never sleeps, never gets overwhelmed, and never lets a lead slip through is the smallest possible promise of that idea — and it's where we started.",
+      worksHeading: 'AI That Works for Your Business',
+      worksIntro:
+        'Every business has different challenges. Some spend hours answering the same customer questions. Others lose leads because they cannot respond quickly enough. Teams may spend valuable time on repetitive administrative tasks, moving information between systems, or manually following up with customers.',
+      worksList: [
+        'Automate repetitive customer and business processes',
+        'Respond to customers faster with AI-powered communication',
+        'Capture and qualify leads automatically',
+        'Automate sales and customer-service workflows',
+        'Connect AI with existing business systems and APIs',
+        'Build intelligent AI agents for specific business tasks',
+        'Create multi-agent systems where specialized AI agents work together',
+        'Develop custom AI-powered software for unique business requirements',
+      ],
+      worksClosing:
+        'We don’t believe businesses should adopt AI simply because it is trending. We believe AI should solve a real problem, save time, improve efficiency, or create new opportunities.',
+      agentsHeading: 'From AI Assistants to AI Agents',
+      agentsBody:
+        'The next generation of business software is not just about asking AI questions. It is about giving AI the ability to understand, decide, communicate, and take action.',
+      agentsBody2:
+        'Mielikkix is building toward this future with AI agents designed around real business workflows. An AI agent can become a digital member of a team — helping with customer conversations, lead generation, support, sales, administration, and other operational tasks.',
+      agentsBody3:
+        'For more complex requirements, multiple specialized agents can work together as a multi-agent AI system, allowing businesses to automate complete workflows rather than individual tasks — the thinking behind our own growing agent lineup, with the first already live and answering real calls today.',
+      solutionsHeading: 'Our AI Solutions',
+      solutionsGrid: [
+        {
+          icon: 'chat',
+          title: 'AI Chatbots',
+          body: "Intelligent chat experiences for websites and digital channels — answering questions, engaging visitors, and capturing opportunities around the clock, trained on a business's own data.",
+        },
+        {
+          icon: 'headset',
+          title: 'AI Customer Service',
+          body: 'Automate repetitive customer-service interactions while human teams focus on conversations that genuinely need their expertise.',
+        },
+        {
+          icon: 'megaphone',
+          title: 'AI Sales & Lead Automation',
+          body: 'Engage visitors, qualify leads, collect information, follow up, and support sales teams throughout the customer journey.',
+        },
+        {
+          icon: 'route',
+          title: 'Business Automation',
+          body: 'Automate repetitive workflows and connect different parts of a business so information moves automatically.',
+        },
+        {
+          icon: 'trendingUp',
+          title: 'Multi-Agent AI',
+          body: 'Teams of specialized AI agents that collaborate across different business functions and workflows.',
+        },
+        {
+          icon: 'code',
+          title: 'Custom AI Software',
+          body: "AI-powered applications designed around specific business requirements that off-the-shelf products can't solve.",
+        },
+        {
+          icon: 'target',
+          title: 'AI Integrations',
+          body: 'Connect AI with existing apps, APIs, databases, CRMs, and communication platforms for end-to-end workflows.',
+        },
+      ],
+      approachHeading: 'Our Approach',
+      approachSteps: [
+        {
+          title: 'Understand the Business First',
+          body: 'Technology comes second. We start with the business problem, the existing workflow, and where AI can deliver the greatest impact.',
+        },
+        {
+          title: 'Design the Right AI Solution',
+          body: 'Not every problem needs an AI agent. We choose the technology based on the problem — not the other way around.',
+        },
+        {
+          title: 'Build for Real-World Use',
+          body: 'Practical solutions businesses can actually use, integrate, and scale — designed with usability, reliability, security, and growth in mind.',
+        },
+        {
+          title: 'Continuously Improve',
+          body: 'AI systems evolve with the business, expanding to support new use cases as requirements change.',
+        },
+      ],
+      visionHeading: 'Our Vision',
+      visionBody:
+        'We believe the future of business software will be AI-native. Instead of businesses using dozens of disconnected tools and manually moving information between them, intelligent software will increasingly understand business context, communicate with people, make decisions within defined boundaries, and execute tasks automatically.',
+      visionBody2:
+        'Mielikkix aims to be part of that transformation — helping businesses build intelligent digital operations where people and AI work together.',
+      missionHeading: 'Our Mission',
+      missionBody:
+        'Our mission is to make advanced AI technology practical for businesses of all sizes. We want to help companies:',
+      missionTagline: 'Work smarter. Automate better. Respond faster. Scale efficiently. Build with AI.',
+      whyStoryHeading: 'Why Mielikkix?',
+      whyStoryGrid: [
+        { title: 'AI With a Business Purpose', body: 'We focus on solving business problems rather than adding AI for the sake of AI.' },
+        { title: 'Built for Real Workflows', body: 'Our solutions are designed around how businesses actually operate.' },
+        {
+          title: 'Flexible & Customizable',
+          body: 'From ready-to-use SaaS products to completely custom AI systems, adapted to different business needs.',
+        },
+        { title: 'Automation First', body: 'We look for opportunities where intelligent automation reduces repetitive work.' },
+        {
+          title: 'Human + AI',
+          body: 'The best systems combine AI automation with human expertise when human judgment matters most.',
+        },
+      ],
+      closingHeading2: 'Building the Future of AI-Powered Business',
+      closingBody2:
+        'Mielikkix is building a growing ecosystem of AI-powered software, intelligent agents, automation solutions, and integrations designed to help businesses operate more efficiently. Whether the need is an AI chatbot, an AI receptionist, a customer-service agent, sales automation, a multi-agent workflow, a custom AI application, or integration with existing systems, Mielikkix helps turn the idea into a working AI solution.',
+      finalCtaHeading: "Let's Build Something Intelligent",
+      finalCtaBody:
+        'Every business has unique challenges. Your AI solution should be unique too. Talk to Mielikkix about how AI, automation, and intelligent software can transform the way your business works.',
+      finalCtaPricing: 'See Pricing',
       aboutHeading: 'About',
       aboutBody:
         'Mielikkix AS is an AI-powered software and SaaS company providing AI solutions and automation services for businesses — including AI chatbots, business automation, multi-agent AI solutions, customer service and sales automation, custom AI software development, and AI integrations.',
-      aboutPlaceholder: 'PLACEHOLDER: Founding story and mission to be added.',
       careersHeading: 'Careers',
-      careersBody: 'PLACEHOLDER: Open roles will be listed here. No positions confirmed yet.',
+      careersBody:
+        "Mielikkix AS is a small, early-stage team, and we're not actively hiring right now. If you'd like to be considered for future openings, reach out via the contact details below.",
       contactHeading: 'Contact',
-      contactBody: 'PLACEHOLDER: Contact details (email, address, social links) to be added.',
+      contactBody: 'Have a question about our AI solutions, or want to talk through a project? Email us — we read every message and reply personally.',
+      contactEmail: 'post@mielikkix.no',
+      contactEmailLabel: 'Email us',
+      securityHeading: 'Data & Security',
+      securityBody:
+        "Mielikkix AS is based in Norway and builds every AI system with data protection and GDPR principles in mind. If you need specifics on hosting, data residency, or a data processing agreement for your business, email us and we'll walk you through it.",
+    },
+    notFound: {
+      seoTitle: 'Page Not Found',
+      heading: 'This page took a wrong turn.',
+      body: "Even our AI agents get lost sometimes. The page you're looking for doesn't exist, or it may have moved.",
+      homeLink: 'Back to Home',
+      solutionsLink: 'Browse Solutions',
+      contactLink: 'Contact Us',
     },
   },
   no: {
@@ -340,6 +577,22 @@ export const ui: Record<Lang, Dictionary> = {
       heading: 'AI-løsninger for enhver del av virksomheten din',
       subhead:
         'Fra kundevendte chatboter til automatisering i bakgrunnen — Mielikkix bygger AI-laget som knytter sammen verktøyene, teamet og kundene dine.',
+      withoutHeading: 'Uten Mielikkix',
+      withoutList: [
+        'Svare på de samme kundespørsmålene om og om igjen, manuelt, hver dag.',
+        'Miste leads utenfor arbeidstiden fordi ingen følger med på chatten.',
+        'Sjonglere kundedata på tvers av frakoblede verktøy og regneark.',
+        'Bruke timevis på repeterende administrasjon i stedet for arbeid med høyere verdi.',
+        'Skalere support og salg ved å ansette, ikke ved å automatisere.',
+      ],
+      withHeading: 'Med Mielikkix',
+      withList: [
+        'La en AI-chatbot håndtere gjentakende spørsmål umiddelbart, døgnet rundt.',
+        'Fang opp og kvalifiser hvert lead i det øyeblikket det dukker opp — 24/7.',
+        'Koble AI til eksisterende systemer slik at data flyter automatisk.',
+        'Automatiser de repeterende arbeidsflytene slik at teamet fokuserer på det som betyr noe.',
+        'Skaler support og salg med AI-agenter, ikke bare med flere ansatte.',
+      ],
       activities: [
         {
           icon: 'chat',
@@ -379,6 +632,25 @@ export const ui: Record<Lang, Dictionary> = {
           bullets: ['Integrasjon med nettside og CMS', 'API-utvikling og -integrasjon', 'Tilkobling til CRM, ERP og forretningssystemer'],
         },
       ],
+      faqHeading: 'Ofte stilte spørsmål',
+      faq: [
+        {
+          q: 'Hvor lang tid tar det å få en AI-løsning i drift?',
+          a: 'Det avhenger av omfanget — en chatbot-integrasjon kan gå raskt, mens en skreddersydd multiagent-løsning tar lengre tid. Vi gir deg en realistisk tidsplan etter en kort kartleggingssamtale.',
+        },
+        {
+          q: 'Hvem eier dataene AI-systemene våre behandler?',
+          a: 'Det gjør du. Vi bygger og integrerer systemene — forretningsdataene dine forblir dine. Spør oss om detaljene for ditt oppsett.',
+        },
+        {
+          q: 'Hva skjer hvis noe går galt etter lansering?',
+          a: 'Vi følger opp etter lansering — overvåker, retter og justerer. Dette er ikke et bygg-og-forsvinn-oppdrag.',
+        },
+        {
+          q: 'Trenger vi et eget AI/ML-team for å jobbe med dere?',
+          a: 'Nei — vi tar oss av AI-en og den tekniske implementeringen. Du bidrar med forretningskonteksten; vi bidrar med AI-laget.',
+        },
+      ],
       closingHeading: 'Usikker på hvor du skal starte?',
       closingBody: 'Fortell oss hva du jobber med, så hjelper vi deg med å finne riktig AI-løsning.',
       closingCta: 'Kontakt oss',
@@ -394,6 +666,22 @@ export const ui: Record<Lang, Dictionary> = {
       hubCenterLabel: 'Chat Widget',
       chatBubbleGreeting: 'Hei! Hva kan jeg hjelpe deg med i dag?',
       chatBubbleReply: 'Kan jeg bestille time?',
+      withoutHeading: 'Uten Force Agents',
+      withoutList: [
+        'Miste anrop og meldinger utenfor arbeidstiden.',
+        'Håndtere booking, ofte stilte spørsmål og oppfølging manuelt, ett om gangen.',
+        'Følge opp anmeldelser, sosiale innlegg og e-postkampanjer hver for seg, for hånd.',
+        'La leads bli stille etter den første samtalen.',
+        'Stole på at ett team dekker support, salg og vekst samtidig.',
+      ],
+      withHeading: 'Med Force Agents',
+      withList: [
+        'En Voice Receptionist og Booking Assistant tar imot hvert anrop og hver booking, døgnet rundt.',
+        'Front Desk & Support trierer og svarer på rutinespørsmål umiddelbart.',
+        'Sales & Marketing-agenter holder anmeldelser, sosiale medier og e-post gående på autopilot.',
+        'Growth & Retention-agenter følger opp automatisk, slik at ingen leads blir kalde.',
+        '10 spesialiserte agenter deler arbeidet, slik at ingenting venter på ett team.',
+      ],
       crewsHeading: 'Møt mannskapet',
       crews: [
         {
@@ -417,14 +705,146 @@ export const ui: Record<Lang, Dictionary> = {
       seoDescription: 'Om Mielikkix AS — et AI-drevet programvare- og SaaS-selskap som leverer AI-løsninger og automatiseringstjenester for bedrifter.',
       eyebrow: 'Om oss',
       heading: 'Om Mielikkix',
+      heroKicker: 'Vi bygger smartere virksomheter med AI',
+      heroIntro:
+        'Mielikkix AS er et AI-drevet programvare- og SaaS-selskap som hjelper bedrifter med å bruke kunstig intelligens til å jobbe smartere, automatisere raskere og skape bedre kundeopplevelser.',
+      heroIntro2:
+        'Vi bygger praktiske AI-løsninger som går lenger enn enkle chatboter — AI-drevet kundeservice, salgsautomatisering, intelligente forretningsprosesser, multiagent-AI-systemer, skreddersydd programvare og AI-integrasjoner. Målet vårt er enkelt: gjøre AI nyttig, tilgjengelig og målbart for reelle bedrifter.',
+      heroCta: 'Book en gratis demo',
+      mythHeading: 'Hvorfor «Mielikki»?',
+      mythBody:
+        'I finsk mytologi er Mielikki skogens gudinne — en vokter som passer på sitt og sørger for at ingenting går tapt under hennes omsorg. Det var jobben vi ønsket at produktet vårt skulle gjøre for bedriftene som bruker det: stå vakt, fange opp hver besøkende som dukker opp, og sørge for at ingen vandrer av gårde ubesvart.',
+      mythBody2:
+        'En chatteassistent som aldri sover, aldri blir overveldet, og aldri lar et lead gli unna, er det minste mulige løftet av den ideen — og det er der vi startet.',
+      worksHeading: 'AI som fungerer for din virksomhet',
+      worksIntro:
+        'Hver virksomhet har ulike utfordringer. Noen bruker timevis på å svare på de samme kundespørsmålene. Andre mister leads fordi de ikke klarer å respondere raskt nok. Team kan bruke verdifull tid på repeterende administrative oppgaver, flytting av informasjon mellom systemer, eller manuell oppfølging av kunder.',
+      worksList: [
+        'Automatisere repeterende kunde- og forretningsprosesser',
+        'Svare kundene raskere med AI-drevet kommunikasjon',
+        'Fange opp og kvalifisere leads automatisk',
+        'Automatisere salgs- og kundeserviceprosesser',
+        'Koble AI til eksisterende forretningssystemer og API-er',
+        'Bygge intelligente AI-agenter for spesifikke forretningsoppgaver',
+        'Lage multiagent-systemer der spesialiserte AI-agenter jobber sammen',
+        'Utvikle skreddersydd AI-programvare for unike forretningsbehov',
+      ],
+      worksClosing:
+        'Vi tror ikke bedrifter bør ta i bruk AI bare fordi det er trendy. Vi tror AI bør løse et reelt problem, spare tid, forbedre effektiviteten eller skape nye muligheter.',
+      agentsHeading: 'Fra AI-assistenter til AI-agenter',
+      agentsBody:
+        'Neste generasjon forretningsprogramvare handler ikke bare om å stille AI spørsmål. Det handler om å gi AI evnen til å forstå, beslutte, kommunisere og handle.',
+      agentsBody2:
+        'Mielikkix bygger mot denne fremtiden med AI-agenter designet rundt reelle forretningsprosesser. En AI-agent kan bli et digitalt medlem av teamet — og hjelpe til med kundesamtaler, leadgenerering, support, salg, administrasjon og andre driftsoppgaver.',
+      agentsBody3:
+        'For mer komplekse behov kan flere spesialiserte agenter jobbe sammen som et multiagent-AI-system, slik at bedrifter kan automatisere hele arbeidsflyter i stedet for enkeltoppgaver — tankegangen bak vårt eget voksende mannskap av agenter, der den første allerede er live og besvarer reelle samtaler i dag.',
+      solutionsHeading: 'Våre AI-løsninger',
+      solutionsGrid: [
+        {
+          icon: 'chat',
+          title: 'AI-chatboter',
+          body: 'Intelligente chatteopplevelser for nettsider og digitale kanaler — som svarer på spørsmål, engasjerer besøkende og fanger opp muligheter døgnet rundt, trent på bedriftens egne data.',
+        },
+        {
+          icon: 'headset',
+          title: 'AI-kundeservice',
+          body: 'Automatiser repeterende kundeservicehenvendelser, mens menneskelige team fokuserer på samtaler som virkelig krever deres ekspertise.',
+        },
+        {
+          icon: 'megaphone',
+          title: 'AI-salg og leadautomatisering',
+          body: 'Engasjer besøkende, kvalifiser leads, samle inn informasjon, følg opp og støtt salgsteam gjennom hele kundereisen.',
+        },
+        {
+          icon: 'route',
+          title: 'Forretningsautomatisering',
+          body: 'Automatiser repeterende arbeidsflyter og koble sammen ulike deler av virksomheten, slik at informasjon flyter automatisk.',
+        },
+        {
+          icon: 'trendingUp',
+          title: 'Multiagent-AI',
+          body: 'Team av spesialiserte AI-agenter som samarbeider på tvers av ulike forretningsfunksjoner og arbeidsflyter.',
+        },
+        {
+          icon: 'code',
+          title: 'Skreddersydd AI-programvare',
+          body: 'AI-drevne applikasjoner designet rundt spesifikke forretningsbehov som hyllevareprodukter ikke kan løse.',
+        },
+        {
+          icon: 'target',
+          title: 'AI-integrasjoner',
+          body: 'Koble AI til eksisterende apper, API-er, databaser, CRM-er og kommunikasjonsplattformer for helhetlige arbeidsflyter.',
+        },
+      ],
+      approachHeading: 'Vår tilnærming',
+      approachSteps: [
+        {
+          title: 'Forstå virksomheten først',
+          body: 'Teknologi kommer i andre rekke. Vi starter med forretningsproblemet, den eksisterende arbeidsflyten, og hvor AI kan gi størst effekt.',
+        },
+        {
+          title: 'Design den riktige AI-løsningen',
+          body: 'Ikke alle problemer trenger en AI-agent. Vi velger teknologien ut fra problemet — ikke omvendt.',
+        },
+        {
+          title: 'Bygget for reell bruk',
+          body: 'Praktiske løsninger bedrifter faktisk kan bruke, integrere og skalere — designet med brukervennlighet, pålitelighet, sikkerhet og vekst i tankene.',
+        },
+        {
+          title: 'Kontinuerlig forbedring',
+          body: 'AI-systemene utvikler seg med virksomheten, og utvides til å støtte nye bruksområder etter hvert som behovene endrer seg.',
+        },
+      ],
+      visionHeading: 'Vår visjon',
+      visionBody:
+        'Vi tror fremtidens forretningsprogramvare vil være AI-native. I stedet for at bedrifter bruker dusinvis av frakoblede verktøy og manuelt flytter informasjon mellom dem, vil intelligent programvare i økende grad forstå forretningskontekst, kommunisere med mennesker, ta beslutninger innenfor definerte rammer, og utføre oppgaver automatisk.',
+      visionBody2:
+        'Mielikkix ønsker å være en del av den transformasjonen — og hjelpe bedrifter med å bygge intelligent digital drift der mennesker og AI jobber sammen.',
+      missionHeading: 'Vårt oppdrag',
+      missionBody: 'Vårt oppdrag er å gjøre avansert AI-teknologi praktisk for bedrifter i alle størrelser. Vi vil hjelpe selskaper med å:',
+      missionTagline: 'Jobbe smartere. Automatisere bedre. Svare raskere. Skalere effektivt. Bygge med AI.',
+      whyStoryHeading: 'Hvorfor Mielikkix?',
+      whyStoryGrid: [
+        { title: 'AI med et forretningsformål', body: 'Vi fokuserer på å løse forretningsproblemer fremfor å legge til AI for AI-ens skyld.' },
+        { title: 'Bygget for reelle arbeidsflyter', body: 'Løsningene våre er designet rundt hvordan bedrifter faktisk drives.' },
+        {
+          title: 'Fleksibelt og tilpasningsdyktig',
+          body: 'Fra ferdige SaaS-produkter til helt skreddersydde AI-systemer, tilpasset ulike forretningsbehov.',
+        },
+        { title: 'Automatisering først', body: 'Vi leter etter muligheter der intelligent automatisering reduserer repeterende arbeid.' },
+        {
+          title: 'Menneske + AI',
+          body: 'De beste systemene kombinerer AI-automatisering med menneskelig ekspertise når menneskelig vurdering betyr mest.',
+        },
+      ],
+      closingHeading2: 'Vi bygger fremtidens AI-drevne virksomhet',
+      closingBody2:
+        'Mielikkix bygger et voksende økosystem av AI-drevet programvare, intelligente agenter, automatiseringsløsninger og integrasjoner designet for å hjelpe bedrifter med å drive mer effektivt. Enten behovet er en AI-chatbot, en AI-resepsjonist, en kundeserviceagent, salgsautomatisering, en multiagent-arbeidsflyt, en skreddersydd AI-applikasjon, eller integrasjon med eksisterende systemer, hjelper Mielikkix med å gjøre ideen om til en fungerende AI-løsning.',
+      finalCtaHeading: 'La oss bygge noe intelligent',
+      finalCtaBody:
+        'Hver virksomhet har unike utfordringer. AI-løsningen din bør også være unik. Snakk med Mielikkix om hvordan AI, automatisering og intelligent programvare kan transformere måten virksomheten din jobber på.',
+      finalCtaPricing: 'Se priser',
       aboutHeading: 'Om oss',
       aboutBody:
         'Mielikkix AS er et AI-drevet programvare- og SaaS-selskap som leverer AI-løsninger og automatiseringstjenester for bedrifter — inkludert AI-chatboter, forretningsautomatisering, multiagent-AI-løsninger, kundeservice- og salgsautomatisering, skreddersydd AI-programvareutvikling og AI-integrasjoner.',
-      aboutPlaceholder: 'PLASSHOLDER: Grunnleggelseshistorie og misjon legges til her.',
       careersHeading: 'Karriere',
-      careersBody: 'PLASSHOLDER: Ledige stillinger vil bli listet her. Ingen stillinger er bekreftet ennå.',
+      careersBody:
+        'Mielikkix AS er et lite team i en tidlig fase, og vi ansetter ikke aktivt akkurat nå. Ønsker du å bli vurdert for fremtidige stillinger, ta kontakt via kontaktinformasjonen under.',
       contactHeading: 'Kontakt',
-      contactBody: 'PLASSHOLDER: Kontaktinformasjon (e-post, adresse, sosiale lenker) legges til her.',
+      contactBody: 'Har du et spørsmål om AI-løsningene våre, eller vil du snakke om et prosjekt? Send oss en e-post — vi leser alle henvendelser og svarer personlig.',
+      contactEmail: 'post@mielikkix.no',
+      contactEmailLabel: 'Send e-post',
+      securityHeading: 'Data og sikkerhet',
+      securityBody:
+        'Mielikkix AS er basert i Norge, og vi bygger alle AI-systemer med personvern og GDPR-prinsipper i bunn. Trenger du detaljer om hosting, datalagringssted eller en databehandleravtale for din bedrift, send oss en e-post så går vi gjennom det med deg.',
+    },
+    notFound: {
+      seoTitle: 'Siden ble ikke funnet',
+      heading: 'Denne siden tok en feil sving.',
+      body: 'Selv AI-agentene våre går seg bort iblant. Siden du leter etter finnes ikke, eller den har blitt flyttet.',
+      homeLink: 'Tilbake til forsiden',
+      solutionsLink: 'Se løsninger',
+      contactLink: 'Kontakt oss',
     },
   },
 };
