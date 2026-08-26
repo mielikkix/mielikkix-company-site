@@ -1,0 +1,32 @@
+---
+import ButtonPrimary from '../ButtonPrimary.astro';
+import ButtonSecondary from '../ButtonSecondary.astro';
+import Panel from '../Panel.astro';
+import Glow from '../Glow.astro';
+import { t, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).notFound;
+---
+
+<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="accent" class="relative overflow-hidden text-center">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
+    <Glow class="-right-24 -top-24 h-72 w-72" tone="gold" />
+    <div class="relative mx-auto max-w-2xl">
+      <span class="text-sm font-semibold uppercase tracking-widest text-aurora-neon">404</span>
+      <h1 class="mt-4 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{c.heading}</h1>
+      <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-mist-white/80">{c.body}</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <ButtonPrimary href={localizedPath('/', lang)}>{c.homeLink}</ButtonPrimary>
+        <ButtonSecondary href={localizedPath('/solutions', lang)}>{c.solutionsLink}</ButtonSecondary>
+        <ButtonSecondary href={`${localizedPath('/company', lang)}#contact`}>{c.contactLink}</ButtonSecondary>
+      </div>
+    </div>
+  </Panel>
+</div>

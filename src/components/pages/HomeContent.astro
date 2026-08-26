@@ -1,0 +1,109 @@
+---
+import ButtonPrimary from '../ButtonPrimary.astro';
+import ButtonSecondary from '../ButtonSecondary.astro';
+import Panel from '../Panel.astro';
+import Card from '../Card.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
+import PillarStack from '../PillarStack.astro';
+import { t, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).home;
+const nav = t(lang).nav;
+const activities = t(lang).solutions.activities;
+const p = t(lang).products;
+---
+
+<section class="relative overflow-hidden border-b border-mist-white/10 bg-deep-forest">
+  <Glow class="-left-32 -top-32 h-96 w-96" tone="accent" />
+  <Glow class="-right-32 -top-32 h-96 w-96" tone="gold" />
+  <div class="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 sm:py-28 lg:px-8">
+    <Eyebrow text={c.heroEyebrow} class="mx-auto" />
+    <h1 class="mx-auto mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+      {c.heroTitleLead}
+      <span class="bg-gradient-to-r from-aurora-neon to-antler-gold bg-clip-text text-transparent">{c.heroTitleAccent}</span>
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <ButtonPrimary href="https://mielikkix.ai">{c.ctaPrimary}</ButtonPrimary>
+      <ButtonSecondary href={`${localizedPath('/company', lang)}#contact`}>{c.ctaSecondary}</ButtonSecondary>
+    </div>
+  </div>
+</section>
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel>
+    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+      <div>
+        <Eyebrow text={nav.solutions} tone="gold" />
+        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.stackHeading}</h2>
+        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.stackSubhead}</p>
+        <a
+          href={localizedPath('/solutions', lang)}
+          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        >
+          {c.stackLink}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <PillarStack items={activities.map((a) => ({ title: a.title, short: a.short }))} />
+    </div>
+  </Panel>
+
+  <Panel tone="gold">
+    <Eyebrow text={c.valueEyebrow} tone="gold" />
+    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.valueHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        c.valueGrid.map((item) => (
+          <Card title={item.title}>
+            <p class="text-base leading-relaxed text-mist-white/80">{item.body}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </Panel>
+
+  <Panel>
+    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+      <div>
+        <Eyebrow text={c.productsEyebrow} />
+        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.productsHeading}</h2>
+        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.productsBody}</p>
+        <a
+          href={localizedPath('/products', lang)}
+          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        >
+          {c.productsLink}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="rounded-2xl border border-mist-white/15 bg-deep-forest p-6" aria-hidden="true">
+        <div class="flex items-center gap-2 border-b border-mist-white/10 pb-4">
+          <span class="h-2.5 w-2.5 rounded-full bg-aurora-neon"></span>
+          <span class="text-sm font-semibold text-mist-white/90">Mielikkix Chat</span>
+        </div>
+        <div class="mt-4 space-y-3">
+          <div class="max-w-[80%] rounded-xl rounded-tl-sm bg-mist-white/10 px-4 py-2 text-sm text-mist-white/90">{p.chatBubbleGreeting}</div>
+          <div class="ml-auto max-w-[80%] rounded-xl rounded-tr-sm bg-aurora-neon px-4 py-2 text-sm text-[#06231A]">{p.chatBubbleReply}</div>
+        </div>
+      </div>
+    </div>
+  </Panel>
+</div>
+
+<section class="relative overflow-hidden bg-gradient-to-br from-aurora-neon via-deep-forest to-antler-gold">
+  <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+    <h2 class="text-2xl font-bold text-mist-white sm:text-3xl">{c.closingHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/85">{c.closingBody}</p>
+    <div class="mt-8 flex justify-center">
+      <ButtonPrimary href={`${localizedPath('/company', lang)}#contact`}>{c.closingCta}</ButtonPrimary>
+    </div>
+  </div>
+</section>

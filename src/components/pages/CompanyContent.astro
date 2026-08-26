@@ -1,0 +1,215 @@
+---
+import Panel from '../Panel.astro';
+import Card from '../Card.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
+import IconBadge from '../IconBadge.astro';
+import Icon from '../Icon.astro';
+import ButtonPrimary from '../ButtonPrimary.astro';
+import ButtonSecondary from '../ButtonSecondary.astro';
+import { t } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).company;
+
+const cardStyles = [
+  {
+    bg: 'bg-aurora-neon',
+    border: 'border-aurora-neon',
+    text: 'text-[#06231A]',
+    body: 'text-[#06231A]/75',
+    pill: 'border-[#06231A]/25 bg-[#06231A]/10 text-[#06231A]/90',
+    dot: 'bg-[#06231A]/60',
+  },
+  {
+    bg: 'bg-antler-gold',
+    border: 'border-antler-gold',
+    text: 'text-[#2A2005]',
+    body: 'text-[#2A2005]/75',
+    pill: 'border-[#2A2005]/25 bg-[#2A2005]/10 text-[#2A2005]/90',
+    dot: 'bg-[#2A2005]/60',
+  },
+  {
+    bg: 'bg-mist-white',
+    border: 'border-mist-white',
+    text: 'text-deep-forest',
+    body: 'text-deep-forest/75',
+    pill: 'border-deep-forest/20 bg-deep-forest/10 text-deep-forest/90',
+    dot: 'bg-deep-forest/60',
+  },
+];
+---
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel id="about" tone="accent" class="relative overflow-hidden text-center scroll-mt-24">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
+    <Glow class="-right-24 -top-24 h-72 w-72" tone="gold" />
+    <div class="relative mx-auto max-w-3xl">
+      <Eyebrow text={c.eyebrow} tone="accent" class="mx-auto" />
+      <h1 class="mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">{c.heading}</h1>
+      <p class="mt-4 text-xl font-semibold text-antler-gold sm:text-2xl">{c.heroKicker}</p>
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/85">{c.heroIntro}</p>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-mist-white/85">{c.heroIntro2}</p>
+      <div class="mt-8 flex justify-center">
+        <ButtonPrimary href="https://mielikkix.ai">{c.heroCta}</ButtonPrimary>
+      </div>
+    </div>
+  </Panel>
+
+  <Panel>
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.mythHeading}</h2>
+    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.mythBody}</p>
+    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.mythBody2}</p>
+  </Panel>
+
+  <section class={`relative overflow-hidden rounded-3xl border ${cardStyles[1].border} ${cardStyles[1].bg} p-8 shadow-lg shadow-black/20 sm:p-12`}>
+    <h2 class={`text-2xl font-bold sm:text-3xl ${cardStyles[1].text}`}>{c.worksHeading}</h2>
+    <p class={`mt-4 max-w-3xl text-base leading-relaxed ${cardStyles[1].body}`}>{c.worksIntro}</p>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+      {
+        c.worksList.map((item) => (
+          <li class={`flex items-start gap-3 text-base leading-relaxed ${cardStyles[1].text}`}>
+            <span class={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${cardStyles[1].dot}`} />
+            {item}
+          </li>
+        ))
+      }
+    </ul>
+    <p class={`mt-6 max-w-3xl text-base leading-relaxed ${cardStyles[1].body}`}>{c.worksClosing}</p>
+  </section>
+
+  <Panel>
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.agentsHeading}</h2>
+    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody}</p>
+    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody2}</p>
+    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody3}</p>
+  </Panel>
+
+  <section class={`relative overflow-hidden rounded-3xl border ${cardStyles[2].border} ${cardStyles[2].bg} p-8 shadow-lg shadow-black/20 sm:p-12`}>
+    <h2 class={`text-2xl font-bold sm:text-3xl ${cardStyles[2].text}`}>{c.solutionsHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        c.solutionsGrid.map((item) => (
+          <Card>
+            <IconBadge icon={item.icon} tone="gold" />
+            <h3 class="mt-4 text-lg font-semibold text-mist-white">{item.title}</h3>
+            <p class="mt-2 text-base leading-relaxed text-mist-white/75">{item.body}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <Panel>
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.approachHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2">
+      {
+        c.approachSteps.map((step, i) => (
+          <div class="flex gap-4">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-aurora-neon/40 bg-deep-forest text-sm font-bold text-aurora-neon">
+              {i + 1}
+            </span>
+            <div>
+              <h3 class="text-base font-semibold text-mist-white">{step.title}</h3>
+              <p class="mt-2 text-base leading-relaxed text-mist-white/75">{step.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Panel>
+
+  <section class={`relative overflow-hidden rounded-3xl border ${cardStyles[0].border} ${cardStyles[0].bg} p-8 shadow-lg shadow-black/20 sm:p-12`}>
+    <h2 class={`text-2xl font-bold sm:text-3xl ${cardStyles[0].text}`}>{c.visionHeading}</h2>
+    <p class={`mt-4 max-w-3xl text-base leading-relaxed ${cardStyles[0].body}`}>{c.visionBody}</p>
+    <p class={`mt-4 max-w-3xl text-base leading-relaxed ${cardStyles[0].body}`}>{c.visionBody2}</p>
+  </section>
+
+  <Panel tone="gold" class="text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.missionHeading}</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.missionBody}</p>
+    <p class="mx-auto mt-5 max-w-2xl bg-gradient-to-r from-aurora-neon to-antler-gold bg-clip-text text-lg font-semibold text-transparent">
+      {c.missionTagline}
+    </p>
+  </Panel>
+
+  <section class={`relative overflow-hidden rounded-3xl border ${cardStyles[1].border} ${cardStyles[1].bg} p-8 shadow-lg shadow-black/20 sm:p-12`}>
+    <h2 class={`text-2xl font-bold sm:text-3xl ${cardStyles[1].text}`}>{c.whyStoryHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        c.whyStoryGrid.map((item) => (
+          <Card title={item.title}>
+            <p class="text-base leading-relaxed text-mist-white/80">{item.body}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-aurora-neon via-deep-forest to-antler-gold p-8 text-center shadow-lg shadow-black/20 sm:p-12">
+    <h2 class="text-2xl font-bold text-mist-white sm:text-3xl">{c.closingHeading2}</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-mist-white/85">{c.closingBody2}</p>
+    <h3 class="mx-auto mt-10 max-w-2xl text-xl font-bold text-mist-white sm:text-2xl">{c.finalCtaHeading}</h3>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/85">{c.finalCtaBody}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <ButtonPrimary href="https://mielikkix.ai">{c.heroCta}</ButtonPrimary>
+      <ButtonSecondary href="https://mielikkix.ai/pricing/">{c.finalCtaPricing}</ButtonSecondary>
+    </div>
+  </section>
+
+  <Panel id="security" class="scroll-mt-24">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <div class="flex items-center gap-4">
+          <IconBadge icon="shield" tone="gold" />
+          <h2 class="text-2xl font-bold sm:text-3xl">{c.securityHeading}</h2>
+        </div>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.securityBody}</p>
+      </div>
+      <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-antler-gold/40 bg-antler-gold/10 shadow-[0_0_30px_rgba(212,175,55,0.25)] md:flex">
+        <Icon name="shield" class="h-14 w-14 text-antler-gold" />
+      </div>
+    </div>
+  </Panel>
+
+  <Panel id="careers" class="scroll-mt-24">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <div class="flex items-center gap-4">
+          <IconBadge icon="trendingUp" tone="gold" />
+          <h2 class="text-2xl font-bold sm:text-3xl">{c.careersHeading}</h2>
+        </div>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.careersBody}</p>
+      </div>
+      <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-antler-gold/40 bg-antler-gold/10 shadow-[0_0_30px_rgba(212,175,55,0.25)] md:flex">
+        <Icon name="trendingUp" class="h-14 w-14 text-antler-gold" />
+      </div>
+    </div>
+  </Panel>
+
+  <Panel id="contact" class="scroll-mt-24">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <div class="flex items-center gap-4">
+          <IconBadge icon="headset" tone="accent" />
+          <h2 class="text-2xl font-bold sm:text-3xl">{c.contactHeading}</h2>
+        </div>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.contactBody}</p>
+        <a
+          href={`mailto:${c.contactEmail}`}
+          class="mt-6 inline-flex items-center gap-2 rounded-full bg-aurora-neon px-6 py-3 text-sm font-semibold text-[#06231A] transition hover:scale-105 hover:shadow-[0_0_24px_rgba(0,229,160,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        >
+          {c.contactEmailLabel}: {c.contactEmail}
+        </a>
+      </div>
+      <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-aurora-neon/40 bg-aurora-neon/10 shadow-[0_0_30px_rgba(0,229,160,0.3)] md:flex">
+        <Icon name="headset" class="h-14 w-14 text-aurora-neon" />
+      </div>
+    </div>
+  </Panel>
+</div>

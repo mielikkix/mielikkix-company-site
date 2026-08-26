@@ -1,0 +1,21 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  icon: Parameters<typeof Icon>[0]['name'];
+  tone?: 'accent' | 'gold' | 'mixed';
+  class?: string;
+}
+
+const { icon, tone = 'accent', class: className = '' } = Astro.props;
+
+const toneClasses = {
+  accent: 'bg-deep-forest text-aurora-neon border-aurora-neon/40',
+  gold: 'bg-deep-forest text-antler-gold border-antler-gold/40',
+  mixed: 'bg-deep-forest text-mist-white border-mist-white/25',
+};
+---
+
+<div class={`inline-flex h-11 w-11 items-center justify-center rounded-2xl border ${toneClasses[tone]} ${className}`}>
+  <Icon name={icon} class="h-5 w-5" />
+</div>

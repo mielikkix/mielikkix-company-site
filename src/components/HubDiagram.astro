@@ -1,0 +1,76 @@
+---
+import Icon from './Icon.astro';
+
+interface Node {
+  icon: Parameters<typeof Icon>[0]['name'];
+  label: string;
+  tone: 'accent' | 'gold' | 'mist';
+}
+
+interface Props {
+  centerLabel: string;
+  nodes: [Node, Node, Node];
+}
+
+const { centerLabel, nodes } = Astro.props;
+
+// Percentage positions on a square canvas: top, bottom-left, bottom-right.
+const positions = [
+  { top: '6%', left: '50%', x: 100, y: 24 },
+  { top: '82%', left: '14%', x: 42, y: 158 },
+  { top: '82%', left: '86%', x: 158, y: 158 },
+];
+
+const toneStyles = {
+  accent: {
+    ring: 'border-aurora-neon bg-aurora-neon text-[#06231A] shadow-[0_0_22px_rgba(0,229,160,0.55)]',
+    line: 'text-aurora-neon',
+  },
+  gold: {
+    ring: 'border-antler-gold bg-antler-gold text-[#2A2005] shadow-[0_0_22px_rgba(212,175,55,0.55)]',
+    line: 'text-antler-gold',
+  },
+  mist: {
+    ring: 'border-mist-white bg-mist-white text-deep-forest shadow-[0_0_22px_rgba(232,240,235,0.5)]',
+    line: 'text-mist-white',
+  },
+};
+---
+
+<div class="relative mx-auto aspect-square w-full max-w-sm">
+  <svg viewBox="0 0 200 200" class="absolute inset-0 h-full w-full" aria-hidden="true">
+    {
+      nodes.map((node, i) => (
+        <line
+          x1="100"
+          y1="100"
+          x2={positions[i].x}
+          y2={positions[i].y}
+          stroke="currentColor"
+          class={toneStyles[node.tone].line}
+          stroke-width="2"
+          stroke-dasharray="5 4"
+        />
+      ))
+    }
+  </svg>
+
+  <div class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-1 rounded-full border border-aurora-neon bg-aurora-neon text-center shadow-[0_0_28px_rgba(0,229,160,0.6)]">
+    <Icon name="chat" class="h-5 w-5 text-[#06231A]" />
+    <span class="text-[10px] font-semibold leading-tight text-[#06231A]">{centerLabel}</span>
+  </div>
+
+  {
+    nodes.map((node, i) => (
+      <div
+        class="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 text-center"
+        style={{ top: positions[i].top, left: positions[i].left }}
+      >
+        <span class={`flex h-12 w-12 items-center justify-center rounded-full border ${toneStyles[node.tone].ring}`}>
+          <Icon name={node.icon} class="h-5 w-5" />
+        </span>
+        <span class="max-w-[6.5rem] text-[11px] font-medium leading-tight text-mist-white/80">{node.label}</span>
+      </div>
+    ))
+  }
+</div>

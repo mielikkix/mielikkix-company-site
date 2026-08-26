@@ -1,0 +1,135 @@
+---
+import ButtonPrimary from '../ButtonPrimary.astro';
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
+import HubDiagram from '../HubDiagram.astro';
+import IconBadge from '../IconBadge.astro';
+import Icon from '../Icon.astro';
+import { t } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).products;
+
+const crewIcons = ['headset', 'megaphone', 'trendingUp'] as const;
+
+const cardStyles = [
+  {
+    bg: 'bg-aurora-neon',
+    border: 'border-aurora-neon',
+    text: 'text-[#06231A]',
+    body: 'text-[#06231A]/75',
+    iconTone: 'accent' as const,
+  },
+  {
+    bg: 'bg-antler-gold',
+    border: 'border-antler-gold',
+    text: 'text-[#2A2005]',
+    body: 'text-[#2A2005]/75',
+    iconTone: 'gold' as const,
+  },
+  {
+    bg: 'bg-mist-white',
+    border: 'border-mist-white',
+    text: 'text-deep-forest',
+    body: 'text-deep-forest/75',
+    iconTone: 'mixed' as const,
+  },
+];
+---
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="gold" class="relative overflow-hidden text-center">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="gold" />
+    <Glow class="-right-24 -top-24 h-72 w-72" tone="accent" />
+    <div class="relative mx-auto max-w-3xl">
+      <Eyebrow text={c.eyebrow} tone="gold" class="mx-auto" />
+      <h1 class="mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">{c.heading}</h1>
+      <p class="mt-6 text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
+    </div>
+  </Panel>
+
+  <Panel tone="accent" class="relative overflow-hidden">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
+    <Glow class="-right-24 -bottom-24 h-72 w-72" tone="gold" />
+    <div class="relative grid gap-10 md:grid-cols-2 md:items-center">
+      <div class="order-2 md:order-1">
+        <HubDiagram
+          centerLabel={c.hubCenterLabel}
+          nodes={[
+            { icon: 'headset', label: c.crews[0].heading, tone: 'accent' },
+            { icon: 'megaphone', label: c.crews[1].heading, tone: 'gold' },
+            { icon: 'trendingUp', label: c.crews[2].heading, tone: 'mist' },
+          ]}
+        />
+      </div>
+      <div class="order-1 md:order-2">
+        <p class="text-base leading-relaxed text-mist-white/80">{c.body}</p>
+      </div>
+    </div>
+  </Panel>
+
+  <div class="grid gap-6 pb-6 sm:pb-8 md:grid-cols-2 md:gap-0 md:pb-10">
+    <div class="rounded-3xl border border-mist-white/20 bg-mist-white p-8 sm:p-10 md:mr-[-1.5rem] md:mt-8 md:pr-16">
+      <h3 class="text-2xl font-bold text-deep-forest">{c.withoutHeading}</h3>
+      <ul class="mt-6 space-y-5">
+        {
+          c.withoutList.map((item, i) => (
+            <li class={`flex items-start gap-3 text-deep-forest/80 ${i < c.withoutList.length - 1 ? 'border-b border-deep-forest/10 pb-5' : ''}`}>
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-deep-forest/30 text-deep-forest">
+                <Icon name="close" class="h-3.5 w-3.5" />
+              </span>
+              <span class="text-base leading-relaxed">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="relative z-10 rounded-3xl border border-aurora-neon/30 bg-deep-forest p-8 shadow-xl shadow-black/40 sm:p-10 md:ml-[-1.5rem]">
+      <h3 class="text-2xl font-bold text-aurora-neon">{c.withHeading}</h3>
+      <ul class="mt-6 space-y-5">
+        {
+          c.withList.map((item, i) => (
+            <li class={`flex items-start gap-3 text-mist-white/85 ${i < c.withList.length - 1 ? 'border-b border-mist-white/10 pb-5' : ''}`}>
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-aurora-neon/40 text-aurora-neon">
+                <Icon name="check" class="h-3.5 w-3.5" />
+              </span>
+              <span class="text-base leading-relaxed">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <Panel>
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.crewsHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-3">
+      {
+        c.crews.map((crew, i) => {
+          const style = cardStyles[i % cardStyles.length];
+          return (
+            <div class={`rounded-2xl border ${style.border} ${style.bg} p-6 shadow-lg shadow-black/20`}>
+              <IconBadge icon={crewIcons[i]} tone={style.iconTone} />
+              <h3 class={`mt-4 text-lg font-semibold ${style.text}`}>{crew.heading}</h3>
+              <p class={`mt-2 text-base leading-relaxed ${style.body}`}>{crew.body}</p>
+            </div>
+          );
+        })
+      }
+    </div>
+  </Panel>
+
+  <Panel tone="gold" class="text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.ctaBody}</h2>
+    <div class="mt-8 flex justify-center">
+      <ButtonPrimary href="https://mielikkix.ai">{c.cta}</ButtonPrimary>
+    </div>
+  </Panel>
+</div>

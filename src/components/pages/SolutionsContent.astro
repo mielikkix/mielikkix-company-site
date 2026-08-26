@@ -1,0 +1,148 @@
+---
+import ButtonPrimary from '../ButtonPrimary.astro';
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
+import IconBadge from '../IconBadge.astro';
+import Icon from '../Icon.astro';
+import { t, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).solutions;
+
+const images = [
+  '/images/solutions/chatbots-saas.jpg',
+  '/images/solutions/customer-service.jpg',
+  '/images/solutions/automation.jpg',
+  '/images/solutions/custom-dev.jpg',
+  '/images/solutions/integrations.jpg',
+];
+
+const cardStyles = [
+  {
+    bg: 'bg-aurora-neon',
+    border: 'border-aurora-neon',
+    text: 'text-[#06231A]',
+    body: 'text-[#06231A]/75',
+    pill: 'border-[#06231A]/25 bg-[#06231A]/10 text-[#06231A]/90',
+    iconTone: 'accent' as const,
+  },
+  {
+    bg: 'bg-antler-gold',
+    border: 'border-antler-gold',
+    text: 'text-[#2A2005]',
+    body: 'text-[#2A2005]/75',
+    pill: 'border-[#2A2005]/25 bg-[#2A2005]/10 text-[#2A2005]/90',
+    iconTone: 'gold' as const,
+  },
+  {
+    bg: 'bg-mist-white',
+    border: 'border-mist-white',
+    text: 'text-deep-forest',
+    body: 'text-deep-forest/75',
+    pill: 'border-deep-forest/20 bg-deep-forest/10 text-deep-forest/90',
+    iconTone: 'mixed' as const,
+  },
+];
+---
+
+<div class="mx-auto max-w-6xl space-y-8 px-4 py-12 sm:space-y-10 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="accent" class="relative overflow-hidden text-center">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
+    <Glow class="-right-24 -top-24 h-72 w-72" tone="gold" />
+    <div class="relative mx-auto max-w-3xl">
+      <Eyebrow text={c.eyebrow} tone="accent" class="mx-auto" />
+      <h1 class="mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">{c.heading}</h1>
+      <p class="mt-6 text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
+    </div>
+  </Panel>
+
+  <div class="grid gap-6 pb-6 sm:pb-8 md:grid-cols-2 md:gap-0 md:pb-10">
+    <div class="rounded-3xl border border-mist-white/20 bg-mist-white p-8 sm:p-10 md:mr-[-1.5rem] md:mt-8 md:pr-16">
+      <h3 class="text-2xl font-bold text-deep-forest">{c.withoutHeading}</h3>
+      <ul class="mt-6 space-y-5">
+        {
+          c.withoutList.map((item, i) => (
+            <li class={`flex items-start gap-3 text-deep-forest/80 ${i < c.withoutList.length - 1 ? 'border-b border-deep-forest/10 pb-5' : ''}`}>
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-deep-forest/30 text-deep-forest">
+                <Icon name="close" class="h-3.5 w-3.5" />
+              </span>
+              <span class="text-base leading-relaxed">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="relative z-10 rounded-3xl border border-aurora-neon/30 bg-deep-forest p-8 shadow-xl shadow-black/40 sm:p-10 md:ml-[-1.5rem]">
+      <h3 class="text-2xl font-bold text-aurora-neon">{c.withHeading}</h3>
+      <ul class="mt-6 space-y-5">
+        {
+          c.withList.map((item, i) => (
+            <li class={`flex items-start gap-3 text-mist-white/85 ${i < c.withList.length - 1 ? 'border-b border-mist-white/10 pb-5' : ''}`}>
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-aurora-neon/40 text-aurora-neon">
+                <Icon name="check" class="h-3.5 w-3.5" />
+              </span>
+              <span class="text-base leading-relaxed">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  {
+    c.activities.map((activity, i) => {
+      const style = cardStyles[i % cardStyles.length];
+      const imageFirst = i % 2 === 1;
+      return (
+        <div class={`rounded-3xl border ${style.border} ${style.bg} p-10 shadow-lg shadow-black/20 sm:p-12`}>
+          <div class="grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center">
+            <div class={imageFirst ? 'md:order-2' : ''}>
+              <div class="flex items-start gap-6">
+                <IconBadge icon={activity.icon} tone={style.iconTone} class="h-16 w-16 shrink-0" />
+                <h2 class={`text-3xl font-bold sm:text-4xl ${style.text}`}>{activity.title}</h2>
+              </div>
+              <p class={`mt-5 max-w-3xl text-lg leading-relaxed ${style.body}`}>{activity.description}</p>
+              <ul class="mt-6 flex flex-wrap gap-3">
+                {activity.bullets.map((bullet) => (
+                  <li class={`rounded-full border px-5 py-2 text-sm font-medium ${style.pill}`}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+            <div class={`overflow-hidden rounded-2xl border ${style.border} shadow-lg shadow-black/25 ${imageFirst ? 'md:order-1' : ''}`}>
+              <img src={images[i]} alt={activity.title} width="1200" height="800" loading="lazy" class="h-64 w-full object-cover md:h-full" />
+            </div>
+          </div>
+        </div>
+      );
+    })
+  }
+
+  <Panel>
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.faqHeading}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2">
+      {
+        c.faq.map((item) => (
+          <div class="rounded-2xl border border-mist-white/10 bg-mist-white/[0.03] p-6">
+            <h3 class="text-base font-semibold text-mist-white">{item.q}</h3>
+            <p class="mt-2 text-base leading-relaxed text-mist-white/75">{item.a}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Panel>
+
+  <Panel tone="gold" class="text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.closingBody}</p>
+    <div class="mt-8 flex justify-center">
+      <ButtonPrimary href={`${localizedPath('/company', lang)}#contact`}>{c.closingCta}</ButtonPrimary>
+    </div>
+  </Panel>
+</div>

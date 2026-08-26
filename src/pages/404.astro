@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NotFoundContent from '../components/pages/NotFoundContent.astro';
+import { t } from '../i18n/utils';
+
+const lang = 'en';
+const c = t(lang).notFound;
+---
+
+<BaseLayout lang={lang} title={c.seoTitle}>
+  <NotFoundContent lang={lang} />
+</BaseLayout>

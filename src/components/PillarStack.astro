@@ -1,0 +1,29 @@
+---
+interface Item {
+  title: string;
+  short: string;
+}
+
+interface Props {
+  items: Item[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+
+const widths = ['100%', '94%', '88%', '82%', '76%'];
+---
+
+<div class={`flex flex-col items-center gap-3 ${className}`}>
+  {
+    items.map((item, i) => (
+      <div
+        style={{ width: widths[i % widths.length] }}
+        class="rounded-2xl bg-gradient-to-r from-aurora-neon to-antler-gold px-6 py-4 text-center shadow-lg shadow-black/20"
+      >
+        <p class="text-sm font-bold text-deep-forest sm:text-base">{item.title}</p>
+        <p class="mt-0.5 text-xs text-deep-forest/70">{item.short}</p>
+      </div>
+    ))
+  }
+</div>

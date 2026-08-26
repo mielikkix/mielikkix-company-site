@@ -1,0 +1,39 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F2A1F" />
+      <stop offset="1" stop-color="#06140D" />
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00E5A0" />
+      <stop offset="0.5" stop-color="#D4AF37" />
+      <stop offset="1" stop-color="#00E5A0" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#00E5A0" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#00E5A0" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#D4AF37" stop-opacity="0.30" />
+      <stop offset="1" stop-color="#D4AF37" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="130" cy="90" r="260" fill="url(#glowA)" />
+  <circle cx="1100" cy="560" r="280" fill="url(#glowB)" />
+
+  <g transform="translate(120, 195) scale(5)">
+    <polygon points="4,20 15,3 18,22" fill="#00E5A0" />
+    <polygon points="44,20 33,3 30,22" fill="#D4AF37" />
+    <polygon points="24,44 6,25 12,11 36,11 42,25" fill="#E8F0EB" />
+    <circle cx="18" cy="25" r="2.2" fill="#0F2A1F" />
+    <circle cx="30" cy="25" r="2.2" fill="#0F2A1F" />
+    <polygon points="24,37 20.5,31 27.5,31" fill="#0F2A1F" />
+  </g>
+
+  <text x="420" y="300" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="700" fill="#E8F0EB">Mielikkix</text>
+  <text x="422" y="352" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#E8F0EBB3">AI-powered software &amp; SaaS solutions</text>
+
+  <rect x="0" y="618" width="1200" height="12" fill="url(#bar)" />
+</svg>
