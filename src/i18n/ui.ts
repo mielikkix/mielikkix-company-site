@@ -158,6 +158,28 @@ interface Dictionary {
     contactEmailLabel: string;
     securityHeading: string;
     securityBody: string;
+    demoHeading: string;
+    demoBody: string;
+    demoNameLabel: string;
+    demoCompanyLabel: string;
+    demoEmailLabel: string;
+    demoPhoneLabel: string;
+    demoCountryLabel: string;
+    demoAutomateLabel: string;
+    demoAutomatePlaceholder: string;
+    demoRequirementsLabel: string;
+    demoRequirementsPlaceholder: string;
+    demoDateLabel: string;
+    demoDatePlaceholder: string;
+    demoSubmit: string;
+    demoSending: string;
+    demoSuccessHeading: string;
+    demoSuccessBody: string;
+    demoResetLabel: string;
+    demoFallbackHeading: string;
+    demoFallbackBody: string;
+    demoCopyLabel: string;
+    demoCopiedLabel: string;
   };
   notFound: {
     seoTitle: string;
@@ -499,6 +521,28 @@ export const ui: Record<Lang, Dictionary> = {
       securityHeading: 'Data & Security',
       securityBody:
         "Mielikkix AS is based in Norway and builds every AI system with data protection and GDPR principles in mind. If you need specifics on hosting, data residency, or a data processing agreement for your business, email us and we'll walk you through it.",
+      demoHeading: 'Book a Free Demo',
+      demoBody: "Tell us a bit about your business and what you'd like to automate. Submitting opens an email to us with your details already filled in — we'll get back to you to set up a time.",
+      demoNameLabel: 'Full Name',
+      demoCompanyLabel: 'Business / Company Name',
+      demoEmailLabel: 'Work Email',
+      demoPhoneLabel: 'Phone Number',
+      demoCountryLabel: 'Country',
+      demoAutomateLabel: 'What would you like to automate?',
+      demoAutomatePlaceholder: 'e.g. customer support, lead follow-up, booking...',
+      demoRequirementsLabel: 'Message / Requirements',
+      demoRequirementsPlaceholder: 'Any other details we should know before the call...',
+      demoDateLabel: 'Preferred demo date/time',
+      demoDatePlaceholder: 'e.g. Tuesday afternoon, or a specific date/time',
+      demoSubmit: 'Send Request',
+      demoSending: 'Sending...',
+      demoSuccessHeading: 'Thanks — request sent!',
+      demoSuccessBody: "We've got your details and will be in touch soon to set up a time.",
+      demoResetLabel: 'Submit another request',
+      demoFallbackHeading: "Couldn't send automatically",
+      demoFallbackBody: 'No problem — email us directly, or copy your details below and paste them into a message:',
+      demoCopyLabel: 'Copy details',
+      demoCopiedLabel: 'Copied!',
     },
     notFound: {
       seoTitle: 'Page Not Found',
@@ -837,6 +881,28 @@ export const ui: Record<Lang, Dictionary> = {
       securityHeading: 'Data og sikkerhet',
       securityBody:
         'Mielikkix AS er basert i Norge, og vi bygger alle AI-systemer med personvern og GDPR-prinsipper i bunn. Trenger du detaljer om hosting, datalagringssted eller en databehandleravtale for din bedrift, send oss en e-post så går vi gjennom det med deg.',
+      demoHeading: 'Book en gratis demo',
+      demoBody: 'Fortell oss litt om virksomheten din og hva du ønsker å automatisere. Når du sender inn åpnes en e-post til oss med detaljene dine allerede fylt ut — vi tar kontakt for å avtale et tidspunkt.',
+      demoNameLabel: 'Fullt navn',
+      demoCompanyLabel: 'Bedrift / firmanavn',
+      demoEmailLabel: 'Jobb-e-post',
+      demoPhoneLabel: 'Telefonnummer',
+      demoCountryLabel: 'Land',
+      demoAutomateLabel: 'Hva ønsker du å automatisere?',
+      demoAutomatePlaceholder: 'f.eks. kundeservice, oppfølging av leads, booking...',
+      demoRequirementsLabel: 'Melding / behov',
+      demoRequirementsPlaceholder: 'Andre detaljer vi bør vite før samtalen...',
+      demoDateLabel: 'Foretrukket dato/tidspunkt for demo',
+      demoDatePlaceholder: 'f.eks. tirsdag ettermiddag, eller en spesifikk dato/tid',
+      demoSubmit: 'Send forespørsel',
+      demoSending: 'Sender...',
+      demoSuccessHeading: 'Takk — forespørsel sendt!',
+      demoSuccessBody: 'Vi har mottatt detaljene dine og tar kontakt snart for å avtale et tidspunkt.',
+      demoResetLabel: 'Send en ny forespørsel',
+      demoFallbackHeading: 'Kunne ikke sende automatisk',
+      demoFallbackBody: 'Ikke noe problem — send oss en e-post direkte, eller kopier detaljene dine under og lim dem inn i en melding:',
+      demoCopyLabel: 'Kopier detaljer',
+      demoCopiedLabel: 'Kopiert!',
     },
     notFound: {
       seoTitle: 'Siden ble ikke funnet',
