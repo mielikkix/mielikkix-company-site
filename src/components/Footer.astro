@@ -1,5 +1,5 @@
 ---
-import Logo from './Logo.astro';
+import BrandMark from './BrandMark.astro';
 import { t, localizedPath } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
 
@@ -29,7 +29,7 @@ const companyLinks = [
   <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr] lg:px-8">
     <div class="max-w-xs">
       <div class="flex items-center gap-2">
-        <Logo class="h-7 w-7" />
+        <BrandMark class="h-8 w-8" />
         <span class="text-base font-bold text-mist-white">Mielikki<span class="text-aurora-neon">X</span></span>
       </div>
       <p class="mt-3 text-sm leading-relaxed text-mist-white/70">{dict.footer.tagline}</p>

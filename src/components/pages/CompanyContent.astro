@@ -62,9 +62,16 @@ const cardStyles = [
   </Panel>
 
   <Panel>
-    <h2 class="text-2xl font-bold sm:text-3xl">{c.mythHeading}</h2>
-    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.mythBody}</p>
-    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.mythBody2}</p>
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <h2 class="text-2xl font-bold sm:text-3xl">{c.mythHeading}</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.mythBody}</p>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.mythBody2}</p>
+      </div>
+      <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-antler-gold/40 bg-antler-gold/10 shadow-[0_0_30px_rgba(212,175,55,0.25)] md:flex">
+        <Icon name="target" class="h-14 w-14 text-antler-gold" />
+      </div>
+    </div>
   </Panel>
 
   <section class={`relative overflow-hidden rounded-3xl border ${cardStyles[1].border} ${cardStyles[1].bg} p-8 shadow-lg shadow-black/20 sm:p-12`}>
@@ -84,10 +91,17 @@ const cardStyles = [
   </section>
 
   <Panel>
-    <h2 class="text-2xl font-bold sm:text-3xl">{c.agentsHeading}</h2>
-    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody}</p>
-    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody2}</p>
-    <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody3}</p>
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <h2 class="text-2xl font-bold sm:text-3xl">{c.agentsHeading}</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody}</p>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody2}</p>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody3}</p>
+      </div>
+      <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-aurora-neon/40 bg-aurora-neon/10 shadow-[0_0_30px_rgba(0,229,160,0.3)] md:flex">
+        <Icon name="route" class="h-14 w-14 text-aurora-neon" />
+      </div>
+    </div>
   </Panel>
 
   <section class={`relative overflow-hidden rounded-3xl border ${cardStyles[2].border} ${cardStyles[2].bg} p-8 shadow-lg shadow-black/20 sm:p-12`}>

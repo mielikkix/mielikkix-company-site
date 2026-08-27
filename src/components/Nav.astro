@@ -1,5 +1,5 @@
 ---
-import Logo from './Logo.astro';
+import BrandMark from './BrandMark.astro';
 import ButtonPrimary from './ButtonPrimary.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { t, localizedPath, getRouteSlug } from '../i18n/utils';
@@ -27,7 +27,7 @@ const links = [
       href={localizedPath('/', lang)}
       class="flex items-center gap-2 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
     >
-      <Logo class="h-8 w-8" />
+      <BrandMark class="h-9 w-9" />
       <span class="text-lg font-bold tracking-tight text-mist-white">Mielikki<span class="text-aurora-neon">X</span></span>
     </a>
 

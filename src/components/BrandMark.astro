@@ -1,0 +1,9 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'h-8 w-8' } = Astro.props;
+---
+
+<img src="/favicon.png" alt="Mielikkix" width="512" height="512" class={`shrink-0 ${className}`} />
