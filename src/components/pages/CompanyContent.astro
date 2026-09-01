@@ -180,6 +180,14 @@ const cardStyles = [
     <h2 class="text-2xl font-bold sm:text-3xl">{c.demoHeading}</h2>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.demoBody}</p>
     <form id="demo-form" class="mt-8 grid gap-5 sm:grid-cols-2">
+      <input
+        type="text"
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+        style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"
+      />
       <div>
         <label for="demo-name" class="mb-1.5 block text-sm font-medium text-mist-white/80">{c.demoNameLabel} <span class="text-antler-gold">*</span></label>
         <input

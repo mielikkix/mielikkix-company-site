@@ -524,7 +524,7 @@ export const ui: Record<Lang, Dictionary> = {
       securityBody:
         "Mielikkix AS is based in Norway and builds every AI system with data protection and GDPR principles in mind. If you need specifics on hosting, data residency, or a data processing agreement for your business, email us and we'll walk you through it.",
       demoHeading: 'Book a Free Demo',
-      demoBody: "Tell us a bit about your business and what you'd like to automate. Submitting opens an email to us with your details already filled in — we'll get back to you to set up a time.",
+      demoBody: "Tell us a bit about your business and what you'd like to automate. Submitting sends your details straight to our team — we'll get back to you to set up a time.",
       demoNameLabel: 'Full Name',
       demoCompanyLabel: 'Business / Company Name',
       demoEmailLabel: 'Work Email',
@@ -886,7 +886,7 @@ export const ui: Record<Lang, Dictionary> = {
       securityBody:
         'Mielikkix AS er basert i Norge, og vi bygger alle AI-systemer med personvern og GDPR-prinsipper i bunn. Trenger du detaljer om hosting, datalagringssted eller en databehandleravtale for din bedrift, send oss en e-post så går vi gjennom det med deg.',
       demoHeading: 'Book en gratis demo',
-      demoBody: 'Fortell oss litt om virksomheten din og hva du ønsker å automatisere. Når du sender inn åpnes en e-post til oss med detaljene dine allerede fylt ut — vi tar kontakt for å avtale et tidspunkt.',
+      demoBody: 'Fortell oss litt om virksomheten din og hva du ønsker å automatisere. Når du sender inn går detaljene dine rett til teamet vårt — vi tar kontakt for å avtale et tidspunkt.',
       demoNameLabel: 'Fullt navn',
       demoCompanyLabel: 'Bedrift / firmanavn',
       demoEmailLabel: 'Jobb-e-post',
