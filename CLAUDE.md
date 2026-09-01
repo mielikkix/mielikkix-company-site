@@ -25,11 +25,15 @@ solutions for businesses, including AI chatbots, business automation, multi-agen
 solutions, customer service and sales automation, custom AI software development and
 AI integrations."*
 
-There is a **separate, dedicated promotional site** for the Chat Widget + 10 Force
-Agents product line. This repo does not duplicate that site's depth — Chat Widget /
-Force Agents get one brief `/products` page here (mention + link to
+There is a **separate, dedicated promotional site** for the Mielikkix AI agent
+product line (an AI Chatbot, Voice Receptionist, and Booking Assistant as the core
+ready-to-use agents, plus additional agents like Support Triage and Review &
+Reputation, and fully custom agents built per business). **As of 2026-09, that
+product dropped the earlier "Force Agents" branding and the 3-crew grouping —
+don't reintroduce that naming.** This repo does not duplicate that site's depth —
+the AI agent product line gets one brief `/products` page here (mention + link to
 `app.mielikkix.ai`), not full per-agent marketing pages. Don't re-expand this back
-into a Chat-Widget-first site without the user asking.
+into a product-first site without the user asking.
 
 ## Tech stack
 
@@ -80,8 +84,9 @@ tokens (no fifth color introduced):
 - A full-bleed diagonal gradient CTA band (`from-aurora-neon via-deep-forest
   to-antler-gold`) near the end of each page, mirroring TrendAI's testimonial-banner
   treatment — but without a fabricated quote (see Content rules).
-- `<HubDiagram>` — radial hub-and-spoke diagram (Chat Widget at the center, three
-  crews as spokes) — used on the Products page.
+- `<HubDiagram>` — radial hub-and-spoke diagram ("AI Agents" at the center, the
+  three core solutions — AI Chatbot, Voice Receptionist, Booking Assistant — as
+  spokes) — used on the Products page.
 
 Register all four tokens as `theme.extend.colors` in `tailwind.config.mjs` — never
 hardcode these hex values inline in a component once the config exists.
@@ -117,10 +122,12 @@ ear glowing Aurora Neon, the other solid Antler Gold. Build as an inline SVG com
   closing gradient CTA band
 - `/solutions` — the 5 core business activities in detail, one panel each (icon +
   description + capability bullets)
-- `/products` — **brief** mention of the Chat Widget + 10 Force Agents product line
-  (hub diagram + 3-crew summary) with a CTA to `app.mielikkix.ai`. Do not rebuild the
-  full 10-agent grid or per-product pages here — that lives on the dedicated product
-  site.
+- `/products` — **brief** mention of the Mielikkix AI agent product line (hub diagram
+  + summary of the three core solutions: AI Chatbot, Voice Receptionist, Booking
+  Assistant) with a CTA to `app.mielikkix.ai`. Do not rebuild the full agent
+  catalog (additional agents like Support Triage / Review & Reputation, or the
+  custom-agent category grid) or per-product pages here — that lives on the
+  dedicated product site.
 - `/company` — About (uses the official business activity description above),
   Careers, Contact — one page with anchored sections (`#about`, `#careers`,
   `#contact`)
@@ -139,9 +146,9 @@ Not in the original brief, added per user request — the site is bilingual:
 - All copy lives in one typed dictionary, `src/i18n/ui.ts` (`ui.en` / `ui.no`, same
   shape) — never hardcode English strings in a page or component. Helpers in
   `src/i18n/utils.ts`: `t(lang)`, `localizedPath(pathname, lang)`, `getRouteSlug`.
-- Product/brand terms ("Force Agents", individual agent names like "Voice
-  Receptionist", crew names like "Front Desk & Support") stay in English in both
-  locales; everything else (nav, headings, body copy, CTAs) is translated.
+- Product/brand terms (individual agent names like "Voice Receptionist" or
+  "Booking Assistant") stay in English in both locales; everything else (nav,
+  headings, body copy, CTAs) is translated.
 - Route files under `src/pages/*.astro` and `src/pages/no/*.astro` are thin wrappers
   that just pick `lang` and render a shared content component from
   `src/components/pages/` — that's where the actual markup lives, parametrized by

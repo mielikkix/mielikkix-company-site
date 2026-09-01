@@ -16,7 +16,7 @@ interface Props {
 const { lang } = Astro.props;
 const c = t(lang).products;
 
-const crewIcons = ['headset', 'megaphone', 'trendingUp'] as const;
+const crewIcons = ['help', 'headset', 'clock'] as const;
 
 const cardStyles = [
   {
@@ -62,9 +62,9 @@ const cardStyles = [
         <HubDiagram
           centerLabel={c.hubCenterLabel}
           nodes={[
-            { icon: 'headset', label: c.crews[0].heading, tone: 'accent' },
-            { icon: 'megaphone', label: c.crews[1].heading, tone: 'gold' },
-            { icon: 'trendingUp', label: c.crews[2].heading, tone: 'mist' },
+            { icon: 'help', label: c.crews[0].heading, tone: 'accent' },
+            { icon: 'headset', label: c.crews[1].heading, tone: 'gold' },
+            { icon: 'clock', label: c.crews[2].heading, tone: 'mist' },
           ]}
         />
       </div>
