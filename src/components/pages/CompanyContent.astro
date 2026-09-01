@@ -248,14 +248,15 @@ const cardStyles = [
       </div>
       <div class="sm:col-span-2">
         <label for="demo-automate" class="mb-1.5 block text-sm font-medium text-mist-white/80">{c.demoAutomateLabel} <span class="text-antler-gold">*</span></label>
-        <input
+        <select
           id="demo-automate"
           name="automate"
-          type="text"
           required
-          placeholder={c.demoAutomatePlaceholder}
-          class="w-full rounded-xl border border-mist-white/15 bg-deep-forest px-4 py-2.5 text-sm text-mist-white placeholder:text-mist-white/40 focus:border-aurora-neon focus:outline-none"
-        />
+          class="w-full rounded-xl border border-mist-white/15 bg-deep-forest px-4 py-2.5 text-sm text-mist-white focus:border-aurora-neon focus:outline-none"
+        >
+          <option value="" selected disabled>{c.demoAutomatePlaceholder}</option>
+          {c.demoAutomateOptions.map((option) => <option value={option}>{option}</option>)}
+        </select>
       </div>
       <div class="sm:col-span-2">
         <label for="demo-message" class="mb-1.5 block text-sm font-medium text-mist-white/80">{c.demoRequirementsLabel}</label>
@@ -412,6 +413,13 @@ const cardStyles = [
           <h2 class="text-2xl font-bold sm:text-3xl">{c.securityHeading}</h2>
         </div>
         <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.securityBody}</p>
+        <a
+          href={localizedPath('/security', lang)}
+          class="mt-4 inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        >
+          {c.securityLink}
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
       <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-antler-gold/40 bg-antler-gold/10 shadow-[0_0_30px_rgba(212,175,55,0.25)] md:flex">
         <Icon name="shield" class="h-14 w-14 text-antler-gold" />

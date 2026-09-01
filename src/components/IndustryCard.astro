@@ -1,0 +1,28 @@
+---
+import IconBadge from './IconBadge.astro';
+import type { IconName } from '../i18n/ui';
+
+interface Props {
+  icon: IconName;
+  title: string;
+  useCases: string[];
+  class?: string;
+}
+
+const { icon, title, useCases, class: className = '' } = Astro.props;
+---
+
+<div class={`rounded-2xl border border-antler-gold/30 bg-deep-forest p-6 ${className}`}>
+  <IconBadge icon={icon} tone="gold" />
+  <h3 class="mt-4 text-lg font-semibold text-mist-white">{title}</h3>
+  <ul class="mt-3 space-y-2">
+    {
+      useCases.map((useCase) => (
+        <li class="flex items-start gap-2 text-sm leading-relaxed text-mist-white/75">
+          <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-antler-gold/70" />
+          {useCase}
+        </li>
+      ))
+    }
+  </ul>
+</div>

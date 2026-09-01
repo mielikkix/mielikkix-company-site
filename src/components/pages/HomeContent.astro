@@ -6,6 +6,13 @@ import Card from '../Card.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
 import PillarStack from '../PillarStack.astro';
+import IconBadge from '../IconBadge.astro';
+import Icon from '../Icon.astro';
+import AgentCard from '../AgentCard.astro';
+import DemoCard from '../DemoCard.astro';
+import IndustryCard from '../IndustryCard.astro';
+import BeforeAfter from '../BeforeAfter.astro';
+import StepFlow from '../StepFlow.astro';
 import { t, localizedPath } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -17,30 +24,56 @@ const { lang } = Astro.props;
 const c = t(lang).home;
 const nav = t(lang).nav;
 const activities = t(lang).solutions.activities;
-const p = t(lang).products;
 ---
 
 <section class="relative overflow-hidden border-b border-mist-white/10 bg-deep-forest">
   <Glow class="-left-32 -top-32 h-96 w-96" tone="accent" />
   <Glow class="-right-32 -top-32 h-96 w-96" tone="gold" />
   <div class="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 sm:py-28 lg:px-8">
-    <div class="mx-auto flex h-56 w-56 items-center justify-center rounded-full bg-mist-white p-5 shadow-xl shadow-black/30 sm:h-72 sm:w-72 sm:p-7">
-      <img src="/mielikkix-hero-logo.png" alt="Mielikkix" width="1033" height="955" class="h-full w-full object-contain" />
-    </div>
-    <Eyebrow text={c.heroEyebrow} class="mx-auto mt-6" />
+    <Eyebrow text={c.heroEyebrow} class="mx-auto" />
     <h1 class="mx-auto mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
       {c.heroTitleLead}
       <span class="bg-gradient-to-r from-aurora-neon to-antler-gold bg-clip-text text-transparent">{c.heroTitleAccent}</span>
     </h1>
     <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
     <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <ButtonPrimary href="https://mielikkix.ai">{c.ctaPrimary}</ButtonPrimary>
-      <ButtonSecondary href={`${localizedPath('/company', lang)}#contact`}>{c.ctaSecondary}</ButtonSecondary>
+      <ButtonPrimary href={`${localizedPath('/company', lang)}#demo`}>{c.ctaPrimary}</ButtonPrimary>
+      <ButtonSecondary href={localizedPath('/products', lang)}>{c.ctaSecondary}</ButtonSecondary>
     </div>
+    <p class="mx-auto mt-8 max-w-xl text-sm font-medium uppercase tracking-wider text-mist-white/50">{c.heroTagline}</p>
   </div>
 </section>
 
-<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+<div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      c.valueStrip.map((item) => (
+        <div class="rounded-2xl border border-mist-white/10 bg-mist-white/[0.03] p-6 text-center">
+          <IconBadge icon={item.icon} tone="accent" class="mx-auto" />
+          <h3 class="mt-4 text-base font-semibold text-mist-white">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mist-white/70">{item.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-6 sm:space-y-8 sm:px-6 sm:py-10 lg:px-8">
+  <Panel>
+    <Eyebrow text={c.problemEyebrow} tone="gold" />
+    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.problemHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.problemSubhead}</p>
+    <div class="mt-8">
+      <BeforeAfter
+        withoutHeading={c.problemBeforeHeading}
+        withoutList={c.problemBeforeList}
+        withHeading={c.problemAfterHeading}
+        withList={c.problemAfterList}
+      />
+    </div>
+    <p class="text-center text-lg font-semibold text-aurora-neon">{c.problemClosing}</p>
+  </Panel>
+
   <Panel>
     <div class="grid gap-10 md:grid-cols-2 md:items-center">
       <div>
@@ -59,6 +92,78 @@ const p = t(lang).products;
     </div>
   </Panel>
 
+  <Panel tone="accent" class="relative overflow-hidden" id="ai-workforce">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
+    <Eyebrow text={c.workforceEyebrow} class="relative" />
+    <h2 class="relative mt-4 text-2xl font-bold sm:text-3xl">{c.workforceHeading}</h2>
+    <p class="relative mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.workforceSubhead}</p>
+    <div class="relative mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {c.agents.map((agent) => <AgentCard agent={agent} />)}
+    </div>
+    <div class="relative mt-8 text-center">
+      <a
+        href={localizedPath('/products', lang)}
+        class="inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+      >
+        {c.workforceExploreLink}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </Panel>
+
+  <Panel>
+    <Eyebrow text={c.demosEyebrow} tone="gold" />
+    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.demosHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.demosSubhead}</p>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {c.demos.map((demo) => <DemoCard icon={demo.icon} name={demo.name} description={demo.description} cta={demo.cta} />)}
+    </div>
+  </Panel>
+
+  <Panel tone="gold">
+    <Eyebrow text={c.industriesEyebrow} tone="gold" />
+    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.industriesHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.industriesSubhead}</p>
+    <div class="mt-8 grid gap-6 sm:grid-cols-3">
+      {c.industriesTeaser.map((industry) => <IndustryCard icon={industry.icon} title={industry.title} useCases={industry.useCases} />)}
+    </div>
+    <div class="mt-8 text-center">
+      <a
+        href={localizedPath('/industries', lang)}
+        class="inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+      >
+        {c.industriesLink}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </Panel>
+
+  <Panel>
+    <Eyebrow text={c.howEyebrow} />
+    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.howHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.howSubhead}</p>
+    <div class="mt-10">
+      <StepFlow steps={c.howSteps} direction="horizontal" />
+    </div>
+  </Panel>
+
+  <Panel tone="accent">
+    <Eyebrow text={c.integrationsEyebrow} />
+    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.integrationsHeading}</h2>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.integrationsSubhead}</p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      {
+        c.integrations.map((integration) => (
+          <div class="flex items-center gap-3 rounded-full border border-mist-white/15 bg-deep-forest px-5 py-2.5">
+            <IconBadge icon={integration.icon} tone="accent" class="h-8 w-8" />
+            <span class="text-sm font-medium text-mist-white/85">{integration.name}</span>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mt-6 text-sm text-mist-white/50">{c.integrationsNote}</p>
+  </Panel>
+
   <Panel tone="gold">
     <Eyebrow text={c.valueEyebrow} tone="gold" />
     <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.valueHeading}</h2>
@@ -74,29 +179,33 @@ const p = t(lang).products;
   </Panel>
 
   <Panel>
-    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
       <div>
-        <Eyebrow text={c.productsEyebrow} />
-        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.productsHeading}</h2>
-        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.productsBody}</p>
+        <div class="flex items-center gap-4">
+          <IconBadge icon="shield" tone="gold" />
+          <h2 class="text-2xl font-bold sm:text-3xl">{c.securityTeaserHeading}</h2>
+        </div>
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.securityTeaserBody}</p>
         <a
-          href={localizedPath('/products', lang)}
-          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+          href={localizedPath('/security', lang)}
+          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
         >
-          {c.productsLink}
+          {c.securityTeaserLink}
           <span aria-hidden="true">→</span>
         </a>
       </div>
-      <div class="rounded-2xl border border-mist-white/15 bg-deep-forest p-6" aria-hidden="true">
-        <div class="flex items-center gap-2 border-b border-mist-white/10 pb-4">
-          <span class="h-2.5 w-2.5 rounded-full bg-aurora-neon"></span>
-          <span class="text-sm font-semibold text-mist-white/90">Mielikkix Chat</span>
-        </div>
-        <div class="mt-4 space-y-3">
-          <div class="max-w-[80%] rounded-xl rounded-tl-sm bg-mist-white/10 px-4 py-2 text-sm text-mist-white/90">{p.chatBubbleGreeting}</div>
-          <div class="ml-auto max-w-[80%] rounded-xl rounded-tr-sm bg-aurora-neon px-4 py-2 text-sm text-[#06231A]">{p.chatBubbleReply}</div>
-        </div>
+      <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-antler-gold/40 bg-antler-gold/10 shadow-[0_0_30px_rgba(212,175,55,0.25)] md:flex">
+        <Icon name="shield" class="h-14 w-14 text-antler-gold" />
       </div>
+    </div>
+  </Panel>
+
+  <Panel tone="accent" class="text-center">
+    <Eyebrow text={c.startEyebrow} class="mx-auto" />
+    <h2 class="mx-auto mt-4 max-w-2xl text-2xl font-bold sm:text-3xl">{c.startHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.startSubhead}</p>
+    <div class="mt-10">
+      <StepFlow steps={c.startSteps} direction="vertical" stepPrefix={c.startStepPrefix} />
     </div>
   </Panel>
 </div>
@@ -106,7 +215,7 @@ const p = t(lang).products;
     <h2 class="text-2xl font-bold text-mist-white sm:text-3xl">{c.closingHeading}</h2>
     <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/85">{c.closingBody}</p>
     <div class="mt-8 flex justify-center">
-      <ButtonPrimary href={`${localizedPath('/company', lang)}#contact`}>{c.closingCta}</ButtonPrimary>
+      <ButtonPrimary href={`${localizedPath('/company', lang)}#demo`}>{c.closingCta}</ButtonPrimary>
     </div>
   </div>
 </section>

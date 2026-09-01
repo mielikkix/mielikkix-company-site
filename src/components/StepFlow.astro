@@ -1,0 +1,52 @@
+---
+interface Step {
+  title: string;
+  body: string;
+}
+
+interface Props {
+  steps: Step[];
+  direction?: 'horizontal' | 'vertical';
+  stepPrefix?: string;
+  class?: string;
+}
+
+const { steps, direction = 'horizontal', stepPrefix = 'Step', class: className = '' } = Astro.props;
+---
+
+{
+  direction === 'horizontal' ? (
+    <div class={`grid gap-8 sm:grid-cols-2 lg:grid-cols-5 ${className}`}>
+      {steps.map((step, i) => (
+        <div class="relative">
+          <span class="bg-gradient-to-r from-aurora-neon to-antler-gold bg-clip-text text-3xl font-bold text-transparent">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h3 class="mt-2 text-base font-semibold text-mist-white">{step.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mist-white/70">{step.body}</p>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class={`mx-auto flex max-w-md flex-col items-stretch ${className}`}>
+      {steps.map((step, i) => (
+        <>
+          <div class="rounded-2xl border border-aurora-neon/30 bg-deep-forest px-6 py-4 text-center shadow-lg shadow-black/20">
+            <p class="text-xs font-semibold uppercase tracking-wide text-antler-gold">
+              {stepPrefix} {i + 1}
+            </p>
+            <p class="mt-1 text-base font-semibold text-mist-white">{step.title}</p>
+            {step.body && <p class="mt-1 text-sm leading-relaxed text-mist-white/65">{step.body}</p>}
+          </div>
+          {i < steps.length - 1 && (
+            <div class="flex justify-center py-1" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5 text-aurora-neon/60">
+                <path d="M12 4v16m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          )}
+        </>
+      ))}
+    </div>
+  )
+}

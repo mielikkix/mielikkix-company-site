@@ -17,6 +17,8 @@ const currentSlug = getRouteSlug(path);
 const links = [
   { slug: '/solutions', label: nav.solutions },
   { slug: '/products', label: nav.products },
+  { slug: '/industries', label: nav.industries },
+  { slug: '/security', label: nav.security },
   { slug: '/company', label: nav.company },
 ];
 ---
@@ -35,7 +37,7 @@ const links = [
 
     <label
       for="nav-toggle"
-      class="cursor-pointer rounded p-2 text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white md:hidden"
+      class="cursor-pointer rounded p-2 text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white lg:hidden"
       aria-label={nav.menuLabel}
       tabindex="0"
     >
@@ -45,9 +47,9 @@ const links = [
     </label>
 
     <div
-      class="absolute inset-x-0 top-full hidden flex-col gap-4 border-b border-mist-white/10 bg-deep-forest px-4 py-4 peer-checked:flex sm:px-6 md:static md:flex md:flex-1 md:flex-row md:items-center md:justify-between md:border-none md:p-0"
+      class="absolute inset-x-0 top-full hidden flex-col gap-4 border-b border-mist-white/10 bg-deep-forest px-4 py-4 peer-checked:flex sm:px-6 lg:static lg:flex lg:flex-1 lg:flex-row lg:items-center lg:justify-between lg:border-none lg:p-0"
     >
-      <ul class="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+      <ul class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-5">
         {
           links.map((link) => {
             const href = localizedPath(link.slug, lang);
@@ -72,13 +74,13 @@ const links = [
       <div class="flex flex-wrap items-center gap-4">
         <LanguageSwitcher lang={lang} path={path} />
         <a
-          href={`${localizedPath('/company', lang)}#contact`}
-          class="hidden rounded-full border border-antler-gold px-5 py-2.5 text-sm font-semibold text-antler-gold transition hover:bg-antler-gold/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white sm:inline-flex"
+          href="https://app.mielikkix.ai"
+          class="hidden rounded text-sm font-medium text-mist-white/80 transition hover:text-mist-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white sm:inline-flex"
         >
-          {nav.contact}
+          {nav.login}
         </a>
-        <ButtonPrimary href="https://mielikkix.ai" class="!px-5 !py-2.5">
-          {nav.getStarted}
+        <ButtonPrimary href={`${localizedPath('/company', lang)}#demo`} class="!px-5 !py-2.5">
+          {nav.bookDemo}
         </ButtonPrimary>
       </div>
     </div>
