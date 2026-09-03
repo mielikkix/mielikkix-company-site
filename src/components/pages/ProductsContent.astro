@@ -1,12 +1,11 @@
 ---
 import ButtonPrimary from '../ButtonPrimary.astro';
 import Panel from '../Panel.astro';
+import Card from '../Card.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
-import HubDiagram from '../HubDiagram.astro';
-import BeforeAfter from '../BeforeAfter.astro';
-import AgentCard from '../AgentCard.astro';
-import { t, localizedPath } from '../../i18n/utils';
+import IconBadge from '../IconBadge.astro';
+import { t } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
 interface Props {
@@ -28,41 +27,24 @@ const c = t(lang).products;
     </div>
   </Panel>
 
-  <Panel tone="accent" class="relative overflow-hidden">
-    <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
-    <Glow class="-right-24 -bottom-24 h-72 w-72" tone="gold" />
-    <div class="relative grid gap-10 md:grid-cols-2 md:items-center">
-      <div class="order-2 md:order-1">
-        <HubDiagram
-          centerLabel={c.hubCenterLabel}
-          nodes={[
-            { icon: c.agents[0].icon, label: c.agents[0].name, tone: 'accent' },
-            { icon: c.agents[1].icon, label: c.agents[1].name, tone: 'gold' },
-            { icon: c.agents[2].icon, label: c.agents[2].name, tone: 'mist' },
-          ]}
-        />
-      </div>
-      <div class="order-1 md:order-2">
-        <p class="text-base leading-relaxed text-mist-white/80">{c.body}</p>
-      </div>
-    </div>
-  </Panel>
-
-  <BeforeAfter withoutHeading={c.withoutHeading} withoutList={c.withoutList} withHeading={c.withHeading} withList={c.withList} />
-
   <Panel>
-    <Eyebrow text={c.agentsEyebrow} />
-    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.agentsHeading}</h2>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.agentsSubhead}</p>
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {c.agents.map((agent) => <AgentCard agent={agent} />)}
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        c.categories.map((category) => (
+          <Card>
+            <IconBadge icon={category.icon} tone="accent" />
+            <h3 class="mt-4 text-lg font-semibold text-mist-white">{category.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mist-white/75">{category.body}</p>
+          </Card>
+        ))
+      }
     </div>
   </Panel>
 
-  <Panel tone="gold" class="text-center">
+  <Panel tone="accent" class="text-center">
     <h2 class="text-2xl font-bold sm:text-3xl">{c.ctaBody}</h2>
     <div class="mt-8 flex justify-center">
-      <ButtonPrimary href={`${localizedPath('/company', lang)}#demo`}>{c.cta}</ButtonPrimary>
+      <ButtonPrimary href="https://mielikkix.ai">{c.cta}</ButtonPrimary>
     </div>
   </Panel>
 </div>

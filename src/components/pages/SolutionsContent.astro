@@ -73,7 +73,7 @@ const cardStyles = [
           <div class="grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center">
             <div class={imageFirst ? 'md:order-2' : ''}>
               <div class="flex items-start gap-6">
-                <IconBadge icon={activity.icon} tone={style.iconTone} class="h-16 w-16 shrink-0" />
+                <IconBadge icon={activity.icon} tone={style.iconTone} class="h-16 w-16 shrink-0" iconClass="h-8 w-8" />
                 <h2 class={`text-3xl font-bold sm:text-4xl ${style.text}`}>{activity.title}</h2>
               </div>
               <p class={`mt-5 max-w-3xl text-lg leading-relaxed ${style.body}`}>{activity.description}</p>

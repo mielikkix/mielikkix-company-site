@@ -16,6 +16,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const c = t(lang).company;
+const security = t(lang).security;
 
 const cardStyles = [
   {
@@ -99,7 +100,7 @@ const cardStyles = [
         <p class="mt-4 max-w-3xl text-base leading-relaxed text-mist-white/80">{c.agentsBody3}</p>
       </div>
       <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-aurora-neon/40 bg-aurora-neon/10 shadow-[0_0_30px_rgba(0,229,160,0.3)] md:flex">
-        <Icon name="route" class="h-14 w-14 text-aurora-neon" />
+        <Icon name="bot" class="h-14 w-14 text-aurora-neon" />
       </div>
     </div>
   </Panel>
@@ -406,24 +407,21 @@ const cardStyles = [
   </script>
 
   <Panel id="security" class="scroll-mt-24">
-    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
-      <div>
-        <div class="flex items-center gap-4">
-          <IconBadge icon="shield" tone="gold" />
-          <h2 class="text-2xl font-bold sm:text-3xl">{c.securityHeading}</h2>
-        </div>
-        <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.securityBody}</p>
-        <a
-          href={localizedPath('/security', lang)}
-          class="mt-4 inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
-        >
-          {c.securityLink}
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-      <div class="hidden h-32 w-32 shrink-0 items-center justify-center rounded-full border border-antler-gold/40 bg-antler-gold/10 shadow-[0_0_30px_rgba(212,175,55,0.25)] md:flex">
-        <Icon name="shield" class="h-14 w-14 text-antler-gold" />
-      </div>
+    <div class="flex items-center gap-4">
+      <IconBadge icon="shield" tone="gold" />
+      <h2 class="text-2xl font-bold sm:text-3xl">{c.securityHeading}</h2>
+    </div>
+    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.securityBody}</p>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        security.pillars.map((pillar) => (
+          <Card>
+            <IconBadge icon={pillar.icon} tone="gold" />
+            <h3 class="mt-4 text-lg font-semibold text-mist-white">{pillar.title}</h3>
+            <p class="mt-2 text-base leading-relaxed text-mist-white/75">{pillar.body}</p>
+          </Card>
+        ))
+      }
     </div>
   </Panel>
 

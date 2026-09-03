@@ -1,0 +1,70 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from '../i18n/ui';
+
+interface Branch {
+  icon: IconName;
+  label: string;
+}
+
+interface Props {
+  businessLabel: string;
+  aiLabel: string;
+  workforceLabel: string;
+  branches: Branch[];
+  convergeLabel: string;
+  class?: string;
+}
+
+const { businessLabel, aiLabel, workforceLabel, branches, convergeLabel, class: className = '' } = Astro.props;
+---
+
+<div class={`mx-auto flex max-w-2xl flex-col items-center ${className}`}>
+  <div class="rounded-full border border-mist-white/20 bg-deep-forest px-6 py-2.5 text-sm font-semibold text-mist-white/90">
+    {businessLabel}
+  </div>
+  <svg viewBox="0 0 24 24" fill="none" class="my-1 h-4 w-4 text-mist-white/40" aria-hidden="true">
+    <path d="M12 4v16m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <div class="rounded-full border border-aurora-neon/50 bg-aurora-neon/10 px-6 py-2.5 text-sm font-semibold text-aurora-neon">
+    {aiLabel}
+  </div>
+  <svg viewBox="0 0 24 24" fill="none" class="my-1 h-4 w-4 text-mist-white/40" aria-hidden="true">
+    <path d="M12 4v16m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <div class="rounded-full border border-antler-gold/50 bg-antler-gold/10 px-6 py-2.5 text-sm font-semibold text-antler-gold">
+    {workforceLabel}
+  </div>
+  <svg viewBox="0 0 24 24" fill="none" class="my-1 h-4 w-4 text-mist-white/40" aria-hidden="true">
+    <path d="M12 4v16m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <div class="flex flex-wrap items-start justify-center gap-x-8 gap-y-4">
+    {
+      branches.map((branch) => (
+        <div class="flex w-20 flex-col items-center gap-1.5 text-center">
+          <span class="flex h-11 w-11 items-center justify-center rounded-full border border-aurora-neon/40 bg-deep-forest text-aurora-neon">
+            <Icon name={branch.icon} class="h-5 w-5" />
+          </span>
+          <span class="text-[11px] font-medium leading-tight text-mist-white/75">{branch.label}</span>
+        </div>
+      ))
+    }
+  </div>
+  <svg viewBox="0 0 24 24" fill="none" class="my-1 h-4 w-4 text-mist-white/40" aria-hidden="true">
+    <path d="M12 4v16m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <div class="rounded-full border border-aurora-neon/40 bg-deep-forest px-6 py-2.5 text-sm font-semibold text-mist-white/85">
+    {convergeLabel}
+  </div>
+  <svg viewBox="0 0 24 24" fill="none" class="my-1 h-4 w-4 text-mist-white/40" aria-hidden="true">
+    <path d="M12 4v16m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <div class="rounded-full border border-mist-white/20 bg-deep-forest px-6 py-2.5 text-sm font-semibold text-mist-white/90">
+    {businessLabel}
+  </div>
+</div>

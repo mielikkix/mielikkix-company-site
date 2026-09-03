@@ -47,25 +47,6 @@ interface ValueCopy {
   body: string;
 }
 
-export type AgentStatus = 'available' | 'demo' | 'comingSoon';
-
-interface AgentCopy {
-  icon: IconName;
-  name: string;
-  description: string;
-  capability: string;
-  status: AgentStatus;
-  statusLabel: string;
-  cta: string;
-}
-
-interface DemoCopy {
-  icon: IconName;
-  name: string;
-  description: string;
-  cta: string;
-}
-
 interface IndustryCopy {
   icon: IconName;
   title: string;
@@ -80,6 +61,7 @@ interface StepCopy {
 interface IntegrationCopy {
   icon: IconName;
   name: string;
+  status: 'available' | 'comingSoon';
 }
 
 interface Dictionary {
@@ -122,6 +104,8 @@ interface Dictionary {
     stackHeading: string;
     stackSubhead: string;
     stackLink: string;
+    solutionsEyebrow: string;
+    solutionCategories: { icon: IconName; title: string; body: string }[];
     valueStrip: { icon: IconName; title: string; body: string }[];
     problemEyebrow: string;
     problemHeading: string;
@@ -131,15 +115,9 @@ interface Dictionary {
     problemAfterHeading: string;
     problemAfterList: string[];
     problemClosing: string;
-    workforceEyebrow: string;
-    workforceHeading: string;
-    workforceSubhead: string;
-    agents: AgentCopy[];
-    workforceExploreLink: string;
-    demosEyebrow: string;
-    demosHeading: string;
-    demosSubhead: string;
-    demos: DemoCopy[];
+    aiCtaEyebrow: string;
+    aiCtaHeading: string;
+    aiCtaBody: string;
     industriesEyebrow: string;
     industriesHeading: string;
     industriesSubhead: string;
@@ -153,6 +131,8 @@ interface Dictionary {
     integrationsHeading: string;
     integrationsSubhead: string;
     integrations: IntegrationCopy[];
+    integrationsAvailableLabel: string;
+    integrationsComingSoonLabel: string;
     integrationsNote: string;
     valueEyebrow: string;
     valueHeading: string;
@@ -164,8 +144,10 @@ interface Dictionary {
     startEyebrow: string;
     startHeading: string;
     startSubhead: string;
-    startStepPrefix: string;
     startSteps: StepCopy[];
+    meetAiEyebrow: string;
+    meetAiHeading: string;
+    meetAiBody: string;
     closingHeading: string;
     closingBody: string;
     closingCta: string;
@@ -193,16 +175,7 @@ interface Dictionary {
     eyebrow: string;
     heading: string;
     subhead: string;
-    body: string;
-    hubCenterLabel: string;
-    withoutHeading: string;
-    withoutList: string[];
-    withHeading: string;
-    withList: string[];
-    agentsEyebrow: string;
-    agentsHeading: string;
-    agentsSubhead: string;
-    agents: AgentCopy[];
+    categories: { icon: IconName; title: string; body: string }[];
     cta: string;
     ctaBody: string;
   };
@@ -322,7 +295,7 @@ export const ui: Record<Lang, Dictionary> = {
     nav: {
       home: 'Home',
       solutions: 'Solutions',
-      products: 'AI Agents',
+      products: 'AI',
       industries: 'Industries',
       security: 'Security',
       company: 'About',
@@ -342,21 +315,44 @@ export const ui: Record<Lang, Dictionary> = {
       languageLabel: 'Language',
     },
     home: {
-      seoTitle: 'AI Agents for Your Business',
+      seoTitle: 'AI Solutions for Growing Businesses',
       seoDescription:
-        'Mielikkix builds AI agents for businesses — AI chatbots, voice receptionists, booking assistants, and business automation that work around the clock.',
-      heroEyebrow: 'AI Workforce for Growing Businesses',
+        'Mielikkix AS helps businesses adopt AI — business automation, customer communication, and custom AI solutions built around how your company works.',
+      heroEyebrow: 'AI Automation for Growing Businesses',
       heroTitleLead: 'AI Agents That ',
       heroTitleAccent: 'Work for Your Business.',
       heroSubhead:
         'Automate customer conversations, calls, bookings, support and repetitive workflows with AI agents built around the way your business operates.',
       heroTagline: 'Chat • Voice • Booking • Support • Reviews • Automation',
       ctaPrimary: 'Book a Free AI Demo',
-      ctaSecondary: 'Explore AI Agents',
-      stackHeading: 'AI Solutions for Every Part of Your Business',
+      ctaSecondary: 'Explore Mielikkix AI',
+      stackHeading: 'AI Solutions for Your Business',
       stackSubhead:
-        'From customer-facing chatbots to backend automation, Mielikkix builds the AI layer that connects your tools, your team, and your customers.',
+        'From customer communication to business automation, Mielikkix helps businesses identify and implement AI solutions that reduce repetitive work and improve customer experiences.',
       stackLink: 'See all solutions',
+      solutionsEyebrow: 'AI Solutions',
+      solutionCategories: [
+        {
+          icon: 'chat',
+          title: 'Customer Experience',
+          body: 'AI-powered customer communication, support and engagement.',
+        },
+        {
+          icon: 'trendingUp',
+          title: 'Sales & Lead Automation',
+          body: 'Capture, qualify and follow up with leads.',
+        },
+        {
+          icon: 'route',
+          title: 'Business Automation',
+          body: 'Automate repetitive workflows and connect your existing systems.',
+        },
+        {
+          icon: 'code',
+          title: 'Custom AI Solutions',
+          body: 'Build AI solutions around your unique business processes.',
+        },
+      ],
       valueStrip: [
         { icon: 'clock', title: '24/7 Availability', body: 'AI agents that answer, respond, and follow up around the clock.' },
         { icon: 'route', title: 'Automated Workflows', body: 'Repetitive business processes handled automatically, end to end.' },
@@ -385,133 +381,31 @@ export const ui: Record<Lang, Dictionary> = {
         'Reviews monitored automatically',
       ],
       problemClosing: 'Let AI handle the repetitive work.',
-      workforceEyebrow: 'AI Workforce',
-      workforceHeading: 'Meet Your AI Workforce',
-      workforceSubhead: 'Start with one AI agent. Add more as your business grows.',
-      agents: [
-        {
-          icon: 'chat',
-          name: 'AI Chatbot',
-          description: '24/7 AI-powered customer conversations that answer questions, capture leads, and help customers instantly.',
-          capability: 'Answers FAQs and captures leads on your website, day or night.',
-          status: 'available',
-          statusLabel: 'Available',
-          cta: 'Try Demo',
-        },
-        {
-          icon: 'mic',
-          name: 'Voice Receptionist',
-          description: 'An AI receptionist that answers calls, handles customer questions, and can assist with appointments.',
-          capability: "Picks up calls and handles common questions when your team can't.",
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
-        },
-        {
-          icon: 'calendar',
-          name: 'Booking Assistant',
-          description: 'An AI booking assistant that helps customers schedule appointments and manage booking-related conversations.',
-          capability: 'Handles scheduling conversations end-to-end.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
-        },
-        {
-          icon: 'headset',
-          name: 'Support Triage',
-          description: 'Sorts and responds to incoming support requests, escalating to a human teammate when needed.',
-          capability: 'Classifies and routes support requests automatically.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
-        },
-        {
-          icon: 'star',
-          name: 'Review & Reputation',
-          description: 'Monitors customer reviews and helps draft responses across the places your business gets reviewed.',
-          capability: 'Flags new reviews and drafts responses for your approval.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
-        },
-        {
-          icon: 'share',
-          name: 'Social Media',
-          description: 'Drafts and schedules social posts based on your business updates and promotions.',
-          capability: 'Turns business updates into ready-to-post social content.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'mail',
-          name: 'Email Marketing',
-          description: 'Plans and drafts email campaigns and follow-ups for customers and leads.',
-          capability: 'Drafts campaigns and follow-up sequences for your review.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'search',
-          name: 'SEO Copywriter',
-          description: 'Writes and optimizes website and blog content to help your business get found online.',
-          capability: 'Produces SEO-focused copy for your website and blog.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'clipboard',
-          name: 'Feedback & Survey',
-          description: 'Sends and collects customer feedback and survey responses automatically.',
-          capability: 'Automates feedback requests and collects responses in one place.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'heart',
-          name: 'Loyalty / Retention',
-          description: 'Identifies repeat customers and helps design outreach that keeps them coming back.',
-          capability: 'Surfaces retention opportunities from your customer activity.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-      ],
-      workforceExploreLink: 'Explore All AI Agents',
-      demosEyebrow: 'Live Demos',
-      demosHeading: 'See Your AI Workforce in Action',
-      demosSubhead: "Don't just read about AI. Experience what your AI agents can actually do.",
-      demos: [
-        { icon: 'chat', name: 'AI Chatbot', description: 'Try a live conversation with the AI chatbot.', cta: 'Try the conversation' },
-        { icon: 'mic', name: 'Voice Receptionist', description: 'Hear how the AI receptionist handles a call.', cta: 'Try the voice experience' },
-        { icon: 'calendar', name: 'Booking Assistant', description: 'Walk through booking an appointment with AI.', cta: 'Try booking' },
-        { icon: 'headset', name: 'Support Triage', description: 'Send a sample support request and see it triaged.', cta: 'Send a support request' },
-        { icon: 'star', name: 'Review & Reputation', description: 'See how the agent analyzes a customer review.', cta: 'Analyze a review' },
-      ],
+      aiCtaEyebrow: 'AI In Action',
+      aiCtaHeading: 'See What AI Could Do for Your Business',
+      aiCtaBody:
+        "Tell us about your business and we'll identify opportunities where AI can automate repetitive work, improve customer service or support growth.",
       industriesEyebrow: 'Industries',
       industriesHeading: 'AI for Your Industry',
-      industriesSubhead: 'AI agents adapted to the way different industries actually work.',
+      industriesSubhead: 'AI solutions designed around the way your business works.',
       industriesTeaser: [
         {
+          icon: 'briefcase',
+          title: 'Solo & Small-Team Service Providers',
+          useCases: ['Automate bookings, customer questions and follow-ups for salons, clinics, repair shops and consultants.'],
+        },
+        {
           icon: 'building',
-          title: 'Hotels & Hospitality',
-          useCases: ['AI receptionist', 'Guest support', 'Booking assistance', 'Review management'],
+          title: 'Multi-Location Franchise & Chain Operators',
+          useCases: ['Deliver consistent AI-powered customer communication and support across every location.'],
         },
         {
-          icon: 'star',
-          title: 'Beauty & Wellness',
-          useCases: ['Appointment booking', 'Voice receptionist', 'Customer questions', 'Reviews'],
-        },
-        {
-          icon: 'utensils',
-          title: 'Restaurants',
-          useCases: ['Reservations', 'Customer questions', 'Feedback', 'Review management'],
+          icon: 'trendingUp',
+          title: 'Growing SaaS & E-commerce Support Teams',
+          useCases: ['Scale customer support and lead follow-up without growing headcount at the same pace.'],
         },
       ],
-      industriesLink: "Don't see your industry? Build a custom AI workflow",
+      industriesLink: 'Find an AI Solution for Your Business',
       howEyebrow: 'How It Works',
       howHeading: 'From Business Problem to AI Workforce',
       howSubhead: "You don't need to replace your existing business systems. Mielikkix connects AI to the tools you already use.",
@@ -519,22 +413,24 @@ export const ui: Record<Lang, Dictionary> = {
         { title: 'Tell us your workflow', body: 'We start with the business problem, not the technology.' },
         { title: 'We design your AI solution', body: 'The right agent for the job — not a one-size-fits-all bot.' },
         { title: 'Connect your existing systems', body: 'AI connects to your website, calendar, and tools.' },
-        { title: 'Launch your AI agent', body: 'Your agent goes live and starts handling real conversations.' },
+        { title: 'Launch the solution', body: 'Your solution goes live and starts handling real work.' },
         { title: 'Monitor and improve', body: 'We stay involved after launch to refine and expand.' },
       ],
       integrationsEyebrow: 'Integrations',
       integrationsHeading: 'Works With Your Existing Tools',
-      integrationsSubhead: 'No need to replace your existing systems.',
+      integrationsSubhead: 'No need to replace your existing systems. Connect AI to the tools your business already uses.',
       integrations: [
-        { icon: 'calendar', name: 'Google Calendar' },
-        { icon: 'mic', name: 'Phone / Voice' },
-        { icon: 'chat', name: 'WhatsApp' },
-        { icon: 'trendingUp', name: 'CRM' },
-        { icon: 'mail', name: 'Email' },
-        { icon: 'target', name: 'Website' },
-        { icon: 'code', name: 'APIs' },
+        { icon: 'target', name: 'Website', status: 'available' },
+        { icon: 'calendar', name: 'Google Calendar', status: 'comingSoon' },
+        { icon: 'mic', name: 'Phone / Voice', status: 'comingSoon' },
+        { icon: 'chat', name: 'WhatsApp', status: 'comingSoon' },
+        { icon: 'trendingUp', name: 'CRM', status: 'comingSoon' },
+        { icon: 'mail', name: 'Email', status: 'comingSoon' },
+        { icon: 'code', name: 'APIs', status: 'comingSoon' },
       ],
-      integrationsNote: 'Availability depends on your setup — talk to us about connecting a specific tool.',
+      integrationsAvailableLabel: 'Available',
+      integrationsComingSoonLabel: 'Coming Soon',
+      integrationsNote: 'Talk to us about connecting a specific tool for your business.',
       valueEyebrow: 'Why Businesses Choose Mielikkix',
       valueHeading: 'Why Businesses Choose Mielikkix',
       valueGrid: [
@@ -549,19 +445,22 @@ export const ui: Record<Lang, Dictionary> = {
       securityTeaserHeading: 'Built With Trust in Mind',
       securityTeaserBody: 'A GDPR-conscious approach to data handling, data ownership, and access control — with a human always reachable.',
       securityTeaserLink: 'Learn About Security',
-      startEyebrow: 'Start Small',
-      startHeading: 'Start With One AI Agent. Build Your AI Workforce.',
-      startSubhead: 'Start with the problem that matters most. Expand your AI workforce as your business grows.',
-      startStepPrefix: 'Step',
+      startEyebrow: 'Our Approach',
+      startHeading: 'Start With the Business Problem. Scale From There.',
+      startSubhead:
+        'Every business has different priorities. We start by understanding your workflow, identify where AI can create the most value, and build a solution that can grow with your business.',
       startSteps: [
-        { title: 'AI Chatbot', body: '' },
-        { title: 'Add Voice Receptionist', body: '' },
-        { title: 'Add Booking Assistant', body: '' },
-        { title: 'Add Support + Reviews', body: '' },
-        { title: 'Connect Your AI Workforce', body: '' },
+        { title: 'Understand your business', body: '' },
+        { title: 'Identify opportunities', body: '' },
+        { title: 'Design the right solution', body: '' },
+        { title: 'Integrate with your systems', body: '' },
+        { title: 'Scale as your needs grow', body: '' },
       ],
-      closingHeading: "Let's build your AI workforce.",
-      closingBody: "Tell us about your business and we'll show you where AI agents can save the most time.",
+      meetAiEyebrow: 'The Mielikkix AI Platform',
+      meetAiHeading: 'Meet Mielikkix AI',
+      meetAiBody: 'Explore the Mielikkix AI platform and discover the tools, AI agents and automation capabilities available for your business.',
+      closingHeading: 'Find the Right AI Solution',
+      closingBody: "Tell us what takes your team the most time. We'll show you which AI solution can handle it.",
       closingCta: 'Book a Free AI Demo',
     },
     solutions: {
@@ -651,129 +550,37 @@ export const ui: Record<Lang, Dictionary> = {
       closingCta: 'Contact Us',
     },
     products: {
-      seoTitle: 'Products',
+      seoTitle: 'Mielikkix AI — AI Solutions Overview',
       seoDescription:
-        'Ready-to-use AI agents — AI Chatbot, Voice Receptionist, and Booking Assistant — plus custom AI agents built around your business, from Mielikkix.',
-      eyebrow: 'Products',
-      heading: 'AI Agents Built Around Your Business',
+        'An overview of the Mielikkix AI platform — AI agents, automation and integrations for your business. Explore the full product at mielikkix.ai.',
+      eyebrow: 'Mielikkix AI',
+      heading: 'AI Solutions for Your Business',
       subhead:
-        'Automate customer conversations, phone calls, bookings, support, and business workflows with AI agents designed for your business.',
-      body:
-        'Alongside custom AI development and integrations, Mielikkix builds ready-to-use AI agents — an AI Chatbot, Voice Receptionist, and Booking Assistant — plus additional agents like Support Triage and Review & Reputation, and fully custom agents designed around your workflow.',
-      hubCenterLabel: 'AI Agents',
-      withoutHeading: 'Without Mielikkix AI Agents',
-      withoutList: [
-        'Miss calls and messages outside business hours.',
-        'Handle bookings, FAQs, and follow-ups manually, one at a time.',
-        'Chase reviews and support tickets separately, by hand.',
-        'Let leads go quiet after the first conversation.',
-        'Build every new workflow automation from scratch.',
-      ],
-      withHeading: 'With Mielikkix AI Agents',
-      withList: [
-        'A Voice Receptionist and Booking Assistant pick up every call and booking, day or night.',
-        'An AI Chatbot answers customer questions and captures leads instantly.',
-        'Support Triage and Review & Reputation agents keep tickets and reviews handled automatically.',
-        'Custom agents follow up automatically so no lead goes cold.',
-        'New agents can be designed around any workflow specific to your business.',
-      ],
-      agentsEyebrow: 'AI Workforce',
-      agentsHeading: 'Meet Your AI Workforce',
-      agentsSubhead: 'Start with one AI agent. Add more as your business grows.',
-      agents: [
+        'From customer communication to business automation, Mielikkix helps businesses identify and implement AI solutions that reduce repetitive work and improve customer experiences.',
+      categories: [
         {
           icon: 'chat',
-          name: 'AI Chatbot',
-          description: '24/7 AI-powered customer conversations that answer questions, capture leads, and help customers instantly.',
-          capability: 'Answers FAQs and captures leads on your website, day or night.',
-          status: 'available',
-          statusLabel: 'Available',
-          cta: 'Try Demo',
+          title: 'Customer Experience',
+          body: 'AI-powered customer communication, support and engagement.',
         },
         {
-          icon: 'mic',
-          name: 'Voice Receptionist',
-          description: 'An AI receptionist that answers calls, handles customer questions, and can assist with appointments.',
-          capability: "Picks up calls and handles common questions when your team can't.",
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
+          icon: 'trendingUp',
+          title: 'Sales & Lead Automation',
+          body: 'Capture, qualify and follow up with leads.',
         },
         {
-          icon: 'calendar',
-          name: 'Booking Assistant',
-          description: 'An AI booking assistant that helps customers schedule appointments and manage booking-related conversations.',
-          capability: 'Handles scheduling conversations end-to-end.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
+          icon: 'route',
+          title: 'Business Automation',
+          body: 'Automate repetitive workflows and connect your existing systems.',
         },
         {
-          icon: 'headset',
-          name: 'Support Triage',
-          description: 'Sorts and responds to incoming support requests, escalating to a human teammate when needed.',
-          capability: 'Classifies and routes support requests automatically.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
-        },
-        {
-          icon: 'star',
-          name: 'Review & Reputation',
-          description: 'Monitors customer reviews and helps draft responses across the places your business gets reviewed.',
-          capability: 'Flags new reviews and drafts responses for your approval.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Try Demo',
-        },
-        {
-          icon: 'share',
-          name: 'Social Media',
-          description: 'Drafts and schedules social posts based on your business updates and promotions.',
-          capability: 'Turns business updates into ready-to-post social content.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'mail',
-          name: 'Email Marketing',
-          description: 'Plans and drafts email campaigns and follow-ups for customers and leads.',
-          capability: 'Drafts campaigns and follow-up sequences for your review.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'search',
-          name: 'SEO Copywriter',
-          description: 'Writes and optimizes website and blog content to help your business get found online.',
-          capability: 'Produces SEO-focused copy for your website and blog.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'clipboard',
-          name: 'Feedback & Survey',
-          description: 'Sends and collects customer feedback and survey responses automatically.',
-          capability: 'Automates feedback requests and collects responses in one place.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
-        },
-        {
-          icon: 'heart',
-          name: 'Loyalty / Retention',
-          description: 'Identifies repeat customers and helps design outreach that keeps them coming back.',
-          capability: 'Surfaces retention opportunities from your customer activity.',
-          status: 'comingSoon',
-          statusLabel: 'Coming Soon',
-          cta: 'Coming Soon',
+          icon: 'code',
+          title: 'Custom AI Solutions',
+          body: 'Build AI solutions around your unique business processes.',
         },
       ],
-      cta: 'Book a Free AI Demo',
-      ctaBody: 'Ready to add AI agents to your business?',
+      cta: 'Explore Mielikkix AI',
+      ctaBody: 'Ready to see the Mielikkix AI platform in action?',
     },
     company: {
       seoTitle: 'Company',
@@ -953,51 +760,31 @@ export const ui: Record<Lang, Dictionary> = {
     industries: {
       seoTitle: 'AI for Your Industry',
       seoDescription:
-        'AI agents adapted for hospitality, healthcare, beauty and wellness, restaurants, real estate, professional services, and retail businesses.',
+        'AI business solutions for solo and small-team service providers, multi-location franchise and chain operators, and growing SaaS and e-commerce support teams.',
       eyebrow: 'Industries',
       heading: 'AI for Your Industry',
-      subhead: 'AI agents adapted to the way different industries actually work.',
+      subhead: 'AI solutions designed around the way your business works.',
       industries: [
         {
-          icon: 'building',
-          title: 'Hotels & Hospitality',
-          useCases: ['AI receptionist', 'Guest support', 'Booking assistance', 'Review management'],
-        },
-        {
-          icon: 'pulse',
-          title: 'Healthcare',
-          useCases: ['Appointment booking', 'AI receptionist', 'General inquiries', 'Appointment reminders'],
-        },
-        {
-          icon: 'star',
-          title: 'Beauty & Wellness',
-          useCases: ['Appointment booking', 'Voice receptionist', 'Customer questions', 'Reviews'],
-        },
-        {
-          icon: 'utensils',
-          title: 'Restaurants',
-          useCases: ['Reservations', 'Customer questions', 'Feedback', 'Review management'],
-        },
-        {
-          icon: 'building',
-          title: 'Real Estate',
-          useCases: ['AI chatbot for listings', 'Booking viewings', 'Lead capture', 'Follow-up automation'],
-        },
-        {
           icon: 'briefcase',
-          title: 'Professional Services',
-          useCases: ['AI receptionist', 'Appointment booking', 'Lead qualification', 'Client FAQs'],
+          title: 'Solo & Small-Team Service Providers',
+          useCases: ['Automate bookings, customer questions and follow-ups for salons, clinics, repair shops and consultants.'],
         },
         {
-          icon: 'cart',
-          title: 'Retail / E-commerce',
-          useCases: ['AI chatbot for product questions', 'Order status inquiries', 'Review management', 'Customer support'],
+          icon: 'building',
+          title: 'Multi-Location Franchise & Chain Operators',
+          useCases: ['Deliver consistent AI-powered customer communication and support across every location.'],
+        },
+        {
+          icon: 'trendingUp',
+          title: 'Growing SaaS & E-commerce Support Teams',
+          useCases: ['Scale customer support and lead follow-up without growing headcount at the same pace.'],
         },
       ],
-      notListedHeading: "Don't see your industry?",
-      notListedLink: 'Build a custom AI workflow',
-      closingHeading: 'Not sure where your industry fits?',
-      closingBody: "Tell us about your business and we'll show you where AI agents can help.",
+      notListedHeading: "Don't see your business type?",
+      notListedLink: 'Find an AI Solution for Your Business',
+      closingHeading: 'Not sure where your business fits?',
+      closingBody: "Tell us about your business and we'll show you where AI can help.",
       closingCta: 'Book a Free AI Demo',
     },
     security: {
@@ -1056,7 +843,7 @@ export const ui: Record<Lang, Dictionary> = {
     nav: {
       home: 'Hjem',
       solutions: 'Løsninger',
-      products: 'AI-agenter',
+      products: 'AI',
       industries: 'Bransjer',
       security: 'Sikkerhet',
       company: 'Om oss',
@@ -1076,21 +863,44 @@ export const ui: Record<Lang, Dictionary> = {
       languageLabel: 'Språk',
     },
     home: {
-      seoTitle: 'AI-agenter for din virksomhet',
+      seoTitle: 'AI-løsninger for bedrifter i vekst',
       seoDescription:
-        'Mielikkix bygger AI-agenter for bedrifter — AI-chatboter, voice-resepsjonister, bookingassistenter og forretningsautomatisering som jobber døgnet rundt.',
-      heroEyebrow: 'AI-arbeidsstyrke for bedrifter i vekst',
+        'Mielikkix AS hjelper bedrifter med å ta i bruk AI — forretningsautomatisering, kundekommunikasjon og skreddersydde AI-løsninger bygget rundt hvordan virksomheten din jobber.',
+      heroEyebrow: 'AI-automatisering for bedrifter i vekst',
       heroTitleLead: 'AI-agenter som ',
       heroTitleAccent: 'jobber for virksomheten din.',
       heroSubhead:
         'Automatiser kundesamtaler, telefonsamtaler, bookinger, support og repeterende arbeidsflyter med AI-agenter bygget rundt måten virksomheten din faktisk drives på.',
       heroTagline: 'Chat • Tale • Booking • Support • Anmeldelser • Automatisering',
       ctaPrimary: 'Book gratis AI-demo',
-      ctaSecondary: 'Utforsk AI-agenter',
-      stackHeading: 'AI-løsninger for enhver del av virksomheten din',
+      ctaSecondary: 'Utforsk Mielikkix AI',
+      stackHeading: 'AI-løsninger for din virksomhet',
       stackSubhead:
-        'Fra kundevendte chatboter til automatisering i bakgrunnen — Mielikkix bygger AI-laget som knytter sammen verktøyene, teamet og kundene dine.',
+        'Fra kundekommunikasjon til forretningsautomatisering — Mielikkix hjelper bedrifter med å identifisere og implementere AI-løsninger som reduserer rutinearbeid og forbedrer kundeopplevelsen.',
       stackLink: 'Se alle løsninger',
+      solutionsEyebrow: 'AI-løsninger',
+      solutionCategories: [
+        {
+          icon: 'chat',
+          title: 'Kundeopplevelse',
+          body: 'AI-drevet kundekommunikasjon, support og engasjement.',
+        },
+        {
+          icon: 'trendingUp',
+          title: 'Salg og leadautomatisering',
+          body: 'Fang opp, kvalifiser og følg opp leads.',
+        },
+        {
+          icon: 'route',
+          title: 'Forretningsautomatisering',
+          body: 'Automatiser repeterende arbeidsflyter og koble sammen eksisterende systemer.',
+        },
+        {
+          icon: 'code',
+          title: 'Skreddersydde AI-løsninger',
+          body: 'Bygg AI-løsninger rundt dine unike forretningsprosesser.',
+        },
+      ],
       valueStrip: [
         { icon: 'clock', title: 'Tilgjengelig døgnet rundt', body: 'AI-agenter som svarer, responderer og følger opp hele døgnet.' },
         { icon: 'route', title: 'Automatiserte arbeidsflyter', body: 'Repeterende forretningsprosesser håndtert automatisk, fra start til slutt.' },
@@ -1119,133 +929,31 @@ export const ui: Record<Lang, Dictionary> = {
         'Anmeldelser overvåkes automatisk',
       ],
       problemClosing: 'La AI ta seg av rutinearbeidet.',
-      workforceEyebrow: 'AI-arbeidsstyrke',
-      workforceHeading: 'Møt AI-arbeidsstyrken din',
-      workforceSubhead: 'Start med én AI-agent. Legg til flere etter hvert som virksomheten vokser.',
-      agents: [
-        {
-          icon: 'chat',
-          name: 'AI-chatbot',
-          description: 'AI-drevne kundesamtaler døgnet rundt som svarer på spørsmål, fanger opp leads og hjelper kunder umiddelbart.',
-          capability: 'Svarer på ofte stilte spørsmål og fanger opp leads på nettsiden din, døgnet rundt.',
-          status: 'available',
-          statusLabel: 'Tilgjengelig',
-          cta: 'Prøv demo',
-        },
-        {
-          icon: 'mic',
-          name: 'Voice Receptionist',
-          description: 'En AI-resepsjonist som svarer på anrop, håndterer kundespørsmål og kan bistå med avtaler.',
-          capability: 'Tar imot anrop og svarer på vanlige spørsmål når teamet ditt ikke kan.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
-        },
-        {
-          icon: 'calendar',
-          name: 'Booking Assistant',
-          description: 'En AI-bookingassistent som hjelper kunder med å bestille time og håndtere bookingrelaterte samtaler.',
-          capability: 'Håndterer hele bookingsamtalen, fra start til slutt.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
-        },
-        {
-          icon: 'headset',
-          name: 'Support Triage',
-          description: 'Sorterer og besvarer innkommende supporthenvendelser, og eskalerer til en kollega ved behov.',
-          capability: 'Klassifiserer og videresender supporthenvendelser automatisk.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
-        },
-        {
-          icon: 'star',
-          name: 'Review & Reputation',
-          description: 'Overvåker kundeanmeldelser og hjelper med å utarbeide svar på tvers av stedene virksomheten din blir anmeldt.',
-          capability: 'Varsler om nye anmeldelser og utarbeider svarutkast til din godkjenning.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
-        },
-        {
-          icon: 'share',
-          name: 'Social Media',
-          description: 'Utarbeider og planlegger innlegg i sosiale medier basert på virksomhetens oppdateringer og tilbud.',
-          capability: 'Gjør forretningsoppdateringer om til ferdig innhold for sosiale medier.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'mail',
-          name: 'Email Marketing',
-          description: 'Planlegger og utarbeider e-postkampanjer og oppfølginger for kunder og leads.',
-          capability: 'Utarbeider kampanjer og oppfølgingssekvenser til din gjennomgang.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'search',
-          name: 'SEO Copywriter',
-          description: 'Skriver og optimaliserer innhold for nettside og blogg, slik at virksomheten din blir lettere å finne.',
-          capability: 'Produserer SEO-tilpasset tekst for nettsiden og bloggen din.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'clipboard',
-          name: 'Feedback & Survey',
-          description: 'Sender ut og samler inn kundetilbakemeldinger og undersøkelsessvar automatisk.',
-          capability: 'Automatiserer tilbakemeldingsforespørsler og samler svarene på ett sted.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'heart',
-          name: 'Loyalty / Retention',
-          description: 'Identifiserer faste kunder og bidrar til å utforme oppfølging som får dem til å komme tilbake.',
-          capability: 'Synliggjør muligheter for kundelojalitet basert på kundeaktivitet.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-      ],
-      workforceExploreLink: 'Utforsk alle AI-agenter',
-      demosEyebrow: 'Live demoer',
-      demosHeading: 'Se AI-arbeidsstyrken din i aksjon',
-      demosSubhead: 'Ikke bare les om AI. Opplev hva AI-agentene faktisk kan gjøre.',
-      demos: [
-        { icon: 'chat', name: 'AI-chatbot', description: 'Prøv en live samtale med AI-chatboten.', cta: 'Prøv samtalen' },
-        { icon: 'mic', name: 'Voice Receptionist', description: 'Hør hvordan AI-resepsjonisten håndterer et anrop.', cta: 'Prøv taleopplevelsen' },
-        { icon: 'calendar', name: 'Booking Assistant', description: 'Gå gjennom en timebestilling med AI.', cta: 'Prøv booking' },
-        { icon: 'headset', name: 'Support Triage', description: 'Send en eksempelhenvendelse og se den sortert.', cta: 'Send en supporthenvendelse' },
-        { icon: 'star', name: 'Review & Reputation', description: 'Se hvordan agenten analyserer en kundeanmeldelse.', cta: 'Analyser en anmeldelse' },
-      ],
+      aiCtaEyebrow: 'AI i praksis',
+      aiCtaHeading: 'Se hva AI kan gjøre for virksomheten din',
+      aiCtaBody:
+        'Fortell oss om virksomheten din, så identifiserer vi muligheter der AI kan automatisere rutinearbeid, forbedre kundeservice eller støtte vekst.',
       industriesEyebrow: 'Bransjer',
       industriesHeading: 'AI for din bransje',
-      industriesSubhead: 'AI-agenter tilpasset måten ulike bransjer faktisk jobber på.',
+      industriesSubhead: 'AI-løsninger designet rundt måten virksomheten din jobber på.',
       industriesTeaser: [
         {
+          icon: 'briefcase',
+          title: 'Solo- og småteam-tjenesteytere',
+          useCases: ['Automatiser booking, kundespørsmål og oppfølging for salonger, klinikker, reparasjonsverksteder og konsulenter.'],
+        },
+        {
           icon: 'building',
-          title: 'Hotell & overnatting',
-          useCases: ['AI-resepsjonist', 'Gjestesupport', 'Bookinghjelp', 'Håndtering av anmeldelser'],
+          title: 'Franchise- og kjedeaktører med flere lokasjoner',
+          useCases: ['Lever konsistent AI-drevet kundekommunikasjon og support på tvers av alle lokasjoner.'],
         },
         {
-          icon: 'star',
-          title: 'Skjønnhet & velvære',
-          useCases: ['Timebestilling', 'Voice-resepsjonist', 'Kundespørsmål', 'Anmeldelser'],
-        },
-        {
-          icon: 'utensils',
-          title: 'Restauranter',
-          useCases: ['Reservasjoner', 'Kundespørsmål', 'Tilbakemeldinger', 'Håndtering av anmeldelser'],
+          icon: 'trendingUp',
+          title: 'Voksende SaaS- og netthandel-supportteam',
+          useCases: ['Skaler kundesupport og leadoppfølging uten å vokse bemanningen i samme takt.'],
         },
       ],
-      industriesLink: 'Ser du ikke bransjen din? Bygg en skreddersydd AI-arbeidsflyt',
+      industriesLink: 'Finn en AI-løsning for virksomheten din',
       howEyebrow: 'Slik fungerer det',
       howHeading: 'Fra forretningsproblem til AI-arbeidsstyrke',
       howSubhead: 'Du trenger ikke å erstatte de eksisterende forretningssystemene dine. Mielikkix kobler AI til verktøyene du allerede bruker.',
@@ -1253,22 +961,24 @@ export const ui: Record<Lang, Dictionary> = {
         { title: 'Fortell oss om arbeidsflyten din', body: 'Vi starter med forretningsproblemet, ikke teknologien.' },
         { title: 'Vi designer AI-løsningen din', body: 'Riktig agent for jobben — ikke en standardbot.' },
         { title: 'Koble til eksisterende systemer', body: 'AI kobles til nettsiden, kalenderen og verktøyene dine.' },
-        { title: 'Lanser AI-agenten din', body: 'Agenten går live og begynner å håndtere reelle samtaler.' },
+        { title: 'Lanser løsningen', body: 'Løsningen går live og begynner å håndtere reelt arbeid.' },
         { title: 'Overvåk og forbedre', body: 'Vi følger opp etter lansering for å justere og utvide.' },
       ],
       integrationsEyebrow: 'Integrasjoner',
       integrationsHeading: 'Fungerer med verktøyene du allerede bruker',
-      integrationsSubhead: 'Ingen grunn til å erstatte eksisterende systemer.',
+      integrationsSubhead: 'Ingen grunn til å erstatte eksisterende systemer. Koble AI til verktøyene virksomheten din allerede bruker.',
       integrations: [
-        { icon: 'calendar', name: 'Google Kalender' },
-        { icon: 'mic', name: 'Telefon / tale' },
-        { icon: 'chat', name: 'WhatsApp' },
-        { icon: 'trendingUp', name: 'CRM' },
-        { icon: 'mail', name: 'E-post' },
-        { icon: 'target', name: 'Nettside' },
-        { icon: 'code', name: 'API-er' },
+        { icon: 'target', name: 'Nettside', status: 'available' },
+        { icon: 'calendar', name: 'Google Kalender', status: 'comingSoon' },
+        { icon: 'mic', name: 'Telefon / tale', status: 'comingSoon' },
+        { icon: 'chat', name: 'WhatsApp', status: 'comingSoon' },
+        { icon: 'trendingUp', name: 'CRM', status: 'comingSoon' },
+        { icon: 'mail', name: 'E-post', status: 'comingSoon' },
+        { icon: 'code', name: 'API-er', status: 'comingSoon' },
       ],
-      integrationsNote: 'Tilgjengelighet avhenger av oppsettet ditt — snakk med oss om å koble til et spesifikt verktøy.',
+      integrationsAvailableLabel: 'Tilgjengelig',
+      integrationsComingSoonLabel: 'Kommer',
+      integrationsNote: 'Snakk med oss om å koble til et spesifikt verktøy for din virksomhet.',
       valueEyebrow: 'Hvorfor bedrifter velger Mielikkix',
       valueHeading: 'Hvorfor bedrifter velger Mielikkix',
       valueGrid: [
@@ -1283,19 +993,22 @@ export const ui: Record<Lang, Dictionary> = {
       securityTeaserHeading: 'Bygget med tillit i bunn',
       securityTeaserBody: 'En GDPR-bevisst tilnærming til databehandling, dataeierskap og tilgangskontroll — med et menneske alltid tilgjengelig.',
       securityTeaserLink: 'Les mer om sikkerhet',
-      startEyebrow: 'Start i det små',
-      startHeading: 'Start med én AI-agent. Bygg AI-arbeidsstyrken din.',
-      startSubhead: 'Start med problemet som betyr mest. Utvid AI-arbeidsstyrken etter hvert som virksomheten vokser.',
-      startStepPrefix: 'Steg',
+      startEyebrow: 'Vår tilnærming',
+      startHeading: 'Start med forretningsproblemet. Skaler derfra.',
+      startSubhead:
+        'Hver virksomhet har ulike prioriteringer. Vi starter med å forstå arbeidsflyten din, identifiserer hvor AI kan skape mest verdi, og bygger en løsning som kan vokse med virksomheten din.',
       startSteps: [
-        { title: 'AI-chatbot', body: '' },
-        { title: 'Legg til Voice Receptionist', body: '' },
-        { title: 'Legg til Booking Assistant', body: '' },
-        { title: 'Legg til support + anmeldelser', body: '' },
-        { title: 'Koble sammen AI-arbeidsstyrken', body: '' },
+        { title: 'Forstå virksomheten din', body: '' },
+        { title: 'Identifiser muligheter', body: '' },
+        { title: 'Design riktig løsning', body: '' },
+        { title: 'Integrer med systemene dine', body: '' },
+        { title: 'Skaler etter hvert som behovene vokser', body: '' },
       ],
-      closingHeading: 'La oss bygge AI-arbeidsstyrken din.',
-      closingBody: 'Fortell oss om virksomheten din, så viser vi deg hvor AI-agenter kan spare mest tid.',
+      meetAiEyebrow: 'Mielikkix AI-plattformen',
+      meetAiHeading: 'Møt Mielikkix AI',
+      meetAiBody: 'Utforsk Mielikkix AI-plattformen og oppdag verktøyene, AI-agentene og automatiseringsmulighetene som er tilgjengelige for virksomheten din.',
+      closingHeading: 'Finn den riktige AI-løsningen',
+      closingBody: 'Fortell oss hva som tar mest tid for teamet ditt. Vi viser deg hvilken AI-løsning som kan ta seg av det.',
       closingCta: 'Book gratis AI-demo',
     },
     solutions: {
@@ -1385,129 +1098,37 @@ export const ui: Record<Lang, Dictionary> = {
       closingCta: 'Kontakt oss',
     },
     products: {
-      seoTitle: 'Produkter',
+      seoTitle: 'Mielikkix AI — Oversikt over AI-løsninger',
       seoDescription:
-        'Ferdige AI-agenter — AI-chatbot, Voice Receptionist og Booking Assistant — samt skreddersydde AI-agenter bygget rundt virksomheten din, fra Mielikkix.',
-      eyebrow: 'Produkter',
-      heading: 'AI-agenter bygget rundt din virksomhet',
+        'En oversikt over Mielikkix AI-plattformen — AI-agenter, automatisering og integrasjoner for virksomheten din. Utforsk hele produktet på mielikkix.ai.',
+      eyebrow: 'Mielikkix AI',
+      heading: 'AI-løsninger for din virksomhet',
       subhead:
-        'Automatiser kundesamtaler, telefonsamtaler, bookinger, support og forretningsprosesser med AI-agenter designet for virksomheten din.',
-      body:
-        'Ved siden av skreddersydd AI-utvikling og integrasjoner bygger Mielikkix ferdige AI-agenter — en AI-chatbot, en Voice Receptionist og en Booking Assistant — i tillegg til flere agenter som Support Triage og Review & Reputation, og helt skreddersydde agenter designet rundt arbeidsflyten din.',
-      hubCenterLabel: 'AI-agenter',
-      withoutHeading: 'Uten Mielikkix AI-agenter',
-      withoutList: [
-        'Miste anrop og meldinger utenfor arbeidstiden.',
-        'Håndtere booking, ofte stilte spørsmål og oppfølging manuelt, ett om gangen.',
-        'Følge opp anmeldelser og supporthenvendelser hver for seg, for hånd.',
-        'La leads bli stille etter den første samtalen.',
-        'Bygge hver ny arbeidsflyt-automatisering fra bunnen av.',
-      ],
-      withHeading: 'Med Mielikkix AI-agenter',
-      withList: [
-        'En Voice Receptionist og Booking Assistant tar imot hvert anrop og hver booking, døgnet rundt.',
-        'En AI-chatbot svarer på kundespørsmål og fanger opp leads umiddelbart.',
-        'Support Triage- og Review & Reputation-agenter holder henvendelser og anmeldelser håndtert automatisk.',
-        'Skreddersydde agenter følger opp automatisk, slik at ingen leads blir kalde.',
-        'Nye agenter kan designes rundt enhver arbeidsflyt som er spesifikk for virksomheten din.',
-      ],
-      agentsEyebrow: 'AI-arbeidsstyrke',
-      agentsHeading: 'Møt AI-arbeidsstyrken din',
-      agentsSubhead: 'Start med én AI-agent. Legg til flere etter hvert som virksomheten vokser.',
-      agents: [
+        'Fra kundekommunikasjon til forretningsautomatisering — Mielikkix hjelper bedrifter med å identifisere og implementere AI-løsninger som reduserer rutinearbeid og forbedrer kundeopplevelsen.',
+      categories: [
         {
           icon: 'chat',
-          name: 'AI-chatbot',
-          description: 'AI-drevne kundesamtaler døgnet rundt som svarer på spørsmål, fanger opp leads og hjelper kunder umiddelbart.',
-          capability: 'Svarer på ofte stilte spørsmål og fanger opp leads på nettsiden din, døgnet rundt.',
-          status: 'available',
-          statusLabel: 'Tilgjengelig',
-          cta: 'Prøv demo',
+          title: 'Kundeopplevelse',
+          body: 'AI-drevet kundekommunikasjon, support og engasjement.',
         },
         {
-          icon: 'mic',
-          name: 'Voice Receptionist',
-          description: 'En AI-resepsjonist som svarer på anrop, håndterer kundespørsmål og kan bistå med avtaler.',
-          capability: 'Tar imot anrop og svarer på vanlige spørsmål når teamet ditt ikke kan.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
+          icon: 'trendingUp',
+          title: 'Salg og leadautomatisering',
+          body: 'Fang opp, kvalifiser og følg opp leads.',
         },
         {
-          icon: 'calendar',
-          name: 'Booking Assistant',
-          description: 'En AI-bookingassistent som hjelper kunder med å bestille time og håndtere bookingrelaterte samtaler.',
-          capability: 'Håndterer hele bookingsamtalen, fra start til slutt.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
+          icon: 'route',
+          title: 'Forretningsautomatisering',
+          body: 'Automatiser repeterende arbeidsflyter og koble sammen eksisterende systemer.',
         },
         {
-          icon: 'headset',
-          name: 'Support Triage',
-          description: 'Sorterer og besvarer innkommende supporthenvendelser, og eskalerer til en kollega ved behov.',
-          capability: 'Klassifiserer og videresender supporthenvendelser automatisk.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
-        },
-        {
-          icon: 'star',
-          name: 'Review & Reputation',
-          description: 'Overvåker kundeanmeldelser og hjelper med å utarbeide svar på tvers av stedene virksomheten din blir anmeldt.',
-          capability: 'Varsler om nye anmeldelser og utarbeider svarutkast til din godkjenning.',
-          status: 'demo',
-          statusLabel: 'Demo',
-          cta: 'Prøv demo',
-        },
-        {
-          icon: 'share',
-          name: 'Social Media',
-          description: 'Utarbeider og planlegger innlegg i sosiale medier basert på virksomhetens oppdateringer og tilbud.',
-          capability: 'Gjør forretningsoppdateringer om til ferdig innhold for sosiale medier.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'mail',
-          name: 'Email Marketing',
-          description: 'Planlegger og utarbeider e-postkampanjer og oppfølginger for kunder og leads.',
-          capability: 'Utarbeider kampanjer og oppfølgingssekvenser til din gjennomgang.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'search',
-          name: 'SEO Copywriter',
-          description: 'Skriver og optimaliserer innhold for nettside og blogg, slik at virksomheten din blir lettere å finne.',
-          capability: 'Produserer SEO-tilpasset tekst for nettsiden og bloggen din.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'clipboard',
-          name: 'Feedback & Survey',
-          description: 'Sender ut og samler inn kundetilbakemeldinger og undersøkelsessvar automatisk.',
-          capability: 'Automatiserer tilbakemeldingsforespørsler og samler svarene på ett sted.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
-        },
-        {
-          icon: 'heart',
-          name: 'Loyalty / Retention',
-          description: 'Identifiserer faste kunder og bidrar til å utforme oppfølging som får dem til å komme tilbake.',
-          capability: 'Synliggjør muligheter for kundelojalitet basert på kundeaktivitet.',
-          status: 'comingSoon',
-          statusLabel: 'Kommer',
-          cta: 'Kommer',
+          icon: 'code',
+          title: 'Skreddersydde AI-løsninger',
+          body: 'Bygg AI-løsninger rundt dine unike forretningsprosesser.',
         },
       ],
-      cta: 'Book gratis AI-demo',
-      ctaBody: 'Klar til å legge AI-agenter til virksomheten din?',
+      cta: 'Utforsk Mielikkix AI',
+      ctaBody: 'Klar til å se Mielikkix AI-plattformen i aksjon?',
     },
     company: {
       seoTitle: 'Om oss',
@@ -1686,51 +1307,31 @@ export const ui: Record<Lang, Dictionary> = {
     industries: {
       seoTitle: 'AI for din bransje',
       seoDescription:
-        'AI-agenter tilpasset hotell og overnatting, helse, skjønnhet og velvære, restauranter, eiendom, profesjonelle tjenester og handel.',
+        'AI-forretningsløsninger for solo- og småteam-tjenesteytere, franchise- og kjedeaktører med flere lokasjoner, og voksende SaaS- og netthandel-supportteam.',
       eyebrow: 'Bransjer',
       heading: 'AI for din bransje',
-      subhead: 'AI-agenter tilpasset måten ulike bransjer faktisk jobber på.',
+      subhead: 'AI-løsninger designet rundt måten virksomheten din jobber på.',
       industries: [
         {
-          icon: 'building',
-          title: 'Hotell & overnatting',
-          useCases: ['AI-resepsjonist', 'Gjestesupport', 'Bookinghjelp', 'Håndtering av anmeldelser'],
-        },
-        {
-          icon: 'pulse',
-          title: 'Helse',
-          useCases: ['Timebestilling', 'AI-resepsjonist', 'Generelle henvendelser', 'Påminnelser om avtaler'],
-        },
-        {
-          icon: 'star',
-          title: 'Skjønnhet & velvære',
-          useCases: ['Timebestilling', 'Voice-resepsjonist', 'Kundespørsmål', 'Anmeldelser'],
-        },
-        {
-          icon: 'utensils',
-          title: 'Restauranter',
-          useCases: ['Reservasjoner', 'Kundespørsmål', 'Tilbakemeldinger', 'Håndtering av anmeldelser'],
-        },
-        {
-          icon: 'building',
-          title: 'Eiendom',
-          useCases: ['AI-chatbot for boliger', 'Booking av visninger', 'Fange opp leads', 'Automatisk oppfølging'],
-        },
-        {
           icon: 'briefcase',
-          title: 'Profesjonelle tjenester',
-          useCases: ['AI-resepsjonist', 'Timebestilling', 'Kvalifisering av leads', 'Kundespørsmål'],
+          title: 'Solo- og småteam-tjenesteytere',
+          useCases: ['Automatiser booking, kundespørsmål og oppfølging for salonger, klinikker, reparasjonsverksteder og konsulenter.'],
         },
         {
-          icon: 'cart',
-          title: 'Handel / netthandel',
-          useCases: ['AI-chatbot for produktspørsmål', 'Statusspørsmål om ordre', 'Håndtering av anmeldelser', 'Kundesupport'],
+          icon: 'building',
+          title: 'Franchise- og kjedeaktører med flere lokasjoner',
+          useCases: ['Lever konsistent AI-drevet kundekommunikasjon og support på tvers av alle lokasjoner.'],
+        },
+        {
+          icon: 'trendingUp',
+          title: 'Voksende SaaS- og netthandel-supportteam',
+          useCases: ['Skaler kundesupport og leadoppfølging uten å vokse bemanningen i samme takt.'],
         },
       ],
-      notListedHeading: 'Ser du ikke bransjen din?',
-      notListedLink: 'Bygg en skreddersydd AI-arbeidsflyt',
-      closingHeading: 'Usikker på hvor bransjen din passer inn?',
-      closingBody: 'Fortell oss om virksomheten din, så viser vi deg hvor AI-agenter kan hjelpe.',
+      notListedHeading: 'Ser du ikke din type virksomhet?',
+      notListedLink: 'Finn en AI-løsning for virksomheten din',
+      closingHeading: 'Usikker på hvor virksomheten din passer inn?',
+      closingBody: 'Fortell oss om virksomheten din, så viser vi deg hvor AI kan hjelpe.',
       closingCta: 'Book gratis AI-demo',
     },
     security: {

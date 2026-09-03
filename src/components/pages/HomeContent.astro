@@ -5,11 +5,8 @@ import Panel from '../Panel.astro';
 import Card from '../Card.astro';
 import Eyebrow from '../Eyebrow.astro';
 import Glow from '../Glow.astro';
-import PillarStack from '../PillarStack.astro';
 import IconBadge from '../IconBadge.astro';
 import Icon from '../Icon.astro';
-import AgentCard from '../AgentCard.astro';
-import DemoCard from '../DemoCard.astro';
 import IndustryCard from '../IndustryCard.astro';
 import BeforeAfter from '../BeforeAfter.astro';
 import StepFlow from '../StepFlow.astro';
@@ -22,8 +19,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const c = t(lang).home;
-const nav = t(lang).nav;
-const activities = t(lang).solutions.activities;
 ---
 
 <section class="relative overflow-hidden border-b border-mist-white/10 bg-deep-forest">
@@ -38,7 +33,7 @@ const activities = t(lang).solutions.activities;
     <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-mist-white/80">{c.heroSubhead}</p>
     <div class="mt-8 flex flex-wrap justify-center gap-4">
       <ButtonPrimary href={`${localizedPath('/company', lang)}#demo`}>{c.ctaPrimary}</ButtonPrimary>
-      <ButtonSecondary href={localizedPath('/products', lang)}>{c.ctaSecondary}</ButtonSecondary>
+      <ButtonSecondary href="https://mielikkix.ai">{c.ctaSecondary}</ButtonSecondary>
     </div>
     <p class="mx-auto mt-8 max-w-xl text-sm font-medium uppercase tracking-wider text-mist-white/50">{c.heroTagline}</p>
   </div>
@@ -74,53 +69,45 @@ const activities = t(lang).solutions.activities;
     <p class="text-center text-lg font-semibold text-aurora-neon">{c.problemClosing}</p>
   </Panel>
 
-  <Panel>
-    <div class="grid gap-10 md:grid-cols-2 md:items-center">
-      <div>
-        <Eyebrow text={nav.solutions} tone="gold" />
-        <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.stackHeading}</h2>
-        <p class="mt-4 text-base leading-relaxed text-mist-white/80">{c.stackSubhead}</p>
-        <a
-          href={localizedPath('/solutions', lang)}
-          class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
-        >
-          {c.stackLink}
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-      <PillarStack items={activities.map((a) => ({ title: a.title, short: a.short }))} />
-    </div>
-  </Panel>
-
-  <Panel tone="accent" class="relative overflow-hidden" id="ai-workforce">
+  <Panel tone="accent" class="relative overflow-hidden" id="ai-solutions">
     <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
-    <Eyebrow text={c.workforceEyebrow} class="relative" />
-    <h2 class="relative mt-4 text-2xl font-bold sm:text-3xl">{c.workforceHeading}</h2>
-    <p class="relative mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.workforceSubhead}</p>
-    <div class="relative mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {c.agents.map((agent) => <AgentCard agent={agent} />)}
+    <Eyebrow text={c.solutionsEyebrow} class="relative" />
+    <h2 class="relative mt-4 text-2xl font-bold sm:text-3xl">{c.stackHeading}</h2>
+    <p class="relative mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.stackSubhead}</p>
+    <div class="relative mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        c.solutionCategories.map((category) => (
+          <Card>
+            <IconBadge icon={category.icon} tone="accent" />
+            <h3 class="mt-4 text-lg font-semibold text-mist-white">{category.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mist-white/75">{category.body}</p>
+          </Card>
+        ))
+      }
     </div>
-    <div class="relative mt-8 text-center">
+    <div class="relative mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      <ButtonPrimary href="https://mielikkix.ai">{c.ctaSecondary}</ButtonPrimary>
       <a
-        href={localizedPath('/products', lang)}
+        href={localizedPath('/solutions', lang)}
         class="inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
       >
-        {c.workforceExploreLink}
+        {c.stackLink}
         <span aria-hidden="true">→</span>
       </a>
     </div>
   </Panel>
 
-  <Panel>
-    <Eyebrow text={c.demosEyebrow} tone="gold" />
-    <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.demosHeading}</h2>
-    <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.demosSubhead}</p>
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {c.demos.map((demo) => <DemoCard icon={demo.icon} name={demo.name} description={demo.description} cta={demo.cta} />)}
+  <Panel tone="gold" class="text-center">
+    <Eyebrow text={c.aiCtaEyebrow} tone="gold" class="mx-auto" />
+    <h2 class="mx-auto mt-4 max-w-2xl text-2xl font-bold sm:text-3xl">{c.aiCtaHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.aiCtaBody}</p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <ButtonPrimary href={`${localizedPath('/company', lang)}#demo`}>{c.ctaPrimary}</ButtonPrimary>
+      <ButtonSecondary href="https://mielikkix.ai">{c.ctaSecondary}</ButtonSecondary>
     </div>
   </Panel>
 
-  <Panel tone="gold">
+  <Panel>
     <Eyebrow text={c.industriesEyebrow} tone="gold" />
     <h2 class="mt-4 text-2xl font-bold sm:text-3xl">{c.industriesHeading}</h2>
     <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.industriesSubhead}</p>
@@ -130,7 +117,7 @@ const activities = t(lang).solutions.activities;
     <div class="mt-8 text-center">
       <a
         href={localizedPath('/industries', lang)}
-        class="inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        class="inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
       >
         {c.industriesLink}
         <span aria-hidden="true">→</span>
@@ -154,9 +141,18 @@ const activities = t(lang).solutions.activities;
     <div class="mt-8 flex flex-wrap gap-4">
       {
         c.integrations.map((integration) => (
-          <div class="flex items-center gap-3 rounded-full border border-mist-white/15 bg-deep-forest px-5 py-2.5">
+          <div class="flex items-center gap-3 rounded-full border border-mist-white/15 bg-deep-forest py-2.5 pl-5 pr-3">
             <IconBadge icon={integration.icon} tone="accent" class="h-8 w-8" />
             <span class="text-sm font-medium text-mist-white/85">{integration.name}</span>
+            <span
+              class={`rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide ${
+                integration.status === 'available'
+                  ? 'border-aurora-neon/40 bg-aurora-neon/10 text-aurora-neon'
+                  : 'border-mist-white/20 bg-mist-white/5 text-mist-white/50'
+              }`}
+            >
+              {integration.status === 'available' ? c.integrationsAvailableLabel : c.integrationsComingSoonLabel}
+            </span>
           </div>
         ))
       }
@@ -187,7 +183,7 @@ const activities = t(lang).solutions.activities;
         </div>
         <p class="mt-4 max-w-2xl text-base leading-relaxed text-mist-white/80">{c.securityTeaserBody}</p>
         <a
-          href={localizedPath('/security', lang)}
+          href={`${localizedPath('/company', lang)}#security`}
           class="mt-6 inline-flex items-center gap-1 rounded text-sm font-semibold text-antler-gold transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
         >
           {c.securityTeaserLink}
@@ -205,7 +201,16 @@ const activities = t(lang).solutions.activities;
     <h2 class="mx-auto mt-4 max-w-2xl text-2xl font-bold sm:text-3xl">{c.startHeading}</h2>
     <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.startSubhead}</p>
     <div class="mt-10">
-      <StepFlow steps={c.startSteps} direction="vertical" stepPrefix={c.startStepPrefix} />
+      <StepFlow steps={c.startSteps} direction="horizontal" />
+    </div>
+  </Panel>
+
+  <Panel tone="gold" class="text-center">
+    <Eyebrow text={c.meetAiEyebrow} tone="gold" class="mx-auto" />
+    <h2 class="mx-auto mt-4 max-w-2xl text-2xl font-bold sm:text-3xl">{c.meetAiHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.meetAiBody}</p>
+    <div class="mt-8 flex justify-center">
+      <ButtonPrimary href="https://mielikkix.ai">{c.ctaSecondary}</ButtonPrimary>
     </div>
   </Panel>
 </div>

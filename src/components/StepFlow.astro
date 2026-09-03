@@ -23,7 +23,7 @@ const { steps, direction = 'horizontal', stepPrefix = 'Step', class: className =
             {String(i + 1).padStart(2, '0')}
           </span>
           <h3 class="mt-2 text-base font-semibold text-mist-white">{step.title}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-mist-white/70">{step.body}</p>
+          {step.body && <p class="mt-2 text-sm leading-relaxed text-mist-white/70">{step.body}</p>}
         </div>
       ))}
     </div>

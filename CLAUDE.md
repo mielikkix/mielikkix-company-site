@@ -32,17 +32,46 @@ Reputation, and fully custom agents built per business). **As of 2026-09, that
 product dropped the earlier "Force Agents" branding and the 3-crew grouping —
 don't reintroduce that naming.**
 
-**Site-direction update (2026-09-01, explicit user request — supersedes the
-"brief mention only" rule that used to live here):** this repo was deliberately
-turned into a full AI-agent conversion site — a "Meet Your AI Workforce" catalog
-of 10 agents (with honest Available/Demo/Coming Soon status labels), a live-demos
-section, an Industries page, and a Security page all now live here, not just on
-the product site. Do not revert this back to a brief-mention/thin-marketing-site
-without the user asking again — that pendulum has already swung once. The
-`/products` route still exists at that URL but its label/heading is now "AI
-Agents" / "Meet Your AI Workforce", not "Products". Actual agent demos still only
-run on `app.mielikkix.ai` — every "Try Demo" CTA in this repo links out there
-rather than faking interactivity, since this repo has no backend/agent runtime.
+**Domain-separation rule (2026-09-01, explicit user request — supersedes the
+prior "full AI-agent conversion site" note that used to live here; that
+pendulum swung twice now, read this before re-expanding product content into
+this repo again):** `mielikkix.no` and `mielikkix.ai` must feel like different
+experiences of the same company, not near-duplicates:
+  - **mielikkix.no** ("we help your business adopt AI") = company, business
+    solutions, industries, AI consulting/implementation, custom AI,
+    automation, integrations, security, trust, about, contact, free demo.
+  - **mielikkix.ai** ("here is the product") = individual AI agents (Chatbot,
+    Voice Receptionist, Booking Assistant, Support Triage, Review &
+    Reputation, and the rest of the lineup), features, live demos, pricing,
+    subscriptions, onboarding, login, dashboard.
+
+  This repo (`mielikkix.no`) does **not** name individual agents, show
+  agent-by-agent status badges (Available/Demo/Coming Soon), run a live-demos
+  showcase, or show an agent-adoption progression (e.g. "Start with Chatbot,
+  add Voice, add Booking…") anywhere — that content was tried on this repo
+  and then deliberately pulled back out once it made the two sites feel
+  redundant. Instead: a handful of high-level solution *categories*
+  (Customer Experience / Sales & Lead Automation / Business Automation /
+  Custom AI Solutions), industry/audience pages describing business outcomes
+  only (no per-segment agent lists), and clearly-labeled bridge moments —
+  "Explore Mielikkix AI →" / "Meet Mielikkix AI" — that hand the visitor off
+  to `https://mielikkix.ai` for anything agent-, demo-, or pricing-specific.
+
+  **Further trim (2026-09-01, same session, explicit user request):** the
+  `/products` ("AI") and `/security` routes were removed entirely — nav is
+  now just Solutions / Industries / About. There is no on-site bridge page
+  for the AI product anymore; every "Explore Mielikkix AI" CTA (hero, AI
+  Solutions panel, AI-in-Action panel, Meet Mielikkix AI panel) links
+  straight to `https://mielikkix.ai`. Security content didn't disappear —
+  it moved onto `/company#security` (the anchor there now holds the full
+  GDPR/data-ownership/API-security/DPA/human-escalation pillar grid, not
+  just a teaser), and the homepage's security teaser link now points to
+  that anchor instead of a separate page. `ProductsContent.astro` and
+  `SecurityContent.astro` are kept in the repo unused (not deleted) in case
+  a dedicated page is wanted again later — don't wire them back into routes
+  without the user asking. Components built for the fuller catalogue era
+  (`AgentCard`, `DemoCard`, `WorkforceDiagram`, `HeroWorkforceVisual`,
+  `HubDiagram`) are likewise kept unused rather than deleted.
 
 ## Tech stack
 
@@ -88,14 +117,15 @@ tokens (no fifth color introduced):
   headline (`bg-gradient-to-r from-aurora-neon to-antler-gold bg-clip-text
   text-transparent`).
 - `<PillarStack>` — stacked, slightly-narrowing gradient bars (mirrors TrendAI's
-  layered platform-capability bars) — used on Home for the five core business
-  activities.
+  layered platform-capability bars). Currently unused on Home (replaced by the
+  "AI Solutions" category-card panel per the domain-separation rule) but kept in
+  the repo; fine to reuse elsewhere.
 - A full-bleed diagonal gradient CTA band (`from-aurora-neon via-deep-forest
   to-antler-gold`) near the end of each page, mirroring TrendAI's testimonial-banner
   treatment — but without a fabricated quote (see Content rules).
-- `<HubDiagram>` — radial hub-and-spoke diagram ("AI Agents" at the center, the
-  three core solutions — AI Chatbot, Voice Receptionist, Booking Assistant — as
-  spokes) — used on the Products page.
+- `<HubDiagram>` — radial hub-and-spoke diagram. Currently unused (the Products
+  page/route no longer exists) but kept in the repo per the domain-separation
+  rule — don't delete it.
 
 Register all four tokens as `theme.extend.colors` in `tailwind.config.mjs` — never
 hardcode these hex values inline in a component once the config exists.
@@ -126,36 +156,44 @@ ear glowing Aurora Neon, the other solid Antler Gold. Build as an inline SVG com
 
 ## Site structure
 
+Nav is just **Solutions / Industries / About** (+ "Book a Free AI Demo" primary
+CTA, "Log in" → `app.mielikkix.ai`) — no "AI" or "Security" nav items; see the
+domain-separation rule above for why.
+
 - `/` — Home, a long conversion-focused page (in order): hero (headline + "Book a
-  Free AI Demo" / "Explore AI Agents" CTAs), 4-item value strip, "Still doing this
-  manually?" problem section (`<BeforeAfter>`), `<PillarStack>` solutions teaser,
-  "Meet Your AI Workforce" 10-agent grid (`<AgentCard>`), live-demos section
-  (`<DemoCard>`, links out to `app.mielikkix.ai`), industries teaser
-  (`<IndustryCard>`, links to `/industries`), "How It Works" step flow
-  (`<StepFlow direction="horizontal">`), integrations pill list, "Why Businesses
-  Choose Mielikkix" value grid, security teaser (links to `/security`), "Start
-  Small" step flow (`<StepFlow direction="vertical">`), closing gradient CTA band.
+  Free AI Demo" / "Explore Mielikkix AI" CTAs, the latter linking straight to
+  `https://mielikkix.ai`, no agent-naming visual), 4-item value strip, "Still
+  doing this manually?" problem section (`<BeforeAfter>`), "AI Solutions for
+  Your Business" (4 category cards + link to `/solutions` + bridge CTA to
+  mielikkix.ai), "See What AI Could Do for Your Business" sales CTA panel,
+  industries/audience-segment teaser (`<IndustryCard>`, one outcome sentence
+  each, links to `/industries`), "How It Works" step flow (`<StepFlow
+  direction="horizontal">`), integrations pill list, "Why Businesses Choose
+  Mielikkix" value grid, security teaser (links to `/company#security`),
+  "Start With the Business Problem. Scale From There." step flow (generic
+  consulting steps, no agent names), "Meet Mielikkix AI" bridge panel (CTA to
+  mielikkix.ai), closing gradient CTA band.
 - `/solutions` — the 5 core business activities in detail, one panel each (icon +
   description + capability bullets)
-- `/products` — "AI Agents" in the nav; the full "Meet Your AI Workforce" 10-agent
-  grid (`<AgentCard>`, same status-label convention as Home) plus the hub diagram
-  for the three core agents and a closing CTA to `/company#demo`.
-- `/industries` — 7 industry cards (`<IndustryCard>`) with use-case bullets built
-  from the existing agent lineup; no regulated-industry/compliance claims.
-- `/security` — GDPR-conscious data-handling pillars (ownership, API scoping, DPA,
-  human escalation); no certifications claimed that don't exist.
+- `/industries` — 3 audience-segment cards (`<IndustryCard>`) — Solo &
+  Small-Team Service Providers, Multi-Location Franchise & Chain Operators,
+  Growing SaaS & E-commerce Support Teams — one high-level business-outcome
+  sentence each (no per-segment agent lists); no regulated-industry/compliance
+  claims. Same 3 segments are mirrored in Home's industries teaser.
 - `/company` — About (uses the official business activity description above),
-  Careers, Contact/demo form, and a short Security teaser anchor (`#about`,
-  `#careers`, `#contact`, `#security` — full security content now lives at
-  `/security`, this anchor is just a teaser + link)
+  a full "Data & Security" section (`#security` anchor — the 5-pillar
+  GDPR/data-ownership/API-security/DPA/human-escalation grid that used to live
+  on a standalone `/security` page now lives here in full, not as a teaser),
+  Careers, Contact/demo form (`#about`, `#security`, `#careers`, `#contact`).
 - No dedicated `/pricing` page — the business model (custom dev + SaaS + integrations)
   doesn't fit fixed tiers, and no pricing has been confirmed. CTAs point to the
   demo form instead. Don't add fixed pricing tiers without the user supplying real
   numbers.
 - No `/privacy` or `/terms` pages exist yet — no real legal copy has been supplied.
   Don't invent one; wire up the footer links once the user provides real content.
-- Links out to `app.mielikkix.ai` for login/sign-up and demo CTAs — **do not**
-  replicate auth or the product experience here.
+- Links out to `app.mielikkix.ai` for login/sign-up and demo CTAs, and to
+  `https://mielikkix.ai` for anything product-specific — **do not** replicate
+  auth or the product experience here.
 
 ## Internationalization (EN/NOR)
 
@@ -209,7 +247,7 @@ the product apps:
 
 - `npm run build` completes with no errors.
 - `npx astro check` completes with no errors.
-- `npm run preview` (or dev server) renders all 14 routes (7 pages × EN/NOR) without
+- `npm run preview` (or dev server) renders all 10 routes (5 pages × EN/NOR) without
   console errors.
 - Every internal nav/footer link resolves; demo CTAs point to `/company#demo`;
   "Try Demo"/login CTAs point to `app.mielikkix.ai`.
