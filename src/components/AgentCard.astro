@@ -1,0 +1,62 @@
+---
+import IconBadge from './IconBadge.astro';
+import Icon from './Icon.astro';
+import type { IconName } from '../i18n/ui';
+
+interface Agent {
+  icon: IconName;
+  name: string;
+  description: string;
+  capability: string;
+  status: 'available' | 'demo' | 'comingSoon';
+  statusLabel: string;
+  cta: string;
+}
+
+interface Props {
+  agent: Agent;
+  class?: string;
+}
+
+const { agent, class: className = '' } = Astro.props;
+
+const statusStyles = {
+  available: 'border-aurora-neon/40 bg-aurora-neon/10 text-aurora-neon',
+  demo: 'border-antler-gold/40 bg-antler-gold/10 text-antler-gold',
+  comingSoon: 'border-mist-white/20 bg-mist-white/5 text-mist-white/60',
+} as const;
+
+const isLinkable = agent.status !== 'comingSoon';
+---
+
+<div class={`flex h-full flex-col rounded-2xl border border-mist-white/15 bg-deep-forest p-6 transition hover:border-aurora-neon/40 hover:shadow-lg hover:shadow-black/20 ${className}`}>
+  <div class="flex items-start justify-between gap-3">
+    <IconBadge icon={agent.icon} tone={agent.status === 'demo' ? 'gold' : 'accent'} />
+    <span class={`shrink-0 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wide ${statusStyles[agent.status]}`}>
+      {agent.statusLabel}
+    </span>
+  </div>
+  <h3 class="mt-4 text-lg font-semibold text-mist-white">{agent.name}</h3>
+  <p class="mt-2 text-sm leading-relaxed text-mist-white/75">{agent.description}</p>
+  <p class="mt-3 flex items-start gap-2 text-sm leading-relaxed text-mist-white/60">
+    <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-aurora-neon/70" />
+    {agent.capability}
+  </p>
+  <div class="mt-5 pt-1">
+    {
+      isLinkable ? (
+        <a
+          href="https://mielikkix.ai"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+        >
+          {agent.cta}
+          <span aria-hidden="true">→</span>
+        </a>
+      ) : (
+        <span class="text-sm font-medium text-mist-white/40">{agent.cta}</span>
+      )
+    }
+  </div>
+</div>

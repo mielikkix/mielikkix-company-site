@@ -1,0 +1,55 @@
+---
+import Panel from '../Panel.astro';
+import Card from '../Card.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
+import IconBadge from '../IconBadge.astro';
+import { t } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).security;
+---
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="accent" class="relative overflow-hidden text-center">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="accent" />
+    <Glow class="-right-24 -top-24 h-72 w-72" tone="gold" />
+    <div class="relative mx-auto max-w-3xl">
+      <Eyebrow text={c.eyebrow} tone="accent" class="mx-auto" />
+      <h1 class="mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">{c.heading}</h1>
+      <p class="mt-6 text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
+    </div>
+  </Panel>
+
+  <Panel>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        c.pillars.map((pillar) => (
+          <Card>
+            <IconBadge icon={pillar.icon} tone="gold" />
+            <h3 class="mt-4 text-lg font-semibold text-mist-white">{pillar.title}</h3>
+            <p class="mt-2 text-base leading-relaxed text-mist-white/75">{pillar.body}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </Panel>
+
+  <Panel tone="gold" class="text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.closingBody}</p>
+    <div class="mt-8 flex justify-center">
+      <a
+        href={`mailto:${t(lang).company.contactEmail}`}
+        class="inline-flex items-center justify-center gap-2 rounded-full bg-aurora-neon px-6 py-3 text-sm font-semibold text-[#06231A] transition hover:scale-105 hover:shadow-[0_0_24px_rgba(0,229,160,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+      >
+        {c.closingCta}
+      </a>
+    </div>
+  </Panel>
+</div>

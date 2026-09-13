@@ -5,9 +5,10 @@ interface Props {
   icon: Parameters<typeof Icon>[0]['name'];
   tone?: 'accent' | 'gold' | 'mixed';
   class?: string;
+  iconClass?: string;
 }
 
-const { icon, tone = 'accent', class: className = '' } = Astro.props;
+const { icon, tone = 'accent', class: className = '', iconClass = 'h-5 w-5' } = Astro.props;
 
 const toneClasses = {
   accent: 'bg-deep-forest text-aurora-neon border-aurora-neon/40',
@@ -17,5 +18,5 @@ const toneClasses = {
 ---
 
 <div class={`inline-flex h-11 w-11 items-center justify-center rounded-2xl border ${toneClasses[tone]} ${className}`}>
-  <Icon name={icon} class="h-5 w-5" />
+  <Icon name={icon} class={iconClass} />
 </div>

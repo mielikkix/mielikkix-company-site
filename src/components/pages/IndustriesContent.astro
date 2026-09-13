@@ -1,0 +1,55 @@
+---
+import ButtonPrimary from '../ButtonPrimary.astro';
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Glow from '../Glow.astro';
+import IndustryCard from '../IndustryCard.astro';
+import { t, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).industries;
+---
+
+<div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="gold" class="relative overflow-hidden text-center">
+    <Glow class="-left-24 -top-24 h-72 w-72" tone="gold" />
+    <Glow class="-right-24 -top-24 h-72 w-72" tone="accent" />
+    <div class="relative mx-auto max-w-3xl">
+      <Eyebrow text={c.eyebrow} tone="gold" class="mx-auto" />
+      <h1 class="mt-5 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">{c.heading}</h1>
+      <p class="mt-6 text-lg leading-relaxed text-mist-white/80">{c.subhead}</p>
+    </div>
+  </Panel>
+
+  <Panel>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {c.industries.map((industry) => <IndustryCard icon={industry.icon} title={industry.title} useCases={industry.useCases} />)}
+    </div>
+  </Panel>
+
+  <Panel tone="accent" class="text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.notListedHeading}</h2>
+    <div class="mt-6 flex justify-center">
+      <a
+        href={`${localizedPath('/company', lang)}#contact`}
+        class="inline-flex items-center gap-1 rounded text-sm font-semibold text-aurora-neon transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mist-white"
+      >
+        {c.notListedLink}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </Panel>
+
+  <Panel tone="gold" class="text-center">
+    <h2 class="text-2xl font-bold sm:text-3xl">{c.closingHeading}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist-white/80">{c.closingBody}</p>
+    <div class="mt-8 flex justify-center">
+      <ButtonPrimary href={`${localizedPath('/company', lang)}#demo`}>{c.closingCta}</ButtonPrimary>
+    </div>
+  </Panel>
+</div>
