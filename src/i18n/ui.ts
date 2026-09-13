@@ -77,14 +77,12 @@ interface Dictionary {
     security: string;
     company: string;
     bookDemo: string;
-    login: string;
     menuLabel: string;
   };
   footer: {
     tagline: string;
     siteHeading: string;
     companyHeading: string;
-    login: string;
     copyright: string;
   };
   a11y: {
@@ -300,14 +298,12 @@ export const ui: Record<Lang, Dictionary> = {
       security: 'Security',
       company: 'About',
       bookDemo: 'Book a Free AI Demo',
-      login: 'Log in',
       menuLabel: 'Menu',
     },
     footer: {
       tagline: 'AI-powered software and automation for growing businesses.',
       siteHeading: 'Site',
       companyHeading: 'Company',
-      login: 'Log in',
       copyright: '© {year} Mielikkix AS. All rights reserved.',
     },
     a11y: {
@@ -848,14 +844,12 @@ export const ui: Record<Lang, Dictionary> = {
       security: 'Sikkerhet',
       company: 'Om oss',
       bookDemo: 'Book gratis AI-demo',
-      login: 'Logg inn',
       menuLabel: 'Meny',
     },
     footer: {
       tagline: 'AI-drevet programvare og automatisering for bedrifter i vekst.',
       siteHeading: 'Nettsted',
       companyHeading: 'Om oss',
-      login: 'Logg inn',
       copyright: '© {year} Mielikkix AS. Alle rettigheter forbeholdt.',
     },
     a11y: {
