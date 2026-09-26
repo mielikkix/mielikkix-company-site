@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalContent from '../../components/pages/LegalContent.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'no';
+const c = t(lang).legal.cookies;
+---
+
+<BaseLayout lang={lang} title={c.seoTitle} description={c.seoDescription}>
+  <LegalContent lang={lang} doc="cookies" />
+</BaseLayout>

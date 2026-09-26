@@ -189,8 +189,20 @@ domain-separation rule above for why.
   doesn't fit fixed tiers, and no pricing has been confirmed. CTAs point to the
   demo form instead. Don't add fixed pricing tiers without the user supplying real
   numbers.
-- No `/privacy` or `/terms` pages exist yet — no real legal copy has been supplied.
-  Don't invent one; wire up the footer links once the user provides real content.
+- `/privacy` and `/cookies` (added 2026-09-26, user-approved) — rendered by
+  `LegalContent.astro` from `ui.legal.privacy` / `ui.legal.cookies`. Copy is
+  adapted from the real mielikkix.ai policies but scoped to what *this* site
+  actually processes: the demo form (→ Formspree), the embedded Mielikkix chat
+  widget (`mielikkix_session` sessionStorage, only when opened), server logs. No
+  analytics/tracking exists, so there is deliberately **no cookie banner or
+  "Cookie settings" button** — add both (and update the Cookie Policy) the day any
+  analytics or non-essential storage is introduced. Terms, DPA and Subprocessors
+  are product-level docs and are linked out to mielikkix.ai in the footer's bottom
+  bar, not duplicated here. Mielikkix AS registration (org. number + address) was
+  still in progress on 2026-09-26 — fill them into section 1 of the privacy policy
+  once issued. Demo-request/email retention is confirmed as 12 months after last
+  contact; server-log retention is still a visible PLACEHOLDER until confirmed.
+  Keep the privacy policy accurate whenever the form, widget or hosting changes.
 - Links out to `app.mielikkix.ai` for login/sign-up and demo CTAs, and to
   `https://mielikkix.ai` for anything product-specific — **do not** replicate
   auth or the product experience here.
@@ -247,7 +259,8 @@ the product apps:
 
 - `npm run build` completes with no errors.
 - `npx astro check` completes with no errors.
-- `npm run preview` (or dev server) renders all 10 routes (5 pages × EN/NOR) without
+- `npm run preview` (or dev server) renders all 12 content routes (home,
+  solutions, industries, company, privacy, cookies × EN/NOR) plus the 404s without
   console errors.
 - Every internal nav/footer link resolves; demo CTAs point to `/company#demo`;
   "Try Demo"/login CTAs point to `app.mielikkix.ai`.

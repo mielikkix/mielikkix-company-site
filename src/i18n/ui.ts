@@ -64,6 +64,23 @@ interface IntegrationCopy {
   status: 'available' | 'comingSoon';
 }
 
+export interface LegalSection {
+  heading: string;
+  paragraphs?: string[];
+  bullets?: string[];
+  table?: { headers: string[]; rows: string[][] };
+}
+
+export interface LegalDoc {
+  seoTitle: string;
+  seoDescription: string;
+  eyebrow: string;
+  heading: string;
+  updated: string;
+  intro: string;
+  sections: LegalSection[];
+}
+
 interface Dictionary {
   meta: {
     siteName: string;
@@ -248,6 +265,8 @@ interface Dictionary {
     demoFallbackBody: string;
     demoCopyLabel: string;
     demoCopiedLabel: string;
+    demoPrivacyNotice: string;
+    demoPrivacyLink: string;
   };
   industries: {
     seoTitle: string;
@@ -272,6 +291,16 @@ interface Dictionary {
     closingHeading: string;
     closingBody: string;
     closingCta: string;
+  };
+  legal: {
+    privacyLink: string;
+    cookiesLink: string;
+    termsLink: string;
+    dpaLink: string;
+    subprocessorsLink: string;
+    relatedHeading: string;
+    privacy: LegalDoc;
+    cookies: LegalDoc;
   };
   notFound: {
     seoTitle: string;
@@ -752,6 +781,8 @@ export const ui: Record<Lang, Dictionary> = {
       demoFallbackBody: 'No problem — email us directly, or copy your details below and paste them into a message:',
       demoCopyLabel: 'Copy details',
       demoCopiedLabel: 'Copied!',
+      demoPrivacyNotice: 'We use your details only to respond to your demo request.',
+      demoPrivacyLink: 'Read our Privacy Policy',
     },
     industries: {
       seoTitle: 'AI for Your Industry',
@@ -820,6 +851,167 @@ export const ui: Record<Lang, Dictionary> = {
       closingHeading: 'Have a specific security question?',
       closingBody: 'Email us and we will walk you through hosting, data handling, and DPA details for your business.',
       closingCta: 'Contact Us',
+    },
+    legal: {
+      privacyLink: 'Privacy Policy',
+      cookiesLink: 'Cookie Policy',
+      termsLink: 'Terms of Service',
+      dpaLink: 'Data Processing Agreement',
+      subprocessorsLink: 'Subprocessors',
+      relatedHeading: 'Related',
+      privacy: {
+        seoTitle: 'Privacy Policy',
+        seoDescription: 'How Mielikkix AS collects, uses and protects personal data on mielikkix.no, and the rights you have under the GDPR.',
+        eyebrow: 'Legal',
+        heading: 'Privacy Policy',
+        updated: 'Last updated: 2026-09-26 · Version: privacy-no-2026-09-26',
+        intro:
+          'This policy explains what personal data Mielikkix AS collects through this website (mielikkix.no), why, on what legal basis, who we share it with, how long we keep it and what rights you have. Our AI products (mielikkix.ai, the app.mielikkix.ai dashboard and our AI agents) are covered by a separate policy at [mielikkix.ai/privacy](https://mielikkix.ai/privacy).',
+        sections: [
+          {
+            heading: '1. Who we are',
+            paragraphs: [
+              'The data controller is Mielikkix AS, Norway. Contact for all privacy questions: [post@mielikkix.no](mailto:post@mielikkix.no).',
+              'Mielikkix AS is currently being registered in the Norwegian Register of Business Enterprises (Brønnøysundregistrene). Our organisation number and registered address will be added here as soon as the registration is complete.',
+            ],
+          },
+          {
+            heading: '2. What we collect, why, and our legal basis',
+            table: {
+              headers: ['Data', 'Purpose', 'Legal basis (GDPR art. 6)'],
+              rows: [
+                [
+                  'Demo requests: name, company, work email, and optionally phone, country, preferred date/time and your message',
+                  'Answer you and arrange a demo',
+                  'Steps before a contract (6(1)(b)) / legitimate interest (6(1)(f))',
+                ],
+                ['Emails you send to post@mielikkix.no', 'Answer your enquiry', 'Legitimate interest (6(1)(f))'],
+                [
+                  'Chats with the Mielikkix chatbot on this website, and any contact details you give it',
+                  'Answer your questions and follow up if you ask us to',
+                  'Legitimate interest (6(1)(f))',
+                ],
+                [
+                  'Server and security logs (IP address, timestamps, request data)',
+                  'Security, abuse prevention, troubleshooting',
+                  'Legitimate interest (6(1)(f))',
+                ],
+              ],
+            },
+            paragraphs: ['We do not use analytics, advertising or tracking tools on this website, and we do not sell personal data.'],
+          },
+          {
+            heading: '3. The AI chatbot on this website',
+            paragraphs: [
+              'The chat bubble on this website is the Mielikkix chatbot. It is an AI system, not a person. Your messages are sent to our own Mielikkix platform (api.mielikkix.ai), which uses external large language model providers to generate replies. It does not make decisions with legal or similarly significant effects about you (GDPR art. 22). We do not use your chat messages to train AI models.',
+            ],
+          },
+          {
+            heading: '4. Who we share data with',
+            paragraphs: ['Each service provider receives only what it needs for its task:'],
+            bullets: [
+              'Formspree (Formspree, Inc., USA) receives demo-form submissions and forwards them to our inbox.',
+              'Hostinger hosts this website and its server logs.',
+              'The Mielikkix platform and its AI providers process chatbot conversations. The current list is on [mielikkix.ai/subprocessors](https://mielikkix.ai/subprocessors).',
+            ],
+          },
+          {
+            heading: '5. Transfers outside the EEA',
+            paragraphs: [
+              'Some providers (for example Formspree and our AI providers) are based in the USA. When personal data is transferred there, we rely on the EU-US Data Privacy Framework where the provider is certified, or on the EU Standard Contractual Clauses. You can ask us for a copy of the relevant safeguards.',
+            ],
+          },
+          {
+            heading: '6. How long we keep data',
+            bullets: [
+              'Demo requests and emails: 12 months after our last contact, unless you become a customer.',
+              'Chatbot conversations: deleted automatically according to the retention setting on our Mielikkix account, and never kept for more than 365 days.',
+              'Server logs: PLACEHOLDER: confirm server log retention period.',
+            ],
+          },
+          {
+            heading: '7. Cookies',
+            paragraphs: [
+              'This website does not use analytics or advertising cookies, so there is no cookie banner. The only browser storage is a session key the chatbot writes when you open the chat. See our [Cookie Policy](/cookies) for details.',
+            ],
+          },
+          {
+            heading: '8. Security',
+            paragraphs: [
+              'Traffic to this website and to our form and chat providers is encrypted with TLS. Access to demo requests and conversations is limited to the Mielikkix team. Read more under [Data & Security](/company#security).',
+            ],
+          },
+          {
+            heading: '9. Your rights',
+            paragraphs: ['Under the GDPR and the Norwegian Personal Data Act you have the right to:'],
+            bullets: [
+              'access the personal data we hold about you;',
+              'have inaccurate data corrected;',
+              'have your data erased ("right to be forgotten");',
+              'restrict processing;',
+              'data portability (receive your data in a machine-readable format);',
+              'object to processing based on legitimate interest;',
+              'withdraw consent at any time, without affecting processing that took place before.',
+            ],
+          },
+          {
+            heading: '',
+            paragraphs: [
+              'Email [post@mielikkix.no](mailto:post@mielikkix.no) to use any of these rights. We answer within one month, and may ask you to verify your identity first. You can also complain to the Norwegian Data Protection Authority, [Datatilsynet](https://www.datatilsynet.no).',
+            ],
+          },
+          {
+            heading: '10. Children',
+            paragraphs: ['This website and our services are for businesses and are not directed at children.'],
+          },
+          {
+            heading: '11. Changes',
+            paragraphs: [
+              'We will update this policy when our website, services or the law change. The date and version at the top show the current version.',
+            ],
+          },
+        ],
+      },
+      cookies: {
+        seoTitle: 'Cookie Policy',
+        seoDescription: 'Which cookies and browser storage mielikkix.no uses — no analytics or advertising cookies.',
+        eyebrow: 'Legal',
+        heading: 'Cookie Policy',
+        updated: 'Last updated: 2026-09-26 · Version: cookies-no-2026-09-26',
+        intro:
+          'Cookies and similar technologies (localStorage, sessionStorage) store small pieces of information in your browser. Under the Norwegian Electronic Communications Act (ekomloven § 2-7b) and the GDPR, anything that is not strictly necessary may only be used with your consent.',
+        sections: [
+          {
+            heading: 'Our approach',
+            paragraphs: [
+              'mielikkix.no only uses storage that is strictly necessary. We do not use analytics, advertising or tracking cookies, which is why this website has no cookie banner. If we ever add analytics, we will ask for your consent first and add cookie settings here.',
+            ],
+          },
+          {
+            heading: 'Storage used on mielikkix.no',
+            table: {
+              headers: ['Name', 'Type', 'Purpose', 'Duration', 'Consent required'],
+              rows: [
+                [
+                  'mielikkix_session',
+                  'sessionStorage',
+                  'Keeps your chatbot conversation together. Only written when you open the chat.',
+                  'Until you close the browser tab',
+                  'No (strictly necessary)',
+                ],
+              ],
+            },
+          },
+          {
+            heading: 'Requests to other services',
+            bullets: [
+              'Chatbot (app.mielikkix.ai / api.mielikkix.ai): the chat bubble script loads from our own app domain. It stores nothing until you open the chat.',
+              'Demo form (formspree.io): your details are sent to Formspree only when you submit the form. No cookies are set.',
+            ],
+            paragraphs: ['Your browser also contacts the services below, which see your IP address as any web server does. See our [Privacy Policy](/privacy) for how we handle personal data.'],
+          },
+        ],
+      },
     },
     notFound: {
       seoTitle: 'Page Not Found',
@@ -1297,6 +1489,8 @@ export const ui: Record<Lang, Dictionary> = {
       demoFallbackBody: 'Ikke noe problem — send oss en e-post direkte, eller kopier detaljene dine under og lim dem inn i en melding:',
       demoCopyLabel: 'Kopier detaljer',
       demoCopiedLabel: 'Kopiert!',
+      demoPrivacyNotice: 'Vi bruker opplysningene dine kun til å svare på demoforespørselen din.',
+      demoPrivacyLink: 'Les personvernerklæringen vår',
     },
     industries: {
       seoTitle: 'AI for din bransje',
@@ -1365,6 +1559,167 @@ export const ui: Record<Lang, Dictionary> = {
       closingHeading: 'Har du et konkret sikkerhetsspørsmål?',
       closingBody: 'Send oss en e-post, så går vi gjennom hosting, databehandling og DPA-detaljer for din bedrift.',
       closingCta: 'Kontakt oss',
+    },
+    legal: {
+      privacyLink: 'Personvernerklæring',
+      cookiesLink: 'Informasjonskapsler',
+      termsLink: 'Vilkår for bruk',
+      dpaLink: 'Databehandleravtale',
+      subprocessorsLink: 'Underleverandører',
+      relatedHeading: 'Relatert',
+      privacy: {
+        seoTitle: 'Personvernerklæring',
+        seoDescription: 'Hvordan Mielikkix AS samler inn, bruker og beskytter personopplysninger på mielikkix.no, og hvilke rettigheter du har etter GDPR.',
+        eyebrow: 'Juridisk',
+        heading: 'Personvernerklæring',
+        updated: 'Sist oppdatert: 2026-09-26 · Versjon: privacy-no-2026-09-26',
+        intro:
+          'Denne erklæringen forklarer hvilke personopplysninger Mielikkix AS samler inn via dette nettstedet (mielikkix.no), hvorfor, på hvilket rettslig grunnlag, hvem vi deler dem med, hvor lenge vi lagrer dem og hvilke rettigheter du har. AI-produktene våre (mielikkix.ai, dashbordet app.mielikkix.ai og AI-agentene våre) dekkes av en egen erklæring på [mielikkix.ai/privacy](https://mielikkix.ai/privacy).',
+        sections: [
+          {
+            heading: '1. Hvem vi er',
+            paragraphs: [
+              'Behandlingsansvarlig er Mielikkix AS, Norge. Kontakt for alle personvernspørsmål: [post@mielikkix.no](mailto:post@mielikkix.no).',
+              'Mielikkix AS er under registrering i Enhetsregisteret (Brønnøysundregistrene). Organisasjonsnummer og forretningsadresse legges til her så snart registreringen er fullført.',
+            ],
+          },
+          {
+            heading: '2. Hva vi samler inn, hvorfor og rettslig grunnlag',
+            table: {
+              headers: ['Opplysninger', 'Formål', 'Rettslig grunnlag (GDPR art. 6)'],
+              rows: [
+                [
+                  'Demoforespørsler: navn, bedrift, jobb-e-post, og eventuelt telefon, land, ønsket tidspunkt og meldingen din',
+                  'Svare deg og avtale en demo',
+                  'Tiltak før avtaleinngåelse (6(1)(b)) / berettiget interesse (6(1)(f))',
+                ],
+                ['E-post du sender til post@mielikkix.no', 'Svare på henvendelsen din', 'Berettiget interesse (6(1)(f))'],
+                [
+                  'Samtaler med Mielikkix-chatboten på dette nettstedet, og kontaktopplysninger du gir den',
+                  'Svare på spørsmålene dine og følge opp hvis du ber om det',
+                  'Berettiget interesse (6(1)(f))',
+                ],
+                [
+                  'Server- og sikkerhetslogger (IP-adresse, tidspunkter, forespørselsdata)',
+                  'Sikkerhet, hindre misbruk, feilsøking',
+                  'Berettiget interesse (6(1)(f))',
+                ],
+              ],
+            },
+            paragraphs: ['Vi bruker ikke analyse-, reklame- eller sporingsverktøy på dette nettstedet, og vi selger ikke personopplysninger.'],
+          },
+          {
+            heading: '3. AI-chatboten på dette nettstedet',
+            paragraphs: [
+              'Chatboblen på dette nettstedet er Mielikkix-chatboten. Den er et AI-system, ikke et menneske. Meldingene dine sendes til vår egen Mielikkix-plattform (api.mielikkix.ai), som bruker eksterne leverandører av store språkmodeller til å lage svar. Den tar ikke avgjørelser med rettsvirkning eller tilsvarende betydelig virkning for deg (GDPR art. 22). Vi bruker ikke chatmeldingene dine til å trene AI-modeller.',
+            ],
+          },
+          {
+            heading: '4. Hvem vi deler opplysninger med',
+            paragraphs: ['Hver tjenesteleverandør får bare det den trenger for sin oppgave:'],
+            bullets: [
+              'Formspree (Formspree, Inc., USA) mottar innsendte demoskjemaer og videresender dem til innboksen vår.',
+              'Hostinger drifter dette nettstedet og serverloggene.',
+              'Mielikkix-plattformen og AI-leverandørene dens behandler chatbotsamtaler. Gjeldende liste finner du på [mielikkix.ai/subprocessors](https://mielikkix.ai/subprocessors).',
+            ],
+          },
+          {
+            heading: '5. Overføring utenfor EØS',
+            paragraphs: [
+              'Noen leverandører (for eksempel Formspree og AI-leverandørene våre) holder til i USA. Når personopplysninger overføres dit, bygger vi på EU-US Data Privacy Framework der leverandøren er sertifisert, eller på EUs standardkontraktsbestemmelser. Du kan be om en kopi av de aktuelle garantiene.',
+            ],
+          },
+          {
+            heading: '6. Hvor lenge vi lagrer opplysninger',
+            bullets: [
+              'Demoforespørsler og e-post: 12 måneder etter siste kontakt, med mindre du blir kunde.',
+              'Chatbotsamtaler: slettes automatisk i henhold til lagringsinnstillingen på Mielikkix-kontoen vår, og lagres aldri lenger enn 365 dager.',
+              'Serverlogger: PLACEHOLDER: bekreft lagringstid for serverlogger.',
+            ],
+          },
+          {
+            heading: '7. Informasjonskapsler',
+            paragraphs: [
+              'Dette nettstedet bruker ikke analyse- eller reklameinformasjonskapsler, og har derfor ikke noe samtykkebanner. Den eneste lagringen i nettleseren er en øktnøkkel chatboten skriver når du åpner chatten. Se [erklæringen om informasjonskapsler](/no/cookies) for detaljer.',
+            ],
+          },
+          {
+            heading: '8. Sikkerhet',
+            paragraphs: [
+              'Trafikk til dette nettstedet og til skjema- og chatleverandørene våre krypteres med TLS. Tilgang til demoforespørsler og samtaler er begrenset til Mielikkix-teamet. Les mer under [Data og sikkerhet](/no/company#security).',
+            ],
+          },
+          {
+            heading: '9. Dine rettigheter',
+            paragraphs: ['Etter GDPR og personopplysningsloven har du rett til å:'],
+            bullets: [
+              'få innsyn i personopplysningene vi har om deg;',
+              'få uriktige opplysninger rettet;',
+              'få opplysningene dine slettet («retten til å bli glemt»);',
+              'begrense behandlingen;',
+              'dataportabilitet (få opplysningene dine i et maskinlesbart format);',
+              'protestere mot behandling basert på berettiget interesse;',
+              'trekke tilbake samtykke når som helst, uten at det påvirker behandling som skjedde før.',
+            ],
+          },
+          {
+            heading: '',
+            paragraphs: [
+              'Send e-post til [post@mielikkix.no](mailto:post@mielikkix.no) for å bruke rettighetene dine. Vi svarer innen én måned, og kan be deg bekrefte identiteten din først. Du kan også klage til [Datatilsynet](https://www.datatilsynet.no).',
+            ],
+          },
+          {
+            heading: '10. Barn',
+            paragraphs: ['Dette nettstedet og tjenestene våre er for bedrifter og er ikke rettet mot barn.'],
+          },
+          {
+            heading: '11. Endringer',
+            paragraphs: [
+              'Vi oppdaterer denne erklæringen når nettstedet, tjenestene eller regelverket endres. Datoen og versjonen øverst viser gjeldende versjon.',
+            ],
+          },
+        ],
+      },
+      cookies: {
+        seoTitle: 'Informasjonskapsler',
+        seoDescription: 'Hvilke informasjonskapsler og hvilken nettleserlagring mielikkix.no bruker — ingen analyse- eller reklameinformasjonskapsler.',
+        eyebrow: 'Juridisk',
+        heading: 'Informasjonskapsler',
+        updated: 'Sist oppdatert: 2026-09-26 · Versjon: cookies-no-2026-09-26',
+        intro:
+          'Informasjonskapsler og lignende teknologi (localStorage, sessionStorage) lagrer små biter med informasjon i nettleseren din. Etter ekomloven § 2-7b og GDPR kan vi bare bruke lagring som ikke er strengt nødvendig hvis du samtykker.',
+        sections: [
+          {
+            heading: 'Slik gjør vi det',
+            paragraphs: [
+              'mielikkix.no bruker bare lagring som er strengt nødvendig. Vi bruker ikke analyse-, reklame- eller sporingsinformasjonskapsler, og derfor har nettstedet ikke noe samtykkebanner. Hvis vi en gang tar i bruk analyse, spør vi om samtykke først og legger til innstillinger for informasjonskapsler her.',
+            ],
+          },
+          {
+            heading: 'Lagring på mielikkix.no',
+            table: {
+              headers: ['Navn', 'Type', 'Formål', 'Varighet', 'Krever samtykke'],
+              rows: [
+                [
+                  'mielikkix_session',
+                  'sessionStorage',
+                  'Holder chatbotsamtalen samlet. Skrives først når du åpner chatten.',
+                  'Til nettleserfanen lukkes',
+                  'Nei (strengt nødvendig)',
+                ],
+              ],
+            },
+          },
+          {
+            heading: 'Forespørsler til andre tjenester',
+            bullets: [
+              'Chatbot (app.mielikkix.ai / api.mielikkix.ai): skriptet til chatboblen lastes fra vårt eget app-domene. Det lagrer ingenting før du åpner chatten.',
+              'Demoskjema (formspree.io): opplysningene dine sendes til Formspree først når du sender inn skjemaet. Det settes ingen informasjonskapsler.',
+            ],
+            paragraphs: ['Nettleseren din kontakter også tjenestene under, som ser IP-adressen din slik alle webservere gjør. Se [personvernerklæringen](/no/privacy) for hvordan vi behandler personopplysninger.'],
+          },
+        ],
+      },
     },
     notFound: {
       seoTitle: 'Siden ble ikke funnet',

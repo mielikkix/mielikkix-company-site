@@ -1,0 +1,122 @@
+---
+import Panel from '../Panel.astro';
+import Eyebrow from '../Eyebrow.astro';
+import { t, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  doc: 'privacy' | 'cookies';
+}
+
+const { lang, doc } = Astro.props;
+const legal = t(lang).legal;
+const c = legal[doc];
+
+type Segment = { text: string; href?: string };
+
+/** Splits copy containing [label](href) markers into plain-text and link segments. */
+function segments(text: string): Segment[] {
+  const out: Segment[] = [];
+  const re = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let last = 0;
+  for (const m of text.matchAll(re)) {
+    if (m.index > last) out.push({ text: text.slice(last, m.index) });
+    out.push({ text: m[1], href: m[2] });
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) out.push({ text: text.slice(last) });
+  return out;
+}
+
+const isExternal = (href: string) => href.startsWith('http');
+const linkClass = 'text-aurora-neon underline-offset-2 hover:underline';
+
+const related = [
+  doc === 'privacy'
+    ? { href: localizedPath('/cookies', lang), label: legal.cookiesLink }
+    : { href: localizedPath('/privacy', lang), label: legal.privacyLink },
+  { href: 'https://mielikkix.ai/terms', label: legal.termsLink },
+  { href: 'https://mielikkix.ai/dpa', label: legal.dpaLink },
+  { href: 'https://mielikkix.ai/subprocessors', label: legal.subprocessorsLink },
+];
+---
+
+<div class="mx-auto max-w-4xl space-y-6 px-4 py-12 sm:space-y-8 sm:px-6 sm:py-16 lg:px-8">
+  <Panel tone="gold">
+    <Eyebrow text={c.eyebrow} tone="gold" />
+    <h1 class="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{c.heading}</h1>
+    <p class="mt-4 text-sm text-mist-white/60">{c.updated}</p>
+    <p class="mt-6 text-base leading-relaxed text-mist-white/85">
+      {segments(c.intro).map((s) => (s.href ? <a href={s.href} class={linkClass}>{s.text}</a> : s.text))}
+    </p>
+  </Panel>
+
+  <Panel>
+    <div class="space-y-10">
+      {
+        c.sections.map((section) => (
+          <section class={section.heading ? '' : '-mt-6'}>
+            {section.heading && <h2 class="text-xl font-bold text-mist-white sm:text-2xl">{section.heading}</h2>}
+            {section.table && (
+              <div class="mt-4 overflow-x-auto rounded-xl border border-mist-white/10">
+                <table class="w-full min-w-[36rem] text-left text-sm">
+                  <thead class="bg-mist-white/5 text-xs uppercase tracking-wider text-antler-gold">
+                    <tr>{section.table.headers.map((h) => <th scope="col" class="px-4 py-3 font-semibold">{h}</th>)}</tr>
+                  </thead>
+                  <tbody class="divide-y divide-mist-white/10">
+                    {section.table.rows.map((row) => (
+                      <tr>{row.map((cell, i) => <td class={`px-4 py-3 align-top leading-relaxed ${i === 0 ? 'text-mist-white' : 'text-mist-white/75'}`}>{cell}</td>)}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {section.paragraphs?.map((p) => (
+              <p class="mt-4 text-base leading-relaxed text-mist-white/80">
+                {segments(p).map((s) =>
+                  s.href ? (
+                    <a href={s.href} class={linkClass} {...(isExternal(s.href) ? { target: '_blank', rel: 'noopener' } : {})}>{s.text}</a>
+                  ) : (
+                    s.text
+                  ),
+                )}
+              </p>
+            ))}
+            {section.bullets && (
+              <ul class="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-mist-white/80 marker:text-antler-gold">
+                {section.bullets.map((b) => (
+                  <li>
+                    {segments(b).map((s) =>
+                      s.href ? (
+                        <a href={s.href} class={linkClass} {...(isExternal(s.href) ? { target: '_blank', rel: 'noopener' } : {})}>{s.text}</a>
+                      ) : (
+                        s.text
+                      ),
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))
+      }
+    </div>
+  </Panel>
+
+  <Panel tone="accent">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-antler-gold">{legal.relatedHeading}</h2>
+    <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+      {
+        related.map((link) => (
+          <li>
+            <a href={link.href} class={`text-sm font-semibold ${linkClass}`}>
+              {link.label}
+              {isExternal(link.href) && <span aria-hidden="true"> ↗</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Panel>
+</div>

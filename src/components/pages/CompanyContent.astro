@@ -277,6 +277,10 @@ const cardStyles = [
         >
           {c.demoSubmit}
         </button>
+        <p class="mt-4 text-xs leading-relaxed text-mist-white/60">
+          {c.demoPrivacyNotice}{' '}
+          <a href={localizedPath('/privacy', lang)} class="text-aurora-neon underline-offset-2 hover:underline">{c.demoPrivacyLink}</a>.
+        </p>
       </div>
     </form>
 
