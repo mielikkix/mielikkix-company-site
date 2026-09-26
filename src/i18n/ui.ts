@@ -926,7 +926,7 @@ export const ui: Record<Lang, Dictionary> = {
             bullets: [
               'Demo requests and emails: 12 months after our last contact, unless you become a customer.',
               'Chatbot conversations: deleted automatically according to the retention setting on our Mielikkix account, and never kept for more than 365 days.',
-              'Server logs: PLACEHOLDER: confirm server log retention period.',
+              'Server logs: 30 days, then deleted automatically.',
             ],
           },
           {
@@ -1634,7 +1634,7 @@ export const ui: Record<Lang, Dictionary> = {
             bullets: [
               'Demoforespørsler og e-post: 12 måneder etter siste kontakt, med mindre du blir kunde.',
               'Chatbotsamtaler: slettes automatisk i henhold til lagringsinnstillingen på Mielikkix-kontoen vår, og lagres aldri lenger enn 365 dager.',
-              'Serverlogger: PLACEHOLDER: bekreft lagringstid for serverlogger.',
+              'Serverlogger: 30 dager, deretter slettes de automatisk.',
             ],
           },
           {

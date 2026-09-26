@@ -201,7 +201,7 @@ domain-separation rule above for why.
   bar, not duplicated here. Mielikkix AS registration (org. number + address) was
   still in progress on 2026-09-26 — fill them into section 1 of the privacy policy
   once issued. Demo-request/email retention is confirmed as 12 months after last
-  contact; server-log retention is still a visible PLACEHOLDER until confirmed.
+  contact; server logs 30 days (make sure the VPS log rotation actually matches).
   Keep the privacy policy accurate whenever the form, widget or hosting changes.
 - Links out to `app.mielikkix.ai` for login/sign-up and demo CTAs, and to
   `https://mielikkix.ai` for anything product-specific — **do not** replicate
